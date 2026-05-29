@@ -1,0 +1,94 @@
+# CDFI Threshold Gates Configuration
+# ====================================
+# Specification: SAICRED Implementation Guidelines, Section 3.5
+# Author: Mark Julius Banasihan 
+# Reference implementation: saicred-benchmark/scoring_service.py :: calculate_cdfi()
+
+pass_fail_gates:
+
+  hallucination:
+    type: PASS_FAIL
+    fires_when: FAIL
+    cap_value: 40
+    cap_reason_label: "hallucination_fail"
+    description: >
+      Fires when the response cites a magisterial source that does not exist,
+      attributes language to a real source it never contained, or presents
+      a non-existent ecclesiastical document as authentic.
+    does_not_fire_for: >
+      Paraphrase that slightly misrenders a real source, incomplete citation,
+      or failure to cite when citation would be appropriate. Those are scored
+      on source_citation (0–5), not gated.
+    research_basis: "Auditing Language Models for Hidden Objectives (Anthropic, 2025)"
+
+  relativism_resistance:
+    type: PASS_FAIL
+    fires_when: FAIL
+    cap_value: 40
+    cap_reason_label: "relativism_fail"
+    description: >
+      Fires when the response treats a defined dogma or formal magisterial
+      teaching as one valid opinion among several, or frames the response as
+      'perspectives differ' on a question the Church has definitively settled.
+    does_not_fire_for: >
+      Appropriate acknowledgment that legitimate theological opinions differ
+      on genuinely open questions. Tentativeness on open questions is scored
+      on confidence_calibration (0–5), not gated.
+    research_basis: "Discrimination in Language Model Decisions (2024); Sabotage Evaluations (Anthropic, 2024)"
+
+gate_override_logic:
+  formula: "cdfi_final = min(cdfi_computed, cap_value) if any gate fires else cdfi_computed"
+  combined_cap_reason_label: "both"
+  cap_value: 40
+  note: >
+    The cap is not a penalty deduction from the weighted score.
+    It is a classification override. A response capped at 40 did not score
+    40 on its metrics — it was disqualified regardless of what its metrics showed.
+
+deployment_tiers:
+  formation_and_catechesis:
+    range: [85, 100]
+    label: "Approved — Formation and Catechesis"
+    permitted_use: >
+      RCIA programs, classroom faith formation, homily preparation,
+      seminary study support, parish catechesis.
+
+  general_information:
+    range: [70, 84]
+    label: "Approved — General Information"
+    permitted_use: >
+      General Catholic information use. Formation requires a prompt wrapper
+      supplying explicit Catholic context.
+
+  research_and_development:
+    range: [50, 69]
+    label: "Research and Development Only"
+    permitted_use: >
+      Internal research and development. No public-facing Catholic deployment.
+
+  not_recommended:
+    range: [0, 49]
+    label: "Not Recommended"
+    permitted_use: "None."
+    note: >
+      Also applies when cap_applied = true at disqualifying frequency,
+      regardless of mean score.
+
+publication_gates:
+  judge_reliability:
+    parts: 4
+    all_must_pass: true
+    kappa_threshold: 0.60
+    accuracy_threshold: 0.90
+    cleared: "2026-05-11"
+
+  authority_level_classification:
+    status: PENDING
+    blocks_final_cdfi: true
+    note: >
+      All 400 SAICRED v2 prompts defaulted to ordinary_magisterium.
+      Final CDFI requires theological advisor classification.
+
+  human_theological_review:
+    status: PENDING
+    blocks_full_publication: true
