@@ -78,4 +78,4 @@ In the SAICRED v2 reliability run, confidence calibration initially produced kap
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Expert, SAICRED v2 | May 2026*
+*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
