@@ -98,4 +98,4 @@ o3's gap is -0.6 points, effectively zero. It does not depend on the Catholic co
 
 Full results: [mj3b.github.io/saicred-v2-dashboard](https://mj3b.github.io/saicred-v2-dashboard)
 
-*Catholic Digital Commons Foundation | SAICRED v2 | May 2026*
+*May 2026*
