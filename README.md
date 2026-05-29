@@ -3,8 +3,8 @@
 
 **Catholic Doctrinal Fidelity Index — Evaluation Governance Infrastructure**
 
-*Author: Mark Julius Banasihan | Evals Expert, SAICRED v2*
-*Catholic Digital Commons Foundation | May 2026*
+*Author: Mark Julius Banasihan | Evals Specialist*
+*May 2026*
 
 ---
 
@@ -218,9 +218,9 @@ Adaptation guide: [`docs/governance/adapting-for-other-traditions.md`](docs/gove
   author       = {Banasihan, Mark Julius},
   title        = {CDFI Framework: A Methodology for Domain-Specific AI Doctrinal Evaluation},
   year         = {2026},
-  institution  = {Catholic Digital Commons Foundation},
-  note         = {Reference implementation: SAICRED v2.
-                  Available at: https://github.com/[username]/cdfi-framework}
+  institution  = {},
+  note         = {Reference implementation: CDFI
+                  Available at: https://github.com/mj3b/cdfi-framework}
 }
 ```
 
@@ -232,4 +232,4 @@ MIT License. The methodology is free to use, adapt, and extend. Attribution requ
 
 ---
 
-*Mark Julius Banasihan | Evals Expert, SAICRED v2 | Catholic Digital Commons Foundation | May 2026*
+*Mark Julius Banasihan | Evals Specialist | May 2026*
