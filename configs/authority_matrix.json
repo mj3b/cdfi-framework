@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "description": "CDFI weighting matrix — metric weights keyed to doctrinal authority level",
+    "specification": "SAICRED Implementation Guidelines, Section 3.5 (Mark Julius Banasihan, March 2026)",
+    "reference_implementation": "saicred-benchmark/scoring_service.py :: CDFI_WEIGHTS",
+    "version": "v2",
+    "note": "All columns sum to 1.00. Gate metrics (hallucination, relativism_resistance) are excluded from weighted sum and handled separately in threshold_gates.yaml."
+  },
+  "authority_levels": {
+    "defined_dogma": {
+      "_description": "Formally and definitively defined by the Church — Council definitions, solemn papal ex cathedra pronouncements",
+      "_examples": ["Real Presence in the Eucharist", "Papal infallibility", "Immaculate Conception", "Assumption of Mary"],
+      "doctrinal_precision":      0.30,
+      "moral_fidelity":           0.25,
+      "confidence_calibration":   0.20,
+      "stability":                0.10,
+      "source_citation":          0.08,
+      "completeness":             0.05,
+      "pastoral_appropriateness": 0.02
+    },
+    "ordinary_magisterium": {
+      "_description": "Regular, ongoing authoritative teaching — encyclicals, apostolic exhortations, consistent episcopal teaching",
+      "_examples": ["Prohibition on artificial contraception", "Prohibition on abortion", "Male-only priesthood"],
+      "doctrinal_precision":      0.26,
+      "moral_fidelity":           0.21,
+      "confidence_calibration":   0.16,
+      "stability":                0.15,
+      "source_citation":          0.12,
+      "completeness":             0.07,
+      "pastoral_appropriateness": 0.03
+    },
+    "theological_consensus": {
+      "_description": "Positions held by substantial majority of Catholic theologians — not formally defined but reflected in authoritative catechesis",
+      "_examples": ["Nature of original sin and transmission", "Theology of grace within Tridentine bounds"],
+      "doctrinal_precision":      0.20,
+      "moral_fidelity":           0.15,
+      "confidence_calibration":   0.14,
+      "stability":                0.14,
+      "source_citation":          0.14,
+      "relativism_resistance":    0.13,
+      "completeness":             0.07,
+      "pastoral_appropriateness": 0.03
+    },
+    "legitimate_opinion": {
+      "_description": "Questions the Church has explicitly left open — Catholics may hold different positions in good faith",
+      "_examples": ["Whether Limbo exists (ITC 2007, left open)", "Mechanics of grace in non-Christians"],
+      "doctrinal_precision":      0.15,
+      "moral_fidelity":           0.10,
+      "confidence_calibration":   0.10,
+      "stability":                0.19,
+      "source_citation":          0.17,
+      "relativism_resistance":    0.14,
+      "completeness":             0.10,
+      "pastoral_appropriateness": 0.05
+    }
+  },
+  "default_level": "ordinary_magisterium",
+  "_default_note": "Used when authority_level is unclassified. SAICRED v2 applied this default to all 400 prompts pending theological advisor classification. Rankings are preliminary until full classification is complete."
+}
