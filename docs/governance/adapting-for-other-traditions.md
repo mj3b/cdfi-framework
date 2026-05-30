@@ -103,4 +103,4 @@ What is cross-tradition comparable: the framing effect magnitude, the cap rate, 
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
