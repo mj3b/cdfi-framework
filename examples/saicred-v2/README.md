@@ -4,6 +4,20 @@
 
 ---
 
+## The Team
+
+SAICRED v2 was built by three people in distinct roles.
+
+| Role | Person |
+|------|--------|
+| Project Lead | [Dr. Filip Ponulak](https://www.linkedin.com/in/filipponulak/) — framework design, theological authority, dataset, publication |
+| Lead Engineer | [Naveen Kumar Puppala](https://github.com/naveenp2708) — production pipeline, scoring engine, results dashboard |
+| Evals Expert | [Mark Julius Banasihan](https://github.com/mj3b) — CDFI formula, scoring architecture, reliability certification |
+
+The CDFI Framework repository ([github.com/mj3b/cdfi-framework](https://github.com/mj3b/cdfi-framework)) documents the evaluation methodology layer. The production pipeline ([saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark), *private pending publication*) documents the engineering layer.
+
+---
+
 SAICRED v2 is the first benchmark built on the CDFI Framework. It is the existence proof: a complete, scored, published implementation of the methodology across six frontier AI models.
 
 ---
@@ -95,7 +109,5 @@ o3's gap is -0.6 points, effectively zero. It does not depend on the Catholic co
 | Stability scoring (five runs per prompt) | Deferred to v2.1 | No |
 
 ---
-
-Full results: [mj3b.github.io/saicred-v2-dashboard](https://mj3b.github.io/saicred-v2-dashboard)
 
 *May 2026*
