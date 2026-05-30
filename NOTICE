@@ -1,0 +1,36 @@
+CDFI Framework
+Catholic Doctrinal Fidelity Index — Evaluation Governance Infrastructure
+
+Copyright 2026 Mark Julius Banasihan
+Catholic Digital Commons Foundation
+
+This product includes methodology derived from the following
+Anthropic AI safety research publications:
+
+  - Challenges in Evaluating AI Systems (Anthropic, 2023)
+    https://www.anthropic.com/research/evaluating-ai-systems
+
+  - Auditing Language Models for Hidden Objectives (Anthropic, 2025)
+    https://arxiv.org/abs/2503.10965
+
+  - A Statistical Approach to Model Evaluations (Anthropic, 2024)
+    https://www.anthropic.com/research/statistical-approach-to-model-evals
+
+  - Discrimination in Language Model Decisions (2024)
+    https://arxiv.org/abs/2312.03689
+
+  - Measuring Faithfulness in Chain-of-Thought Reasoning (Anthropic, 2023)
+    https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning
+
+  - Sabotage Evaluations (Anthropic, 2024)
+    https://www.anthropic.com/research/sabotage-evaluations
+
+  - Evaluating Feature Steering (Anthropic, 2023)
+    https://www.anthropic.com/research/evaluating-feature-steering
+
+The SAICRED v2 reference implementation was developed in collaboration with:
+  - Dr. Filip Ponulak, Project Lead, Catholic Digital Commons Foundation
+  - Naveen Kumar Puppala, Lead Engineer
+
+This NOTICE file must be retained in all derivative works per the
+terms of the Apache License, Version 2.0.
