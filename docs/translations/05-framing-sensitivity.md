@@ -8,6 +8,6 @@
 
 **The mechanism:** Four prompt variants per question (neutral, Christian context, Catholic context, adversarial), specifically designed to surface framing-sensitive failures. The relativism resistance gate fires when a model treats defined doctrine as one opinion among several, regardless of which framing triggered it.
 
-**SAICRED v2 data:** Claude Sonnet 4.6 — 15.7-point gap between Catholic framing (89.3) and adversarial framing (73.6). Zero relativism failures on Catholic framing; 62 relativism failures across the other three framings. o3 — gap of -0.6 points, effectively zero across all four framings.
+**SAICRED v2 data:** Claude Sonnet 4.6 — 15.8-point gap between Catholic framing (89.4) and adversarial framing (73.6). Zero relativism failures on Catholic framing; 62 relativism failures across the other three framings. o3 — gap of -0.8 points, effectively zero across all four framings.
 
 *Full taxonomy: [`docs/specifications/failure-taxonomy.md`](../specifications/failure-taxonomy.md)*
