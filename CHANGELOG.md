@@ -114,6 +114,54 @@ Systematic gap analysis against CDCF Project Vetting Criteria v0.2 (published Ap
 
 ---
 
+## Framework v1.4 — May 2026
+
+**AI governance framework alignments and security documentation added.**
+
+### What triggered this version
+
+Three governance gaps identified through analysis of the AI Alliance Trust & Safety User Guide, the LatticeFlow AI Atlas frameworks catalog, and the EU AI Act: no mapping to NIST AI RMF 1.0, no EU AI Act alignment documentation, and three undocumented security attack surfaces in the LLM-as-judge architecture.
+
+### What was added
+
+**`docs/governance/nist-rmf-mapping.md`**
+Alignment of the CDFI Framework with NIST AI RMF 1.0 (January 2023) and the NIST AI 600-1 GenAI Profile (2024). Covers all four functions: GOVERN, MAP, MEASURE, MANAGE. 24 sub-functions assessed — all partially or fully satisfied. Maps CDCF criteria to NIST RMF functions for U.S. Catholic institutional reviewers. Two partial satisfactions trace to the same root causes as existing limitations: subgroup evaluation pending (C5) and monitoring automation aspirational (C6).
+
+**`docs/governance/eu-ai-act-mapping.md`**
+Alignment with Regulation (EU) 2024/1689 (EU AI Act), in force August 2024. Articles 9–15 assessed for Catholic formation and education AI deployment contexts. Key findings: Articles 11, 13, and 14 satisfied; Articles 9, 10, 12, and 15 partially satisfied; fundamental rights impact assessment and conformity assessment are open institutional obligations. High-risk classification (Annex III) likely applies to Catholic formation AI tools in EU member states. August 2026 compliance deadline documented.
+
+**`docs/governance/security-considerations.md`**
+Three attack surfaces documented with OWASP LLM Top 10 (2025) and MITRE ATLAS mapping:
+- Surface 1: Judge prompt injection (LLM01) — no systematic adversarial resistance testing of the judge
+- Surface 2: Scoring pipeline integrity (LLM04, LLM08) — no cryptographic hash verification of results files
+- Surface 3: Authority level classification manipulation (LLM09) — classification file not cryptographically signed
+
+Current mitigations documented. Recommended remediations assigned to v1.5.
+
+### What was updated
+
+| File | Change |
+|------|--------|
+| `README.md` | Status badge updated to v1.4; three new governance badges added (NIST AI RMF, EU AI Act, OWASP LLM); directory tree updated; bibtex version updated; L7 security limitation added to known limitations table |
+| `CITATION.cff` | Version updated to 1.4 |
+| `LIMITATIONS.md` | Version header updated to v1.4; L7 (security attack surfaces) added |
+| `CHANGELOG.md` | This entry |
+
+### Frameworks catalog consulted for this release
+
+| Framework | Decision |
+|-----------|---------|
+| NIST AI RMF 1.0 | Mapped — high relevance for U.S. Catholic institutional reviewers |
+| EU AI Act (2024) | Mapped — mandatory for EU member state deployment |
+| OWASP LLM Top 10 (2025) | Referenced in security document — high relevance for judge architecture |
+| ISO/IEC 42001:2023 | Deferred to v1.5 — relevant but lower urgency than NIST and EU AI Act |
+| ISO/IEC 23894:2023 | Deferred to v1.5 |
+| MITRE ATLAS | Referenced in security document |
+| FINMA, NYC LL144, Colorado AI Act | Not applicable — financial and employment contexts |
+| Healthcare-specific frameworks | Not applicable — no clinical use cases |
+
+---
+
 *Framework Maintained by: Mark Julius Banasihan*
 
 ---
