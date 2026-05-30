@@ -102,4 +102,4 @@ The column structure can have more or fewer than four levels depending on the tr
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
