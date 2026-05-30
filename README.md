@@ -93,7 +93,7 @@ cdfi-framework/
 │
 ├── configs/                               ← All numerical parameters (edit here to adapt for your tradition)
 │   ├── authority_matrix.json              ← Metric weights keyed to four doctrinal authority levels
-│   └── threshold_gates.yaml              ← Gate definitions, cap value, deployment tier thresholds
+│   └── threshold_gates.yaml               ← Gate definitions, cap value, deployment tier thresholds
 │
 ├── docs/
 │   ├── translations/                      ← One file per research-finding → CDFI-mechanism translation
