@@ -3,7 +3,7 @@
 
 **Catholic Doctrinal Fidelity Index — Evaluation Governance Infrastructure**
 
-*Author: Mark Julius Banasihan | Evals Specialist*
+*Author: Mark Julius Banasihan*
 
 *May 2026*
 
