@@ -47,5 +47,5 @@
 
 The CDCF Project Vetting Criteria asks: *should this project enter the Foundation?* The CDFI asks: *how doctrinally reliable is this AI model?* These are different instruments solving adjacent problems. The documents in this folder connect them.
 
----
+
 
