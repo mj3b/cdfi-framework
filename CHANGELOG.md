@@ -113,11 +113,6 @@
 
 ---
 
-*Maintained by: Mark Julius Banasihan *
-
-
----
-
 ## Framework v1.1 — May 2026
 
 **Translation methodology documentation added.**
@@ -178,3 +173,7 @@ Systematic gap analysis against CDCF Project Vetting Criteria v0.2 (published Ap
 - `README.md` — DOI badge corrected to `20464408`; bibtex version updated to 1.3; compliance folder added to directory tree.
 - `CITATION.cff` — version updated to 1.3.
 - `LIMITATIONS.md` — version header updated to v1.3.
+
+---
+
+*Maintained by: Mark Julius Banasihan *
