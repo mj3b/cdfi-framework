@@ -10,7 +10,7 @@ SAICRED v2 was built by three people in distinct roles.
 
 | Role | Person |
 |------|--------|
-| Project Lead | [Dr. Filip Ponulak](https://www.linkedin.com/in/filipponulak/) — framework design, theological authority, dataset, publication |
+| Project Lead | [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/) — framework design, theological authority, dataset, publication |
 | Lead Engineer | [Naveen Kumar Puppala](https://github.com/naveenp2708) — production pipeline, scoring engine, results dashboard |
 | Evals Expert | [Mark Julius Banasihan](https://github.com/mj3b) — CDFI formula, scoring architecture, reliability certification |
 
