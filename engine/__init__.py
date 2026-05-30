@@ -8,7 +8,7 @@ This is a standalone, dependency-free implementation intended for:
   - Adaptation by other institutions building domain-specific benchmarks
   - Peer review of the mathematical specification
 
-Production implementation: saicred-benchmark/scoring_service.py
+Production implementation: github.com/naveenp2708/saicred-benchmark :: scoring_service.py
 Specification: SAICRED Implementation Guidelines, Section 3.5
 Author: Mark Julius Banasihan 
 """
