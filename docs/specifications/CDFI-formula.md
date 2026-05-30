@@ -114,4 +114,4 @@ A model with mean CDFI of 82 and cap rate of 17% has a materially different depl
 ---
 
 *Specification version: May 2026*
-*Author: Mark Julius Banasihan | Evals Specialist*
+*Author: Mark Julius Banasihan*
