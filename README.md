@@ -56,13 +56,14 @@ cdfi-framework/
 │
 ├── docs/
 │   ├── translations/
-│   │   ├── 01-evaluation-criteria.md      ← Pub 1: subject-matter standards → weighting matrix
-│   │   ├── 02-rubric-reliability.md       ← Pub 1: inter-rater reliability → publication gate
-│   │   ├── 03-framing-sensitivity.md      ← Pub 4: framing shifts → relativism resistance gate
-│   │   ├── 04-categorical-failures.md     ← Pub 6: sabotage logic → cap gate architecture
-│   │   ├── 05-adversarial-probing.md      ← Pub 7: feature steering → prompt sensitivity drift
-│   │   ├── 06-statistical-rigor.md        ← Pub 3: uncertainty → deployment tier thresholds
-│   │   └── 07-confidence-calibration.md   ← Pubs 4+5 combined: original ninth metric
+│   │   ├── 01-evaluation-criteria.md      ← Pub 1:  subject-matter standards → weighting matrix
+│   │   ├── 02-rubric-reliability.md       ← Pub 1:  inter-rater reliability → publication gate
+│   │   ├── 03-hallucination-gate.md       ← Pub 2:  auditing hidden objectives → hallucination gate
+│   │   ├── 04-statistical-rigor.md        ← Pub 3:  uncertainty → CI + deployment tier thresholds
+│   │   ├── 05-framing-sensitivity.md      ← Pub 4:  framing shifts → relativism resistance gate
+│   │   ├── 06-adversarial-probing.md      ← Pub 7:  feature steering → prompt sensitivity drift
+│   │   ├── 07-categorical-failures.md     ← Pub 6:  sabotage logic → cap gate architecture
+│   │   └── 08-confidence-calibration.md   ← Original construct: Pubs 4+5 combined → ninth metric
 │   │
 │   ├── specifications/
 │   │   ├── CDFI-formula.md                ← Formula, weighting matrix, gate logic
@@ -219,8 +220,8 @@ Adaptation guide: [`docs/governance/adapting-for-other-traditions.md`](docs/gove
   author       = {Banasihan, Mark Julius},
   title        = {CDFI Framework: A Methodology for Domain-Specific AI Doctrinal Evaluation},
   year         = {2026},
-  institution  = {},
-  note         = {Reference implementation: CDFI
+  institution  = {ICJF / ECF},
+  note         = {Reference implementation: SAICRED v2.
                   Available at: https://github.com/mj3b/cdfi-framework}
 }
 ```
@@ -233,4 +234,4 @@ MIT License. The methodology is free to use, adapt, and extend. Attribution requ
 
 ---
 
-*Mark Julius Banasihan | Evals Specialist | May 2026*
+*Mark Julius Banasihan | May 2026*
