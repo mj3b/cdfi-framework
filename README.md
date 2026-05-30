@@ -31,7 +31,7 @@ The framework is the first of its kind: a published, version-controlled methodol
 
 ## The SAICRED Project
 
-The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project within the Catholic Digital Commons Foundation.
+The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project.
 
 | Role | Person | Contribution |
 |------|--------|-------------|
