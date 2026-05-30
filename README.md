@@ -21,11 +21,11 @@
 
 ## The SAICRED Project
 
-> **SAICRED** — Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity
+> **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity)
 >
 > Originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified
-> the gap — no systematic way to evaluate how faithfully AI models represent Catholic doctrine —
-> and designed the framework to fill it. The SAICRED white paper (v2.0, February 2026) specified
+> the gap: no systematic way to evaluate how faithfully AI models represent Catholic doctrine.
+> He designed the framework to fill it. The SAICRED white paper (v2.0, February 2026) specified
 > the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and
 > eight-step methodology.
 
@@ -43,7 +43,7 @@ Production pipeline: [saicred-benchmark](https://github.com/naveenp2728/saicred-
 
 ---
 
-## What This Is (and Is Not)
+## What This Is
 
 The CDFI Framework is a reusable evaluation governance methodology for building domain-specific AI doctrinal benchmarks. Derived from seven frontier AI safety research publications and translated into a scoring architecture for Catholic doctrinal evaluation. SAICRED v2 is the reference implementation.
 
@@ -51,10 +51,10 @@ The CDFI Framework is a reusable evaluation governance methodology for building 
 
 | This IS | This IS NOT |
 |---------|------------|
-| An evaluation governance methodology — every weight, gate, and threshold traces to a named publication | A benchmark dataset — prompts and responses live in the production pipeline |
-| A tradition-agnostic framework — any tradition can substitute its own authority structure | A production scoring pipeline — that is `saicred-benchmark/scoring_service.py` |
-| A portable reference implementation — run `engine/cdfi_calculator.py` independently | Regulatory or theological advice — all doctrinal determinations remain with qualified human authorities |
-| A publication-readiness protocol — three explicit gates must clear before scores carry institutional weight | An autonomous system — no component decides, approves, or classifies without human oversight |
+| An evaluation governance methodology: every weight, gate, and threshold traces to a named publication | A benchmark dataset: prompts and responses live in the production pipeline |
+| A tradition-agnostic framework: any tradition can substitute its own authority structure | A production scoring pipeline: that is `saicred-benchmark/scoring_service.py` |
+| A portable reference implementation: run `engine/cdfi_calculator.py` independently | Regulatory or theological advice: all doctrinal determinations remain with qualified human authorities |
+| A publication-readiness protocol: three explicit gates must clear before scores carry institutional weight | An autonomous system: no component decides, approves, or classifies without human oversight |
 
 ---
 
