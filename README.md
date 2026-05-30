@@ -93,10 +93,11 @@ cdfi-framework/
 │
 ├── configs/                               ← All numerical parameters (edit here to adapt for your tradition)
 │   ├── authority_matrix.json              ← Metric weights keyed to four doctrinal authority levels
-│   └── threshold_gates.yaml               ← Gate definitions, cap value, deployment tier thresholds
+│   └── threshold_gates.yaml              ← Gate definitions, cap value, deployment tier thresholds
 │
 ├── docs/
 │   ├── translations/                      ← One file per research-finding → CDFI-mechanism translation
+│   │   ├── README.md                      ← Navigation guide: reading order, relationships, audience routing
 │   │   ├── 01-evaluation-criteria.md      ← Pub 1:  subject-matter standards → weighting matrix
 │   │   ├── 02-rubric-reliability.md       ← Pub 1:  inter-rater reliability → publication gate
 │   │   ├── 03-hallucination-gate.md       ← Pub 2:  auditing hidden objectives → hallucination gate
@@ -110,13 +111,14 @@ cdfi-framework/
 │   │   ├── CDFI-formula.md                ← Formula, weighting matrix, gate logic
 │   │   ├── failure-taxonomy.md            ← Five failure modes with detection methods
 │   │   ├── authority-levels.md            ← Four doctrinal authority levels explained
-│   │   └── deployment-tiers.md            ← Formation, General, R&D, Not Recommended
+│   │   ├── deployment-tiers.md            ← Formation, General, R&D, Not Recommended
+│   │   └── scoring-anchors.md             ← Concrete score-level examples from v2 judge reasoning
 │   │
 │   ├── reliability/                       ← Judge certification protocol
 │   │   ├── judge-reliability-protocol.md  ← Four-part certification: what each part tests
 │   │   └── publication-gates.md           ← Three gates that must clear before publication
 │   │
-│   └── governance/                            ← Institutional use and adaptation
+│   └── governance/                        ← Institutional use and adaptation
 │       ├── adapting-for-other-traditions.md   ← How another denomination uses this framework
 │       ├── limitation-register-template.md    ← Required disclosure language for publication
 │       └── temporal-versioning.md             ← How scores expire with model version updates
