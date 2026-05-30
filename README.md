@@ -53,9 +53,20 @@ This sequence is what distinguishes evaluation governance infrastructure from re
 cdfi-framework/
 │
 ├── README.md                              ← You are here
+├── TRACEABILITY.md                        ← 7 publications → CDFI architecture (full causal chain)
+├── LIMITATIONS.md                         ← Six known limitations with exact disclosure language
+├── CHANGELOG.md                           ← Version history, reliability run log, v2 results
+│
+├── engine/                                ← Reference implementation of the CDFI formula
+│   ├── __init__.py                        ← Package entry point
+│   └── cdfi_calculator.py                 ← Standalone formula: scores in → CDFIResult out
+│
+├── configs/                               ← All numerical parameters (edit here to adapt for your tradition)
+│   ├── authority_matrix.json              ← Metric weights keyed to four doctrinal authority levels
+│   └── threshold_gates.yaml              ← Gate definitions, cap value, deployment tier thresholds
 │
 ├── docs/
-│   ├── translations/
+│   ├── translations/                      ← One file per research-finding → CDFI-mechanism translation
 │   │   ├── 01-evaluation-criteria.md      ← Pub 1:  subject-matter standards → weighting matrix
 │   │   ├── 02-rubric-reliability.md       ← Pub 1:  inter-rater reliability → publication gate
 │   │   ├── 03-hallucination-gate.md       ← Pub 2:  auditing hidden objectives → hallucination gate
@@ -65,29 +76,29 @@ cdfi-framework/
 │   │   ├── 07-categorical-failures.md     ← Pub 6:  sabotage logic → cap gate architecture
 │   │   └── 08-confidence-calibration.md   ← Original construct: Pubs 4+5 combined → ninth metric
 │   │
-│   ├── specifications/
+│   ├── specifications/                    ← Complete technical specifications
 │   │   ├── CDFI-formula.md                ← Formula, weighting matrix, gate logic
 │   │   ├── failure-taxonomy.md            ← Five failure modes with detection methods
 │   │   ├── authority-levels.md            ← Four doctrinal authority levels explained
 │   │   └── deployment-tiers.md            ← Formation, General, R&D, Not Recommended
 │   │
-│   ├── reliability/
-│   │   ├── judge-reliability-protocol.md  ← Four-part certification protocol
-│   │   └── publication-gates.md           ← What must pass before scores go to print
+│   ├── reliability/                       ← Judge certification protocol
+│   │   ├── judge-reliability-protocol.md  ← Four-part certification: what each part tests
+│   │   └── publication-gates.md           ← Three gates that must clear before publication
 │   │
-│   └── governance/
-│       ├── adapting-for-other-traditions.md   ← How another denomination uses this
-│       ├── limitation-register-template.md    ← Required disclosures for publication
-│       └── temporal-versioning.md             ← How scores expire with model versions
+│   └── governance/                        ← Institutional use and adaptation
+│       ├── adapting-for-other-traditions.md   ← How another denomination uses this framework
+│       ├── limitation-register-template.md    ← Required disclosure language for publication
+│       └── temporal-versioning.md             ← How scores expire with model version updates
 │
 ├── examples/
-│   └── saicred-v2/
-│       ├── README.md                      ← Reference implementation overview
-│       ├── results-summary.md             ← v2 benchmark findings
-│       └── framing-effect-analysis.md     ← The primary policy finding
+│   └── saicred-v2/                        ← Reference implementation (Catholic benchmark)
+│       ├── README.md                      ← Dataset, methodology, and benchmark overview
+│       ├── results-summary.md             ← Full v2 findings: rankings, CI, cap rates
+│       └── framing-effect-analysis.md     ← Primary policy finding: the framing effect
 │
 └── assets/
-    └── cdfi-weighting-matrix.png          ← Visual reference for the formula
+    └── cdfi-weighting-matrix.png          ← Visual reference for the four-column formula
 ```
 
 ---
