@@ -310,7 +310,10 @@ When building a benchmark for another religious tradition using the CDFI Framewo
 ---
 
 *Scoring rubric specification: [docs/specifications/CDFI-formula.md](CDFI-formula.md)*
+
 *Failure taxonomy: [docs/specifications/failure-taxonomy.md](failure-taxonomy.md)*
+
 *Judge reliability protocol: [docs/reliability/judge-reliability-protocol.md](../reliability/judge-reliability-protocol.md)*
-*Author: Mark Julius Banasihan | Evals Expert, SAICRED v2 | May 2026*
+
+*Author: Mark Julius Banasihan | May 2026*
 *DOI: [10.5281/zenodo.20453237](https://doi.org/10.5281/zenodo.20453237)*
