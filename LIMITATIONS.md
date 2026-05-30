@@ -1,6 +1,6 @@
 # Limitations Register
 
-*CDFI Framework v1.3 | SAICRED v2 Reference Implementation*
+*CDFI Framework v1.4 | SAICRED v2 Reference Implementation*
 *Author: Mark Julius Banasihan | May 2026*
 
 ---
@@ -19,6 +19,7 @@
 | L4 | Stability scores hardcoded | All v2 stability scores | No (deferred to v2.1) | Open |
 | L5 | Statistical significance of rank ordering | Positions 1–5 | No (interpretive constraint) | Disclosed |
 | L6 | Temporal validity of scores | All v2 scores | No (versioning protocol) | Active |
+| L7 | Security: prompt injection (judge), pipeline integrity, authority level signing | Attack surfaces disclosed | No — v1.5 remediation planned | Open |
 
 ---
 
@@ -132,4 +133,5 @@ Major version update triggers re-evaluation per the temporal versioning protocol
 ---
 
 *This register should be cited in any publication using SAICRED v2 CDFI scores.*
-*Last updated: May 2026 | CDFI Framework v1.0*
+
+*Last updated: May 2026 | CDFI Framework v1.4*
