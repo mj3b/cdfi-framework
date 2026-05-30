@@ -53,4 +53,5 @@ The re-evaluation run requires no new API calls beyond the benchmark prompts the
 ---
 
 *Research basis: A Statistical Approach to Model Evaluations (Anthropic, 2024)*
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+
+*Author: Mark Julius Banasihan | May 2026*
