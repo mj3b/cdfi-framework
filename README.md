@@ -3,12 +3,15 @@
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20453237)
+[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20464408)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
-[![Status: v1.3 — Reference Implementation](https://img.shields.io/badge/status-v1.3%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
+[![Status: v1.4 — Reference Implementation](https://img.shields.io/badge/status-v1.4%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
 [![Tradition-Agnostic](https://img.shields.io/badge/scope-tradition--agnostic-3bb273)](docs/governance/adapting-for-other-traditions.md)
 [![Seven Source Publications](https://img.shields.io/badge/grounded%20in-7%20AI%20safety%20publications-ff6b35)](TRACEABILITY.md)
 [![SAICRED v2](https://img.shields.io/badge/reference%20implementation-SAICRED%20v2-1565C0)](examples/saicred-v2/)
+[![NIST AI RMF](https://img.shields.io/badge/aligned%20with-NIST%20AI%20RMF%201.0-4a90d9)](docs/governance/nist-rmf-mapping.md)
+[![EU AI Act](https://img.shields.io/badge/mapped%20to-EU%20AI%20Act%202024-003399)](docs/governance/eu-ai-act-mapping.md)
+[![OWASP LLM](https://img.shields.io/badge/security-OWASP%20LLM%20Top%2010-e03434)](docs/governance/security-considerations.md)
 
 ---
 
@@ -121,7 +124,19 @@ cdfi-framework/
 │   └── governance/                            ← Institutional use and adaptation
 │       ├── adapting-for-other-traditions.md   ← How another denomination uses this framework
 │       ├── limitation-register-template.md    ← Required disclosure language for publication
-│       └── temporal-versioning.md             ← How scores expire with model version updates
+│       ├── temporal-versioning.md             ← How scores expire with model version updates
+│       ├── nist-rmf-mapping.md                ← NIST AI RMF 1.0 alignment: GOVERN/MAP/MEASURE/MANAGE
+│       ├── eu-ai-act-mapping.md               ← EU AI Act mapping: Articles 9–15; high-risk classification
+│       ├── security-considerations.md         ← Attack surfaces, OWASP LLM Top 10, open gaps
+│       └── cdcf-compliance/                   ← CDCF eight-criterion vetting documentation
+│           ├── README.md                      ← Status overview and audience routing
+│           ├── c1-canonical-scope.md          ← Mission alignment; pre-screening checklist
+│           ├── c2-human-accountability.md     ← Four-level decision authority matrix
+│           ├── c3-c7-responsibility-boundary.md ← Framework vs. model submitter obligations
+│           ├── c4-validation-status.md        ← Independent validation evidence; open gates
+│           ├── c5-subgroup-protocol.md        ← Vulnerable populations; subgroup protocol
+│           ├── c6-deployment-governance.md    ← Four decision states; Canon 1609 appeal pathway
+│           └── c8-configuration-boundary.md  ← Locked vs. configurable; subsidiarity test
 │
 ├── examples/
 │   └── saicred-v2/                        ← Reference implementation (Catholic benchmark)
@@ -274,6 +289,7 @@ Six limitations are documented with exact disclosure language:
 | L4 | Stability scores hardcoded at 3.0 — deferred to v2.1 | Non-blocking |
 | L5 | Positions 1–5 not statistically distinguishable (only Grok vs. Claude gap reaches p < 0.05) | Interpretive constraint |
 | L6 | Scores tied to specific model versions; expire on major version update | Active via versioning protocol |
+| L7 | Security: three attack surfaces documented but not technically mitigated (prompt injection, pipeline integrity, authority level signing) | Disclosure only — v1.5 remediation planned |
 
 Full register with paste-ready disclosure language: [`LIMITATIONS.md`](LIMITATIONS.md)
 
@@ -294,7 +310,7 @@ This project used Claude (Anthropic) for methodology development, document draft
              for Domain-Specific {AI} Doctrinal Benchmarking},
   year    = {2026},
   month   = {5},
-  version = {1.1},
+  version = {1.4},
   doi     = {10.5281/zenodo.20464408},
   url     = {https://doi.org/10.5281/zenodo.20464408},
   license = {Apache-2.0}
