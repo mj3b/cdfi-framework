@@ -1,4 +1,4 @@
-# The CDFI Framework
+# CDFI Framework
 
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
