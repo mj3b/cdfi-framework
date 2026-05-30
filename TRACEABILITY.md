@@ -165,7 +165,3 @@ Combined:       Does the model express appropriate certainty for the authority
 | Correct calibration, wrong conclusion | Right certainty level, wrong doctrine | Caught by doctrinal precision — not by confidence calibration |
 
 No prior Catholic AI benchmark contains this metric.
-
----
-
-*CDFI Framework v1.0 | SAICRED v2 Reference Implementation | May 2026*
