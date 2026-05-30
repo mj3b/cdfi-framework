@@ -116,7 +116,7 @@ cdfi-framework/
 │   │   ├── judge-reliability-protocol.md  ← Four-part certification: what each part tests
 │   │   └── publication-gates.md           ← Three gates that must clear before publication
 │   │
-│   └── governance/                        ← Institutional use and adaptation
+│   └── governance/                            ← Institutional use and adaptation
 │       ├── adapting-for-other-traditions.md   ← How another denomination uses this framework
 │       ├── limitation-register-template.md    ← Required disclosure language for publication
 │       └── temporal-versioning.md             ← How scores expire with model version updates
