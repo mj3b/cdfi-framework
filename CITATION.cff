@@ -15,12 +15,12 @@ authors:
     orcid: "https://orcid.org/0009-0001-8121-2878"
     email: markjuliusbanasihan@gmail.com
     affiliation: Catholic Digital Commons Foundation
-version: "1.0"
-date-released: "2026-05-29"
+version: "1.1"
+date-released: "2026-05-30"
 license: Apache-2.0
 repository-code: "https://github.com/mj3b/cdfi-framework"
 url: "https://github.com/mj3b/cdfi-framework"
-doi: "10.5281/zenodo.20453237"
+doi: "10.5281/zenodo.20464408"
 keywords:
   - AI evaluation
   - doctrinal fidelity
