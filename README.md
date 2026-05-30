@@ -31,9 +31,15 @@ The framework is the first of its kind: a published, version-controlled methodol
 
 ## The SAICRED Project
 
-The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project.
+> **SAICRED** — Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity
+>
+> Originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified
+> the gap — no systematic way to evaluate how faithfully AI models represent Catholic doctrine —
+> and designed the framework to fill it. The SAICRED white paper (v2.0, February 2026) specified
+> the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and
+> eight-step methodology.
 
-SAICRED was originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified the gap — no systematic way to evaluate how faithfully AI models represent Catholic doctrine — and designed the framework to fill it. The SAICRED white paper (February 2026) specified the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and eight-step methodology. That document is the intellectual foundation the entire project rests on.
+The CDFI Framework is the evaluation governance layer of that project. Three roles built it.
 
 | Role | Person | Contribution |
 |------|--------|-------------|
@@ -43,7 +49,8 @@ SAICRED was originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filip
 
 The three roles were not interchangeable and could not substitute for each other. The Project Lead's theological framing defined what the benchmark was measuring. The Lead Engineer's pipeline produced the data. The Evals Expert's scoring architecture determined whether that data was defensible enough to support institutional deployment guidance.
 
-This repository owns the methodology layer. The production pipeline lives at [saicred-benchmark](https://github.com/naveenp2728/saicred-benchmark) *(private — access pending publication)*.
+Production pipeline: [saicred-benchmark](https://github.com/naveenp2728/saicred-benchmark) *(private — access pending publication)*
+
 
 ## What This Repository Is (and Is Not)
 
