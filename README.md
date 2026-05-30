@@ -311,8 +311,8 @@ This project used Claude (Anthropic) for methodology development, document draft
   year    = {2026},
   month   = {5},
   version = {1.4},
-  doi     = {10.5281/zenodo.20464408},
-  url     = {https://doi.org/10.5281/zenodo.20464408},
+  doi     = {10.5281/zenodo.20467148},
+  url     = {https://doi.org/10.5281/zenodo.20467148},
   license = {Apache-2.0}
 }
 ```
