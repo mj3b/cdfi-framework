@@ -49,6 +49,3 @@ The CDCF Project Vetting Criteria asks: *should this project enter the Foundatio
 
 ---
 
-*DOI: [10.5281/zenodo.20464408](https://doi.org/10.5281/zenodo.20464408)*
-
-*ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
