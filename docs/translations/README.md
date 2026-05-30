@@ -56,18 +56,12 @@ Translation 8 is structurally different from the others. No single paper provide
 
 ## How to Read These Documents
 
-**If you are a researcher evaluating the methodology:**
-Read [`TRANSLATION-METHOD.md`](../../TRANSLATION-METHOD.md) first to understand the seven-step sequence, then read any individual translation to see it applied to a specific publication.
-
-**If you are building a benchmark for another tradition:**
-Read [05-framing-sensitivity.md](05-framing-sensitivity.md) and [07-categorical-failures.md](07-categorical-failures.md) first — the framing effect and categorical failure architecture are the two mechanisms most likely to require adaptation for a different authority structure. Then read [`docs/governance/adapting-for-other-traditions.md`](../governance/adapting-for-other-traditions.md).
-
-**If you are a peer reviewer checking the v2 data claims:**
-Every data figure in these documents was verified against the SAICRED v2 production results CSVs (`cdfi_scores_full.csv`, `scores_full.csv`, `pairwise_significance.csv`, `confidence_intervals.csv`). The figures are not rounded estimates. They are exact outputs from Naveen Kumar Puppala's scoring pipeline.
-
-**If you are a Catholic institution making a deployment decision:**
-Read [04-statistical-rigor.md](04-statistical-rigor.md) for why the rank-order differences between models 2–5 are directionally informative but not statistically reliable, and [05-framing-sensitivity.md](05-framing-sensitivity.md) for the framing effect finding that is the most practically actionable output of the benchmark.
-
+| Audience | Start Here |
+|----------|-----------|
+| **Researcher evaluating the methodology** | [`TRANSLATION-METHOD.md`](../../TRANSLATION-METHOD.md) — the seven-step sequence, then any individual translation to see it applied |
+| **Building a benchmark for another tradition** | [`05-framing-sensitivity.md`](05-framing-sensitivity.md) and [`07-categorical-failures.md`](07-categorical-failures.md) — the two mechanisms most likely to require adaptation. Then [`docs/governance/adapting-for-other-traditions.md`](../governance/adapting-for-other-traditions.md) |
+| **Peer reviewer checking v2 data claims** | All figures verified against `cdfi_scores_full.csv`, `scores_full.csv`, `pairwise_significance.csv`, `confidence_intervals.csv`. Exact outputs from Naveen Kumar Puppala's scoring pipeline — not rounded estimates |
+| **Catholic institution making a deployment decision** | [`04-statistical-rigor.md`](04-statistical-rigor.md) for why rank-order positions 2–5 are directionally informative but not statistically reliable. [`05-framing-sensitivity.md`](05-framing-sensitivity.md) for the framing effect finding — the most practically actionable output of the benchmark |
 ---
 
 ## Relationship to Other Repository Documents
