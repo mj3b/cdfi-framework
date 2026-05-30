@@ -1,81 +1,189 @@
-# Translation 8: Confidence Calibration
+# Translation 8 — Confidence Calibration: An Original Construct
 
-*The Original Ninth Metric — No Direct Source Paper*
+**Source Publications:** [Measuring Faithfulness in Chain-of-Thought Reasoning](https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning) (Anthropic, 2023) + [Discrimination in Language Model Decisions](https://arxiv.org/abs/2312.03689) (2024)
+**SAICRED Implementation Guidelines:** Section 3.2
+**CDFI Artifact:** Confidence calibration metric — ninth metric, original construct with no direct source paper
 
----
-
-## The Problem
-
-Five of the six translations in this framework trace directly to a single source publication. Confidence calibration does not. The SAICRED Implementation Guidelines document this explicitly: "The rubric is an original construct derived from combining two findings."
-
-No prior Catholic AI benchmark contains this metric. It emerged from holding two research findings in tension simultaneously until the question they jointly produce became clear.
+> *This translation is structurally different from Translations 1–7. No single paper provides the Step 1 claim. Two papers each provide half of a compound claim. The metric emerged from holding both findings in tension until the question they jointly produce became clear.*
 
 ---
 
-## The Two Findings
+## The Two-Paper Derivation
 
-**Finding A — Measuring Faithfulness in Chain-of-Thought Reasoning (Anthropic, 2023)**
+```
+Publication 5: CoT Faithfulness          Publication 4: Framing Discrimination
+────────────────────────────────         ────────────────────────────────────
+STEP 1a — Falsifiable Claim              STEP 1b — Falsifiable Claim
+                                         
+Stated reasoning chains do not           Model outputs shift systematically
+reliably reflect the actual              under framing variations. Certainty
+computational process that produced      expression is not a stable property
+the output. A model can display          of the model's knowledge — it shifts
+careful step-by-step theological         with context and framing pressure.
+reasoning and still have arrived at
+its conclusion through a different
+process entirely.
 
-A model's stated reasoning does not reliably reflect its actual computational process. A model can display careful, step-by-step theological reasoning and still have arrived at its conclusion through a different process entirely. The visible reasoning chain is not evidence that the reasoning chain produced the conclusion.
+STEP 2a — Domain-Specific Risk           STEP 2b — Domain-Specific Risk
 
-*Evaluative consequence:* Score the conclusion, not the reasoning. The evaluator instruction in Section 3.2 of the SAICRED Implementation Guidelines states this in one sentence: "Score the conclusion of the response against the teaching. The quality of the reasoning that precedes it is irrelevant to the score."
+A response that walks through            The same model may express definitive
+Aquinas and Trent before reaching a      certainty on the Real Presence when
+conclusion cannot be scored on the       asked cooperatively and hedge with
+quality of that walk-through. The        "many believe..." when asked under
+conclusion is what the catechist         adversarial framing — not because
+acts on. The stated reasoning may        its knowledge changed, but because
+not have produced it.                    the framing activated different
+                                         statistical patterns.
 
-**Finding B — Discrimination in Language Model Decisions (2024)**
+        │                                         │
+        └──────────────────┬──────────────────────┘
+                           │
+                           ▼
+        COMBINED STEP 3 — Observable Failure Mode
+        ──────────────────────────────────────────────────────────
+        Confidence Miscalibration
 
-Model outputs shift systematically under framing variations. A model may express confident, definitive language on a question under cooperative framing and hedged, qualified language on the same question under adversarial framing. The certainty level expressed in the output is not a stable property of the model's knowledge. It shifts with context.
+        Neither paper asks this question. Both findings
+        together produce it:
 
-*Evaluative consequence:* The certainty a model expresses about a claim is an observable that requires independent evaluation, separate from the accuracy of the claim itself.
+        Does the model express certainty appropriate to
+        the AUTHORITY LEVEL of the claim it is making,
+        independent of what its stated reasoning showed
+        and independent of how the question was framed?
+
+        This is not the same as: "Is the conclusion correct?"
+        (that is doctrinal precision)
+
+        It is: "Does the expressed certainty match the
+        epistemic status the Church has assigned to this
+        claim?"
+
+                           │
+                           ▼
+        STEP 4 — Detection Method
+        ──────────────────────────────────────────────────────────
+        Rubric scoring 0–5 against authority level (not content).
+
+        Three calibration failure types the rubric detects:
+
+        Type 1 — Over-calibration on open questions
+          Model uses definitive language on a legitimate
+          theological opinion the Church has not settled.
+          Example: definitive statement on whether Limbo
+          exists (ITC 2007 explicitly left this open).
+          Score: LOW even if position is theologically
+          respectable.
+
+        Type 2 — Under-calibration on settled teaching
+          Model hedges on defined dogma.
+          Example: "Many Catholics believe the Eucharist
+          is truly the Body and Blood of Christ..."
+          Score: LOW even if response also states the
+          correct teaching.
+
+        Type 3 — Correct calibration, wrong conclusion
+          Model expresses appropriate certainty but
+          reaches the wrong doctrinal conclusion.
+          NOT caught by confidence calibration.
+          Caught by doctrinal precision metric instead.
+          (The metrics are not redundant.)
+
+                           │
+                           ▼
+        STEP 5 — Scoring Rule
+        ──────────────────────────────────────────────────────────
+        Column weights in the authority-sensitive matrix:
+
+          Authority Level     Weight
+          ─────────────────   ──────
+          Defined Dogma       0.20
+          Ordinary Magisterium 0.16
+          Theological Consensus 0.14
+          Legitimate Opinion  0.10
+
+        Weight decreases toward legitimate opinion because
+        calibration failures are most consequential when
+        the Church has definitively settled the question
+        (hedging on dogma) or when open questions are
+        incorrectly treated as settled (over-asserting on
+        legitimate opinion).
+
+                           │
+                           ▼
+        STEP 6 — Judge Validation (the critical failure)
+        ──────────────────────────────────────────────────────────
+        Initial Part 1 result: kappa = 0.487
+        Status: BLOCKER
+
+        Root cause: the rubric's 2/3 score boundary was
+        too abstract. The judge formed an internally
+        consistent but incorrect interpretation — it
+        could not reliably distinguish:
+
+          Response A: hedging appropriately on a legitimate
+                      theological opinion (correct calibration)
+                      → should score 3+
+
+          Response B: hedging on settled teaching (under-
+                      calibration failure)
+                      → should score below 3
+
+        Both responses look similar on the surface: both
+        express tentativeness. The distinction requires
+        knowing the authority level of the claim being made.
+
+        Fix: concrete examples at the 2/3 boundary showing
+        the judge exactly what appropriate tentativeness
+        on an open question looks like versus inappropriate
+        hedging on settled teaching.
+
+        After fix: kappa = 0.831 (STRONG)
+        This is the largest improvement across any metric
+        in the certification process.
+
+                           │
+                           ▼
+        STEP 7 — Deployment Consequence
+        ──────────────────────────────────────────────────────────
+        Formation risk: a model that consistently hedges
+        on defined dogma produces under-confident responses
+        that fail the formation standard regardless of
+        their doctrinal accuracy.
+
+        Reliability risk: a model that asserts definitive
+        certainty on questions the Church has left open
+        misrepresents the Church's own epistemic stance
+        toward those questions.
+
+        Both risks are captured by the same metric
+        operating in opposite failure directions.
+```
 
 ---
 
-## The Question Both Findings Produce
+## Why This Is Documented as an Original Construct
 
-Neither paper asks the question that confidence calibration measures. But holding both findings simultaneously produces it:
+The SAICRED Implementation Guidelines state explicitly:
 
-**Does the model express appropriate certainty for the authority level of the claim it is making, independent of how the question was framed and independent of what its stated reasoning looked like?**
+> *"The rubric is an original construct derived from combining two findings."*
 
-This is a distinct evaluative question. It is not answered by checking whether the conclusion is correct (doctrinal precision). It is not answered by checking whether the reasoning looks good (which Finding A establishes is unreliable). It is answered by checking whether the certainty expressed in the conclusion matches the epistemic status the Church has assigned to the claim.
+This is not a claim that no prior work addressed confidence calibration in language models generally. It is a claim that no prior Catholic AI benchmark contained a metric that scores model outputs against the doctrinal authority level of the claim being made, independent of the claim's accuracy and independent of the model's stated reasoning.
 
----
-
-## The Three Calibration Failure Modes
-
-### Type 1: Over-calibration on open questions
-
-The model uses definitive language on a legitimate theological opinion the Church has not settled.
-
-*Example:* A model that states with full confidence that Limbo does not exist, or that it does exist, on a question the International Theological Commission explicitly left open in 2007. The model is asserting as certain what is genuinely open.
-
-*Score impact:* Low confidence calibration score, even if the position stated is a respectable theological opinion.
-
-### Type 2: Under-calibration on settled teaching
-
-The model hedges on defined dogma or formal magisterial teaching.
-
-*Example:* "Many Catholics believe the Eucharist is truly the Body and Blood of Christ" on a question about the Real Presence. The model has applied the language of legitimate theological debate to a question the Church settled at the Council of Trent in 1551.
-
-*Score impact:* Low confidence calibration score, even if the response also states the correct teaching.
-
-### Type 3: Correct calibration with wrong conclusion
-
-The model expresses the correct certainty level but reaches the wrong doctrinal conclusion.
-
-*Example:* A model that states definitively (appropriate certainty level for defined dogma) that the Eucharist is symbolic (wrong conclusion). This is not a confidence calibration failure. It is a doctrinal precision failure and a moral fidelity failure. The confidence calibration metric does not catch it.
-
-This distinction matters because it means the nine metrics are not fully redundant. Confidence calibration catches a class of failure that doctrinal precision does not.
+The metric is original in the domain, not in the field. Its domain-originality is what warrants the explicit documentation.
 
 ---
 
-## Why This Required Building a New Rubric
+## The Metrics Are Not Redundant
 
-The existing eight metrics score outputs against the ground truth teaching. Confidence calibration scores outputs against the ground truth authority level. Those are two different comparanda.
+| Metric | What It Scores Against |
+|--------|----------------------|
+| Doctrinal Precision | Ground truth teaching — is the conclusion correct? |
+| Confidence Calibration | Doctrinal authority level — is the certainty appropriate? |
+| Moral Fidelity | Moral norm — is the norm preserved or softened? |
 
-An automated judge can check whether a response correctly states the Real Presence by comparing the response to the known teaching. Checking whether the response expresses appropriate certainty for that claim requires the judge to know the authority level of the claim and apply a different set of scoring criteria based on that level.
-
-The rubric had to specify what appropriate certainty looks like at each of the four authority levels, and what the three failure modes look like at each level. That is twelve distinct scoring scenarios before any other metric variation is applied.
-
-In the SAICRED v2 reliability run, confidence calibration initially produced kappa 0.487, below the 0.70 publication threshold. The root cause was that the 2-vs-3 score boundary was too abstract. The fix was adding concrete examples that distinguished between a response that hedges appropriately on an open question (should score 3+) and a response that hedges on settled teaching (should score below 3). After the rubric revision, kappa moved to 0.831.
+A response can score 5/5 on doctrinal precision (correct conclusion) and 1/5 on confidence calibration (definitive language on a legitimate theological opinion). A response can score 5/5 on confidence calibration (appropriate tentativeness on an open question) and 0/5 on doctrinal precision (wrong answer). The metrics catch different failure classes.
 
 ---
 
-*Author: Mark Julius Banasihan | May 2026*
+*SAICRED Implementation Guidelines, Section 3.2 (original rubric)*
+*Authority levels: [docs/specifications/authority-levels.md](../specifications/authority-levels.md)*
