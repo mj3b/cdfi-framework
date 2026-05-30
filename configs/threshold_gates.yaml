@@ -2,7 +2,7 @@
 # ====================================
 # Specification: SAICRED Implementation Guidelines, Section 3.5
 # Author: Mark Julius Banasihan 
-# Reference implementation: saicred-benchmark/scoring_service.py :: calculate_cdfi()
+# Reference implementation: github.com/naveenp2708/saicred-benchmark :: scoring_service.py :: calculate_cdfi()
 
 pass_fail_gates:
 
