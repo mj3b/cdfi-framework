@@ -51,68 +51,6 @@
 
 ---
 
-## SAICRED v2 Benchmark Results — May 2026
-
-**100 questions × 4 framings × 6 models = 2,400 responses. 21,599 metric scores.**
-
-### Rankings (preliminary — authority level classification pending)
-
-| Rank | Model | Mean CDFI | 95% CI (clustered) | Median | Cap Rate | Tier |
-|:----:|-------|:---------:|:------------------:|:------:|:--------:|------|
-| 1 | o3 | 85.0 | [83.0, 87.0] | 94.0 | 8.0% | **Formation and Catechesis** |
-| 2 | DeepSeek V4 | 83.4 | [80.6, 86.2] | 91.6 | 12.5% | General Information |
-| 3 | Gemini 3.1 Pro | 82.5 | [80.2, 84.8] | 91.6 | 14.5% | General Information |
-| 4 | GPT-5.4 | 82.1 | [80.6, 83.7] | 84.4 | 8.0% | General Information |
-| 5 | Grok 4 | 82.1 | [79.5, 84.7] | 94.0 | 15.3% | General Information |
-| 6 | Claude Sonnet 4.6 | 78.0 | [76.1, 79.8] | 89.2 | 17.0% | General Information |
-
-*95% CIs use clustered standard errors at topic_domain level (G=7). Only the Grok 4 vs. Claude Sonnet 4.6 gap reaches significance at 95% confidence (p=0.008).*
-
-### Framing effect (mean CDFI by variant)
-
-| Model | Neutral | Christian | Catholic | Adversarial | Gap (C − A) |
-|-------|:-------:|:---------:|:--------:|:-----------:|:-----------:|
-| o3 | 84.9 | 81.9 | 86.2 | 87.0 | **−0.8** |
-| GPT-5.4 | 78.0 | 79.3 | 87.8 | 83.3 | +4.5 |
-| Gemini 3.1 Pro | 79.5 | 78.2 | 90.3 | 82.0 | +8.3 |
-| Grok 4 | 75.0 | 83.1 | 90.7 | 79.6 | +11.1 |
-| DeepSeek V4 | 77.1 | 84.3 | 91.6 | 80.4 | +11.2 |
-| Claude Sonnet 4.6 | 74.3 | 74.6 | 89.4 | 73.6 | **+15.8** |
-
-### Cap event breakdown
-
-| Model | Relativism only | Both gates | Hallucination only | Total | Rate |
-|-------|:---------------:|:----------:|:-----------------:|:-----:|:----:|
-| Claude Sonnet 4.6 | 42 | 20 | 7 | 69 | 17.3% |
-| Grok 4 | 44 | 13 | 7 | 64 | 16.0% |
-| Gemini 3.1 Pro | 36 | 15 | 7 | 58 | 14.5% |
-| DeepSeek V4 | 27 | 12 | 11 | 50 | 12.5% |
-| GPT-5.4 | 18 | 11 | 3 | 32 | 8.0% |
-| o3 | 14 | 5 | 13 | 32 | 8.0% |
-| **Total** | **181** | **76** | **48** | **305** | **12.7%** |
-
-### Open publication gates at time of release
-
-| Gate | Status |
-|------|--------|
-| Judge reliability certification | **CLEARED — May 11, 2026** |
-| Authority level classification (400 prompts) | Pending — theological advisors |
-| Human theological review (21,599 scores) | Pending — Filip Ponulak + advisors |
-| Stability scoring (5 runs/prompt) | Deferred to v2.1 |
-
----
-
-## Upcoming: SAICRED v2.1
-
-**Planned additions:**
-
-- Five-run stability scoring (removes hardcoded stability = 3.0)
-- Authority level classification applied — final CDFI scores replace preliminary scores
-- Human theological review completed — full publication weight achieved
-- Updated rankings with complete four-column matrix applied
-
----
-
 ## Framework v1.1 — May 2026
 
 **Translation methodology documentation added.**
@@ -176,4 +114,72 @@ Systematic gap analysis against CDCF Project Vetting Criteria v0.2 (published Ap
 
 ---
 
-*Maintained by: Mark Julius Banasihan *
+*Framework Maintained by: Mark Julius Banasihan*
+
+---
+
+## SAICRED v2 Benchmark Results — May 2026
+
+**100 questions × 4 framings × 6 models = 2,400 responses. 21,599 metric scores.**
+
+### Rankings (preliminary — authority level classification pending)
+
+| Rank | Model | Mean CDFI | 95% CI (clustered) | Median | Cap Rate | Tier |
+|:----:|-------|:---------:|:------------------:|:------:|:--------:|------|
+| 1 | o3 | 85.0 | [83.0, 87.0] | 94.0 | 8.0% | **Formation and Catechesis** |
+| 2 | DeepSeek V4 | 83.4 | [80.6, 86.2] | 91.6 | 12.5% | General Information |
+| 3 | Gemini 3.1 Pro | 82.5 | [80.2, 84.8] | 91.6 | 14.5% | General Information |
+| 4 | GPT-5.4 | 82.1 | [80.6, 83.7] | 84.4 | 8.0% | General Information |
+| 5 | Grok 4 | 82.1 | [79.5, 84.7] | 94.0 | 15.3% | General Information |
+| 6 | Claude Sonnet 4.6 | 78.0 | [76.1, 79.8] | 89.2 | 17.0% | General Information |
+
+*95% CIs use clustered standard errors at topic_domain level (G=7). Only the Grok 4 vs. Claude Sonnet 4.6 gap reaches significance at 95% confidence (p=0.008).*
+
+### Framing effect (mean CDFI by variant)
+
+| Model | Neutral | Christian | Catholic | Adversarial | Gap (C − A) |
+|-------|:-------:|:---------:|:--------:|:-----------:|:-----------:|
+| o3 | 84.9 | 81.9 | 86.2 | 87.0 | **−0.8** |
+| GPT-5.4 | 78.0 | 79.3 | 87.8 | 83.3 | +4.5 |
+| Gemini 3.1 Pro | 79.5 | 78.2 | 90.3 | 82.0 | +8.3 |
+| Grok 4 | 75.0 | 83.1 | 90.7 | 79.6 | +11.1 |
+| DeepSeek V4 | 77.1 | 84.3 | 91.6 | 80.4 | +11.2 |
+| Claude Sonnet 4.6 | 74.3 | 74.6 | 89.4 | 73.6 | **+15.8** |
+
+### Cap event breakdown
+
+| Model | Relativism only | Both gates | Hallucination only | Total | Rate |
+|-------|:---------------:|:----------:|:-----------------:|:-----:|:----:|
+| Claude Sonnet 4.6 | 42 | 20 | 7 | 69 | 17.3% |
+| Grok 4 | 44 | 13 | 7 | 64 | 16.0% |
+| Gemini 3.1 Pro | 36 | 15 | 7 | 58 | 14.5% |
+| DeepSeek V4 | 27 | 12 | 11 | 50 | 12.5% |
+| GPT-5.4 | 18 | 11 | 3 | 32 | 8.0% |
+| o3 | 14 | 5 | 13 | 32 | 8.0% |
+| **Total** | **181** | **76** | **48** | **305** | **12.7%** |
+
+### Open publication gates at time of release
+
+| Gate | Status |
+|------|--------|
+| Judge reliability certification | **CLEARED — May 11, 2026** |
+| Authority level classification (400 prompts) | Pending — theological advisors |
+| Human theological review (21,599 scores) | Pending — Filip Ponulak + advisors |
+| Stability scoring (5 runs/prompt) | Deferred to v2.1 |
+
+---
+
+## Upcoming: SAICRED v2.1
+
+**Planned additions:**
+
+- Five-run stability scoring (removes hardcoded stability = 3.0)
+- Authority level classification applied — final CDFI scores replace preliminary scores
+- Human theological review completed — full publication weight achieved
+- Updated rankings with complete four-column matrix applied
+
+---
+
+*SAICRED v2 Maintained by: Naveen Kumar Puppala and Filip Ponulak, PhD*
+
+---
