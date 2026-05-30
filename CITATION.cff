@@ -14,7 +14,7 @@ authors:
     given-names: Mark Julius
     orcid: "https://orcid.org/0009-0001-8121-2878"
     email: markjuliusbanasihan@gmail.com
-version: "1.3"
+version: "1.4"
 date-released: "2026-05-30"
 license: Apache-2.0
 repository-code: "https://github.com/mj3b/cdfi-framework"
