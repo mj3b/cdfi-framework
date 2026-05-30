@@ -33,7 +33,7 @@ The framework is the first of its kind: a published, version-controlled methodol
 
 The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project.
 
-SAICRED was originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified the gap, no systematic way to evaluate how faithfully AI models represent Catholic doctrine — and designed the framework to fill it. The SAICRED white paper (February 2026) specified the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and eight-step methodology. That document is the intellectual foundation the entire project rests on.
+SAICRED was originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified the gap — no systematic way to evaluate how faithfully AI models represent Catholic doctrine — and designed the framework to fill it. The SAICRED white paper (February 2026) specified the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and eight-step methodology. That document is the intellectual foundation the entire project rests on.
 
 | Role | Person | Contribution |
 |------|--------|-------------|
