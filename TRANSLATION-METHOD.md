@@ -275,12 +275,13 @@ These results do not validate the method's theological claims. They validate tha
   title   = {{CDFI Framework}: Evaluation Governance Infrastructure
              for Domain-Specific {AI} Doctrinal Benchmarking},
   year    = {2026},
-  doi     = {10.5281/zenodo.20453237},
-  url     = {https://doi.org/10.5281/zenodo.20453237}
+  doi     = {10.5281/zenodo.20467497},
+  url     = {https://doi.org/10.5281/zenodo.20467497}
 }
 ```
 
 ---
 
 *Mark Julius Banasihan | May 2026*
-*DOI: [10.5281/zenodo.20453237](https://doi.org/10.5281/zenodo.20453237) | ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
+
+*DOI: [10.5281/zenodo.20453237](https://doi.org/10.5281/zenodo.20467497) | ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
