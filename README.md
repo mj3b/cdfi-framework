@@ -294,7 +294,7 @@ This project used Claude (Anthropic) for methodology development, document draft
   version      = {1.0},
   doi          = {10.5281/zenodo.20453237},
   url          = {https://doi.org/10.5281/zenodo.20453237},
-  license      = {Apache-2.0},
+  license      = {Apache-2.0}
 }
 ```
 
