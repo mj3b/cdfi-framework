@@ -2,7 +2,7 @@
   "_meta": {
     "description": "CDFI weighting matrix — metric weights keyed to doctrinal authority level",
     "specification": "SAICRED Implementation Guidelines, Section 3.5 (Mark Julius Banasihan, March 2026)",
-    "reference_implementation": "saicred-benchmark/scoring_service.py :: CDFI_WEIGHTS",
+    "reference_implementation": "github.com/naveenp2708/saicred-benchmark :: scoring_service.py :: CDFI_WEIGHTS",
     "version": "v2",
     "note": "All columns sum to 1.00. Gate metrics (hallucination, relativism_resistance) are excluded from weighted sum and handled separately in threshold_gates.yaml."
   },
