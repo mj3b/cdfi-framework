@@ -121,22 +121,22 @@ cdfi-framework/
 │   │   ├── judge-reliability-protocol.md  ← Four-part certification: what each part tests
 │   │   └── publication-gates.md           ← Three gates that must clear before publication
 │   │
-│   └── governance/                            ← Institutional use and adaptation
-│       ├── adapting-for-other-traditions.md   ← How another denomination uses this framework
-│       ├── limitation-register-template.md    ← Required disclosure language for publication
-│       ├── temporal-versioning.md             ← How scores expire with model version updates
-│       ├── nist-rmf-mapping.md                ← NIST AI RMF 1.0 alignment: GOVERN/MAP/MEASURE/MANAGE
-│       ├── eu-ai-act-mapping.md               ← EU AI Act mapping: Articles 9–15; high-risk classification
-│       ├── security-considerations.md         ← Attack surfaces, OWASP LLM Top 10, open gaps
-│       └── cdcf-compliance/                   ← CDCF eight-criterion vetting documentation
-│           ├── README.md                      ← Status overview and audience routing
-│           ├── c1-canonical-scope.md          ← Mission alignment; pre-screening checklist
-│           ├── c2-human-accountability.md     ← Four-level decision authority matrix
+│   └── governance/                              ← Institutional use and adaptation
+│       ├── adapting-for-other-traditions.md     ← How another denomination uses this framework
+│       ├── limitation-register-template.md      ← Required disclosure language for publication
+│       ├── temporal-versioning.md               ← How scores expire with model version updates
+│       ├── nist-rmf-mapping.md                  ← NIST AI RMF 1.0 alignment: GOVERN/MAP/MEASURE/MANAGE
+│       ├── eu-ai-act-mapping.md                 ← EU AI Act mapping: Articles 9–15; high-risk classification
+│       ├── security-considerations.md           ← Attack surfaces, OWASP LLM Top 10, open gaps
+│       └── cdcf-compliance/                     ← CDCF eight-criterion vetting documentation
+│           ├── README.md                        ← Status overview and audience routing
+│           ├── c1-canonical-scope.md            ← Mission alignment; pre-screening checklist
+│           ├── c2-human-accountability.md       ← Four-level decision authority matrix
 │           ├── c3-c7-responsibility-boundary.md ← Framework vs. model submitter obligations
-│           ├── c4-validation-status.md        ← Independent validation evidence; open gates
-│           ├── c5-subgroup-protocol.md        ← Vulnerable populations; subgroup protocol
-│           ├── c6-deployment-governance.md    ← Four decision states; Canon 1609 appeal pathway
-│           └── c8-configuration-boundary.md  ← Locked vs. configurable; subsidiarity test
+│           ├── c4-validation-status.md          ← Independent validation evidence; open gates
+│           ├── c5-subgroup-protocol.md          ← Vulnerable populations; subgroup protocol
+│           ├── c6-deployment-governance.md      ← Four decision states; Canon 1609 appeal pathway
+│           └── c8-configuration-boundary.md     ← Locked vs. configurable; subsidiarity test
 │
 ├── examples/
 │   └── saicred-v2/                        ← Reference implementation (Catholic benchmark)
