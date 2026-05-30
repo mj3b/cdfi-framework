@@ -29,7 +29,7 @@
 > the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and
 > eight-step methodology.
 
-The CDFI Framework is the evaluation governance layer of that project. Three roles built it.
+The CDFI Framework is the evaluation governance layer of this project.
 
 | Role | Person | Contribution |
 |------|--------|-------------|
