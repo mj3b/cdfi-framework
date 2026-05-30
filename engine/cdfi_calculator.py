@@ -7,7 +7,7 @@ Specification:  SAICRED Implementation Guidelines, Section 3.5
                 Mark Julius Banasihan | March 2026
 
 Production implementation (pipeline):
-    saicred-benchmark/scoring_service.py :: calculate_cdfi()
+    github.com/naveenp2708/saicred-benchmark :: scoring_service.py :: calculate_cdfi()
 
 This module is the portable, dependency-free reference implementation.
 It takes a plain dict of metric scores and returns a CDFIResult.
@@ -56,7 +56,7 @@ from typing import Dict, Optional, Union
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Weighting Matrix
-# Matches saicred-benchmark/scoring_service.py :: CDFI_WEIGHTS exactly.
+# Matches github.com/naveenp2708/saicred-benchmark :: scoring_service.py :: CDFI_WEIGHTS exactly.
 # Source: SAICRED Implementation Guidelines, Section 3.5 (March 2026)
 # ──────────────────────────────────────────────────────────────────────────────
 AUTHORITY_WEIGHTS: Dict[str, Dict[str, float]] = {
