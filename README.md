@@ -81,6 +81,7 @@ cdfi-framework/
 ├── TRACEABILITY.md                        ← 7 publications → CDFI architecture (full causal chain)
 ├── LIMITATIONS.md                         ← Six known limitations with exact disclosure language
 ├── CHANGELOG.md                           ← Version history, reliability run log, v2 results
+├── TRANSLATION-METHOD.md                  ← How each publication became a computable CDFI mechanism
 ├── CITATION.cff                           ← Machine-readable citation metadata
 ├── CONTRIBUTING.md                        ← How to adapt, extend, or contribute
 ├── LICENSE                                ← Apache License 2.0
@@ -133,6 +134,8 @@ cdfi-framework/
 Related repositories:
 
 - **[saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark)** — Production scoring pipeline: 400 prompts × 6 models × 9 metrics, Gemini 2.5 Flash judge, CDFI computation, and results dashboard *(private — access pending publication)*
+- **[rgds](https://github.com/mj3b/rgds)** — Regulated Gate Decision Support: human-governed decision governance infrastructure for regulated environments
+- **[rgds-independent-study](https://github.com/mj3b/rgds-independent-study)** — Decision-centric AI governance framework for biopharma/biotech development
 
 ---
 
@@ -151,6 +154,8 @@ Every architectural decision in the CDFI traces to one of these publications. No
 | 7 | [Evaluating Feature Steering](https://www.anthropic.com/research/evaluating-feature-steering) — Anthropic, 2023 | Adversarial prompt taxonomy; prompt sensitivity drift failure mode |
 
 Full translation detail — including the exact causal chain from finding to formula element for each publication: [`TRACEABILITY.md`](TRACEABILITY.md)
+
+The systematic methodology used to perform each translation — the seven-step sequence from literature claim to deployment tier: [`TRANSLATION-METHOD.md`](TRANSLATION-METHOD.md)
 
 ---
 
