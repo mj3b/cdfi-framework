@@ -84,4 +84,4 @@ Include these when applicable to your implementation.
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
