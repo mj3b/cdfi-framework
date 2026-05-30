@@ -111,4 +111,4 @@ The model treats defined Catholic doctrine as one valid opinion among several. T
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
