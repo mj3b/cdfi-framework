@@ -3,7 +3,7 @@
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20464408)
+[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20467497)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
 [![Status: v1.4 — Reference Implementation](https://img.shields.io/badge/status-v1.4%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
 [![Tradition-Agnostic](https://img.shields.io/badge/scope-tradition--agnostic-3bb273)](docs/governance/adapting-for-other-traditions.md)
@@ -28,6 +28,21 @@ The framework is the first of its kind: a published, version-controlled methodol
 **It is not a benchmark.** It is the methodology that makes a benchmark defensible.
 
 ---
+
+## The SAICRED Project
+
+The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project within the Catholic Digital Commons Foundation.
+
+| Role | Person | Contribution |
+|------|--------|-------------|
+| **Project Lead** | [Dr. Filip Ponulak](https://www.linkedin.com/in/filipponulak/) | Framework design, theological authority, dataset authorship, publication |
+| **Lead Engineer** | [Naveen Kumar Puppala](https://github.com/naveenp2708) | Production pipeline: 400 prompts × 6 models × 9 metrics, CDFI computation, results dashboard |
+| **Evals Expert** | [Mark Julius Banasihan](https://github.com/mj3b) | Evaluation methodology, CDFI formula, scoring architecture, reliability certification |
+
+The three roles are not interchangeable. The Project Lead holds the theological and publication authority. The Lead Engineer built the pipeline that produced 21,599 metric scores across six frontier AI models. The Evals Expert designed the scoring architecture that makes those scores defensible — the formula, the weighting matrix, the gate logic, the reliability protocol, and the limitation disclosures.
+
+This repository owns the methodology layer. The production pipeline lives at [saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark) *(private — access pending publication)*.
+
 
 ## What This Repository Is (and Is Not)
 
@@ -311,8 +326,8 @@ This project used Claude (Anthropic) for methodology development, document draft
   year    = {2026},
   month   = {5},
   version = {1.4},
-  doi     = {10.5281/zenodo.20467148},
-  url     = {https://doi.org/10.5281/zenodo.20467148},
+  doi     = {10.5281/zenodo.20467497},
+  url     = {https://doi.org/10.5281/zenodo.20467497},
   license = {Apache-2.0}
 }
 ```
