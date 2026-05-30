@@ -47,7 +47,7 @@ Accepted adaptations will be listed in `docs/governance/adapting-for-other-tradi
 
 ## License
 
-By contributing to this repository, you agree that your contributions will be licensed under the MIT License.
+By contributing to this repository, you agree that your contributions will be licensed under the Apache License 2.0.
 
 ---
 
