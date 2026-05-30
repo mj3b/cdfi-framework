@@ -27,7 +27,7 @@ The CDFI Framework evaluates AI models. It does not train them, does not manage 
 
 The CDFI Framework produces a scored assessment of how reliably an AI model handles the doctrinal claims of a specific religious tradition across nine metrics, four framing conditions, and multiple doctrinal authority levels. The output is the Catholic Doctrinal Fidelity Index: a weighted composite score on a 0-100 scale with a pass/fail gate architecture.
 
-Full specification: `docs/specifications/CDFI-formula.md`
+Full specification: [`docs/specifications/CDFI-formula.md`](../../specifications/CDFI-formula.md)
 
 ### What data it ingests
 
@@ -39,7 +39,7 @@ Full specification: `docs/specifications/CDFI-formula.md`
 
 ### Who is affected by its outputs
 
-Primary: Catholic institutions making deployment decisions about AI tools. The CDFI tier assignment (Formation and Catechesis, General Information, R&D Only, Not Recommended) directly informs whether a diocese, school, or parish authorizes or prohibits specific AI use cases.
+Primary: Catholic institutions making deployment decisions about AI tools. The CDFI tier assignment (Formation and Catechesis, General Information, R&D Only, Not Recommended) directly informs whether a diocese, school, or parish authorizes or prohibits specific AI use cases. See [`docs/specifications/deployment-tiers.md`](../../specifications/deployment-tiers.md).
 
 Secondary: Catholics who use AI tools in contexts where deployment decisions were informed by CDFI scores.
 
@@ -48,10 +48,10 @@ Secondary: Catholics who use AI tools in contexts where deployment decisions wer
 **Informs (requires named human authority):**
 - Deployment tier assignment for a specific AI model version
 - Publication of CDFI rankings
-- Institutional authorization decisions (see c2-human-accountability.md Level 3)
+- Institutional authorization decisions (see [`c2-human-accountability.md`](c2-human-accountability.md) Level 3)
 
 **Makes autonomously (no human required per response):**
-- Pass/fail gate override logic in `engine/cdfi_calculator.py` — when either gate fires, CDFI_final = min(CDFI_computed, 40). This is the only autonomous decision in the framework, and it caps a score, not a person's access to anything.
+- Pass/fail gate override logic in [`engine/cdfi_calculator.py`](../../../engine/cdfi_calculator.py) — when either gate fires, CDFI_final = min(CDFI_computed, 40). This is the only autonomous decision in the framework, and it caps a score, not a person's access to anything.
 - Deployment tier assignment from score (threshold lookup, no judgment)
 
 ### Operational boundaries
@@ -59,7 +59,7 @@ Secondary: Catholics who use AI tools in contexts where deployment decisions wer
 The CDFI Framework does not:
 - Make deployment decisions
 - Approve or prohibit any AI product
-- Validate model responses as theologically correct (pending human theological review — see c4-validation-status.md)
+- Validate model responses as theologically correct (pending human theological review — see [`c4-validation-status.md`](c4-validation-status.md))
 - Operate in any production Catholic institution context (it is a methodology framework, not a deployed tool)
 
 ### Independent technical reviewer documentation
@@ -68,23 +68,23 @@ A technical reviewer without access to the framework authors can assess the fram
 
 | Document | What it enables |
 |----------|----------------|
-| `docs/specifications/CDFI-formula.md` | Reproduce the scoring formula exactly |
-| `configs/authority_matrix.json` | Inspect all metric weights |
-| `configs/threshold_gates.yaml` | Inspect all gate definitions and tier thresholds |
-| `engine/cdfi_calculator.py` | Run the reference implementation against any score input |
-| `TRACEABILITY.md` | Trace every architectural decision to its source publication |
-| `LIMITATIONS.md` | Identify all known constraints with exact disclosure language |
-| `docs/reliability/judge-reliability-protocol.md` | Reproduce the reliability certification protocol |
+| [`docs/specifications/CDFI-formula.md`](../../specifications/CDFI-formula.md) | Reproduce the scoring formula exactly |
+| [`configs/authority_matrix.json`](../../../configs/authority_matrix.json) | Inspect all metric weights |
+| [`configs/threshold_gates.yaml`](../../../configs/threshold_gates.yaml) | Inspect all gate definitions and tier thresholds |
+| [`engine/cdfi_calculator.py`](../../../engine/cdfi_calculator.py) | Run the reference implementation against any score input |
+| [`TRACEABILITY.md`](../../../TRACEABILITY.md) | Trace every architectural decision to its source publication |
+| [`LIMITATIONS.md`](../../../LIMITATIONS.md) | Identify all known constraints with exact disclosure language |
+| [`docs/reliability/judge-reliability-protocol.md`](../../reliability/judge-reliability-protocol.md) | Reproduce the reliability certification protocol |
 
 ### AI Extension: Training data sources and distributional limitations
 
 The CDFI Framework does not train AI models. Training data disclosure for evaluated models belongs to the model submitter (see "What the Model Submitter Owns" below).
 
-**Known distributional limitation of the CDFI Framework itself:** The 100 SAICRED v2 questions are in English, authored by a single domain expert (Dr. Filip Ponulak), and cover seven topic domains weighted by Catholic formation priorities. Performance on this dataset does not predict performance on non-English questions, questions from different cultural contexts, or questions outside these seven domains. See c5-subgroup-protocol.md.
+**Known distributional limitation of the CDFI Framework itself:** The 100 SAICRED v2 questions are in English, authored by a single domain expert (Dr. Filip Ponulak), and cover seven topic domains weighted by Catholic formation priorities. Performance on this dataset does not predict performance on non-English questions, questions from different cultural contexts, or questions outside these seven domains. See [`c5-subgroup-protocol.md`](c5-subgroup-protocol.md).
 
 ### AI Extension: Independent audits
 
-Four-part judge reliability certification (all parts cleared May 11, 2026). See `docs/reliability/judge-reliability-protocol.md` and c4-validation-status.md.
+Four-part judge reliability certification (all parts cleared May 11, 2026). See [`docs/reliability/judge-reliability-protocol.md`](../../reliability/judge-reliability-protocol.md) and [`c4-validation-status.md`](c4-validation-status.md).
 
 ### AI Extension: Autonomous vs. human-review decisions
 
@@ -97,11 +97,11 @@ Stated above under "What decisions it informs or makes."
 **The 90-day test:** Could the director of technology at a diocesan schools office, working with their team and without access to the framework authors, deploy this framework responsibly within 90 days?
 
 **Answer: Yes.** The evidence:
-- README.md provides complete deployment instructions
-- `engine/cdfi_calculator.py` runs as a standalone Python module with no external dependencies
-- `configs/` files are human-readable JSON/YAML requiring no special tooling to modify
-- `docs/governance/adapting-for-other-traditions.md` guides adaptation without author involvement
-- `CONTRIBUTING.md` defines the correction and adaptation process
+- [`README.md`](../../../README.md) provides complete deployment instructions
+- [`engine/cdfi_calculator.py`](../../../engine/cdfi_calculator.py) runs as a standalone Python module with no external dependencies
+- [`configs/`](../../../configs/) files are human-readable JSON/YAML requiring no special tooling to modify
+- [`docs/governance/adapting-for-other-traditions.md`](../adapting-for-other-traditions.md) guides adaptation without author involvement
+- [`CONTRIBUTING.md`](../../../CONTRIBUTING.md) defines the correction and adaptation process
 - DOI 10.5281/zenodo.20464408 ensures permanent access regardless of author availability
 
 ---
@@ -173,9 +173,17 @@ The CDFI Framework cannot verify these statements. That verification belongs to 
 
 ---
 
+*Related: [c1-canonical-scope.md](c1-canonical-scope.md)*
+
+*Related: [c2-human-accountability.md](c2-human-accountability.md)*
+
 *Related: [c4-validation-status.md](c4-validation-status.md)*
 
 *Related: [c5-subgroup-protocol.md](c5-subgroup-protocol.md)*
+
+*Related: [c6-deployment-governance.md](c6-deployment-governance.md)*
+
+*Related: [c8-configuration-boundary.md](c8-configuration-boundary.md)*
 
 *Related: [LIMITATIONS.md](../../../LIMITATIONS.md)*
 
