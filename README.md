@@ -41,26 +41,20 @@ The three roles were not interchangeable and could not substitute for each other
 
 Production pipeline: [saicred-benchmark](https://github.com/naveenp2728/saicred-benchmark) *(private — access pending publication)*
 
+---
 
-## What This Repository Is (and Is Not)
+## What This Is
 
-### This is
+The CDFI Framework is a reusable evaluation governance methodology for building domain-specific AI doctrinal benchmarks. Derived from seven frontier AI safety research publications and translated into a scoring architecture for Catholic doctrinal evaluation. SAICRED v2 is the reference implementation.
 
-| Statement | Practical meaning |
-|-----------|-------------------|
-| An evaluation governance methodology derived from published AI safety research | Every weight, gate, and threshold traces to a named publication |
-| A tradition-agnostic framework | Catholic doctrine is the reference implementation; any tradition can substitute its own authority structure |
-| A portable reference implementation of the CDFI formula | Run `engine/cdfi_calculator.py` independently of the production pipeline |
-| A publication-readiness protocol | Three explicit gates must clear before benchmark scores carry institutional weight |
+**It is not a benchmark.** It is the methodology that makes a benchmark defensible.
 
-### This is not
-
-| Statement | What is explicitly excluded |
-|-----------|----------------------------|
-| A benchmark dataset | Prompts and model responses live in the production pipeline (saicred-benchmark) |
-| A production scoring pipeline | That is `saicred-benchmark/scoring_service.py` |
-| Regulatory or theological advice | All doctrinal and institutional determinations remain with qualified human authorities |
-| An autonomous system | No component decides, approves, or classifies without human oversight |
+| This IS | This IS NOT |
+|---------|------------|
+| An evaluation governance methodology — every weight, gate, and threshold traces to a named publication | A benchmark dataset — prompts and responses live in the production pipeline |
+| A tradition-agnostic framework — any tradition can substitute its own authority structure | A production scoring pipeline — that is `saicred-benchmark/scoring_service.py` |
+| A portable reference implementation — run `engine/cdfi_calculator.py` independently | Regulatory or theological advice — all doctrinal determinations remain with qualified human authorities |
+| A publication-readiness protocol — three explicit gates must clear before scores carry institutional weight | An autonomous system — no component decides, approves, or classifies without human oversight |
 
 ---
 
