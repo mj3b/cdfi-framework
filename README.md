@@ -43,7 +43,7 @@ Production pipeline: [saicred-benchmark](https://github.com/naveenp2728/saicred-
 
 ---
 
-## What This Is
+## What This Is (and Is Not)
 
 The CDFI Framework is a reusable evaluation governance methodology for building domain-specific AI doctrinal benchmarks. Derived from seven frontier AI safety research publications and translated into a scoring architecture for Catholic doctrinal evaluation. SAICRED v2 is the reference implementation.
 
