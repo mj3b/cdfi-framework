@@ -6,6 +6,6 @@
 
 **The Catholic version of this problem:** The automated judge (Gemini 2.5 Flash) scored 2,400 responses across nine metrics covering theological content it was not specifically trained to evaluate. The question was not just whether two human raters would agree. It was whether the automated judge applied the rubric consistently in a domain requiring theological literacy.
 
-**The mechanism:** A formal publication gate: Cohen's kappa at or above 0.70 on all nine metrics before any score goes to print. This is not a procedural step. It is the mechanism that lets the board claim the scores are trustworthy rather than merely reported. SAICRED v2 cleared all four parts of the certification on May 11, 2026.
+**The mechanism:** A formal publication gate: Cohen's kappa at or above 0.60 on all Critical metrics before any score goes to print. This is not a procedural step. It is the mechanism that lets the board claim the scores are trustworthy rather than merely reported. SAICRED v2 cleared all four parts of the certification on May 11, 2026.
 
 *Full protocol: [`docs/reliability/judge-reliability-protocol.md`](../reliability/judge-reliability-protocol.md)*
