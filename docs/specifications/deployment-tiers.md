@@ -80,4 +80,4 @@ The threshold values (85, 70, 50) were set for Catholic institutional contexts. 
 
 *Research basis: A Statistical Approach to Model Evaluations (Anthropic, 2024)*
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
