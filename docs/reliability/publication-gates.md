@@ -67,4 +67,4 @@ Three gates must clear before CDFI rankings carry full publication weight. Two r
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
