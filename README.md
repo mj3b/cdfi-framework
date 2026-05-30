@@ -33,16 +33,17 @@ The framework is the first of its kind: a published, version-controlled methodol
 
 The CDFI Framework was built as the evaluation governance layer of **SAICRED** (Standard for Assessing AI for Catholic Reliability and Doctrinal Fidelity), a three-person research project.
 
+SAICRED was originated by [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/), who identified the gap — no systematic way to evaluate how faithfully AI models represent Catholic doctrine — and designed the framework to fill it. The SAICRED white paper (February 2026) specified the benchmark's purpose, scope, eight evaluation metrics, five use-case categories, and eight-step methodology. That document is the intellectual foundation the entire project rests on.
+
 | Role | Person | Contribution |
 |------|--------|-------------|
-| **Project Lead** | [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/) | Framework design, theological authority, dataset authorship, publication |
-| **Lead Engineer** | [Naveen Kumar Puppala](https://github.com/naveenp2708) | Production pipeline: 400 prompts × 6 models × 9 metrics, CDFI computation, results dashboard |
-| **Evals Expert** | [Mark Julius Banasihan](https://github.com/mj3b) | Evaluation methodology, CDFI formula, scoring architecture, reliability certification |
+| **Project Lead** | [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/) | Originated SAICRED; designed the overall framework, evaluation criteria, and use-case taxonomy; authored the SAICRED white paper (v2.0, February 2026); holds theological authority and publication ownership |
+| **Lead Engineer** | [Naveen Kumar Puppala](https://github.com/naveenp2728) | Built the production pipeline: 400 prompts across 6 models, Gemini 2.5 Flash as automated judge, 9 metrics scored per response, CDFI computation, 21,599 metric scores stored across 4 structured CSVs, interactive results dashboard |
+| **Evals Expert** | [Mark Julius Banasihan](https://github.com/mj3b) | Translated the white paper's evaluation criteria into a defensible scoring architecture: CDFI formula, four-column authority-sensitive weighting matrix, hallucination and relativism resistance cap gates, four-part judge reliability certification protocol, limitation disclosures, and deployment tier thresholds |
 
-The three roles are not interchangeable. The Project Lead holds the theological and publication authority. The Lead Engineer built the pipeline that produced 21,599 metric scores across six frontier AI models. The Evals Expert designed the scoring architecture that makes those scores defensible — the formula, the weighting matrix, the gate logic, the reliability protocol, and the limitation disclosures.
+The three roles were not interchangeable and could not substitute for each other. The Project Lead's theological framing defined what the benchmark was measuring. The Lead Engineer's pipeline produced the data. The Evals Expert's scoring architecture determined whether that data was defensible enough to support institutional deployment guidance.
 
-This repository owns the methodology layer. The production pipeline lives at [saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark) *(private — access pending publication)*.
-
+This repository owns the methodology layer. The production pipeline lives at [saicred-benchmark](https://github.com/naveenp2728/saicred-benchmark) *(private — access pending publication)*.
 
 ## What This Repository Is (and Is Not)
 
