@@ -115,3 +115,66 @@
 
 *Maintained by: Mark Julius Banasihan *
 
+
+---
+
+## Framework v1.1 — May 2026
+
+**Translation methodology documentation added.**
+
+### What was added
+
+- `TRANSLATION-METHOD.md` (root level) — seven-step methodology document showing how each source publication became a computable CDFI mechanism. Includes the full translation map table, the ninth metric's two-paper derivation as a flow diagram, and the empirical validation record.
+- `docs/translations/README.md` — navigation guide with audience routing table and relationship map to specifications, configs, and engine.
+- `docs/specifications/scoring-anchors.md` — concrete score-level examples using real SAICRED v2 model responses and judge reasoning from `scores_full.csv`. Includes the Central Illustration: same question answered by Claude neutral framing (CDFI 40, gate fires), Claude catholic framing (CDFI 94, all 5s), and o3 adversarial framing (CDFI 94, framing-invariant).
+
+### What was corrected
+
+- `docs/translations/02-rubric-reliability.md` — kappa threshold corrected from 0.70 to 0.60, matching `KAPPA_BLOCKER` in `test_judge_reliability.py`.
+- `docs/translations/05-framing-sensitivity.md` — Claude framing gap corrected to 15.8, Catholic framing to 89.4, o3 gap to −0.8. All verified against `cdfi_scores_full.csv`.
+- All eight translation files rebuilt with seven-step pipeline format (labeled code blocks with actual content at each step).
+
+---
+
+## Framework v1.2 — May 2026
+
+**CDCF compliance documentation added (first pass).**
+
+### What was added
+
+- `docs/governance/cdcf-compliance/` — eight documents covering all eight CDCF Project Vetting Criteria v0.2:
+  `README.md`, `c1-canonical-scope.md`, `c2-human-accountability.md`, `c3-c7-responsibility-boundary.md`, `c4-validation-status.md`, `c5-subgroup-protocol.md`, `c6-deployment-governance.md`, `c8-configuration-boundary.md`
+
+### What was extended
+
+- `docs/specifications/deployment-tiers.md` — C6 governance elements appended.
+- `docs/reliability/publication-gates.md` — C4 cross-reference table appended.
+
+---
+
+## Framework v1.3 — May 2026
+
+**CDCF compliance documentation pressure-tested and rebuilt against actual published criteria text.**
+
+### What triggered this version
+
+Systematic gap analysis against CDCF Project Vetting Criteria v0.2 (published April 29, 2026) identified 24 deficiencies in the v1.2 compliance documents. Every deficiency was traced to missing canonical citations, missing case studies, or missing exact requirements from the published criteria text.
+
+### What was corrected (24 gaps closed)
+
+| Criterion | Gaps Closed |
+|-----------|------------|
+| C1 | Added spiritual direction to exclusion list; added *Antiqua et Nova* and Pope Leo XIV Nov 2025 citations; added Father Justin case study; added universality evaluation question |
+| C2 | Added Canon 627 verbatim; added Robodebt Royal Commission case; added Pope Francis quote; added explicit committee-without-named-owner failure condition |
+| C3 | Added inference-time data disclosure; added COMPAS algorithm case study; added *Antiqua et Nova* dignity/fraternity citation |
+| C4 | Added proportionality principle; added conditional graduation path with plan and timeline |
+| C5 | Added people with disabilities to population list; added Pope Leo XIV Dec 2025 quote; added *Antiqua et Nova* magisterial definition of algorithmic bias |
+| C6 | Added Canon 1609 verbatim with explanation; added governance-as-code pattern sourced to CDCF research memo; added four decision states (go/conditional-go/no-go/defer) fully specified; added aspirational vs. required distinction |
+| C7 | Added 90-day deployment test answered explicitly; added five-category data compliance table (HIPAA/FERPA/Sacramental/Minors/Financial); added future model update terms in handoff clause |
+| C8 | Added three named maintainers with public verification paths; added three-severity vulnerability response process with timelines; added *Antiqua et Nova* §42 and CCC §1894 verbatim |
+
+### Other files updated in v1.3
+
+- `README.md` — DOI badge corrected to `20464408`; bibtex version updated to 1.3; compliance folder added to directory tree.
+- `CITATION.cff` — version updated to 1.3.
+- `LIMITATIONS.md` — version header updated to v1.3.
