@@ -289,15 +289,15 @@ This project used Claude (Anthropic) for methodology development, document draft
 
 ```bibtex
 @software{banasihan2026cdfi,
-  author       = {Banasihan, Mark Julius},
-  title        = {{CDFI Framework}: Evaluation Governance Infrastructure
-                  for Domain-Specific {AI} Doctrinal Benchmarking},
-  year         = {2026},
-  month        = {5},
-  version      = {1.0},
-  doi          = {10.5281/zenodo.20453237},
-  url          = {https://doi.org/10.5281/zenodo.20453237},
-  license      = {Apache-2.0}
+  author  = {Banasihan, Mark Julius},
+  title   = {{CDFI Framework}: Evaluation Governance Infrastructure
+             for Domain-Specific {AI} Doctrinal Benchmarking},
+  year    = {2026},
+  month   = {5},
+  version = {1.1},
+  doi     = {10.5281/zenodo.20464408},
+  url     = {https://doi.org/10.5281/zenodo.20464408},
+  license = {Apache-2.0}
 }
 ```
 
