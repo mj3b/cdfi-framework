@@ -113,5 +113,5 @@
 
 ---
 
-*Maintained by: Mark Julius Banasihan | Evals Expert, SAICRED v2*
-*Catholic Digital Commons Foundation*
+*Maintained by: Mark Julius Banasihan *
+
