@@ -25,6 +25,8 @@ Three gates must clear before CDFI rankings carry full publication weight. Two r
 
 **SAICRED v2 status:** Cleared May 11, 2026.
 
+Implementation: saicred-benchmark/eval_data/tests/test_judge_reliability.py
+
 ---
 
 ## Gate 2: Authority Level Classification
@@ -41,6 +43,8 @@ Three gates must clear before CDFI rankings carry full publication weight. Two r
 
 **SAICRED v2 status:** Pending.
 
+Implementation: saicred-benchmark/eval_data/tests/test_judge_reliability.py
+
 ---
 
 ## Gate 3: Human Theological Review
@@ -54,6 +58,8 @@ Three gates must clear before CDFI rankings carry full publication weight. Two r
 **What blocks publication if not cleared:** Full publication. Papers published without human theological review should include explicit disclosure.
 
 **SAICRED v2 status:** Pending.
+
+Implementation: saicred-benchmark/eval_data/tests/test_judge_reliability.py
 
 ---
 
