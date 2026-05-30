@@ -3,8 +3,8 @@
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
 [![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20453237)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
 [![Status: v1.0 — Reference Implementation](https://img.shields.io/badge/status-v1.0%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
 [![Tradition-Agnostic](https://img.shields.io/badge/scope-tradition--agnostic-3bb273)](docs/governance/adapting-for-other-traditions.md)
 [![Seven Source Publications](https://img.shields.io/badge/grounded%20in-7%20AI%20safety%20publications-ff6b35)](TRACEABILITY.md)
@@ -292,10 +292,10 @@ This project used Claude (Anthropic) for methodology development, document draft
   year         = {2026},
   month        = {5},
   version      = {1.0},
-  doi          = {10.5281/zenodo.XXXXXXX},
-  url          = {https://doi.org/10.5281/zenodo.XXXXXXX},
+  doi          = {10.5281/zenodo.20453237},
+  url          = {https://doi.org/10.5281/zenodo.20453237},
   license      = {Apache-2.0},
-  institution  = {}
+  institution  = {Catholic Digital Commons Foundation}
 }
 ```
 
@@ -314,4 +314,4 @@ Copyright © 2026 Mark Julius Banasihan. Licensed under the [Apache License 2.0]
 **Mark Julius Banasihan**
 Evaluation governance systems for AI in high-stakes institutional and doctrinal contexts.
 
-[GitHub](https://github.com/mj3b) · [LinkedIn](https://linkedin.com/in/markjuliusbanasihan) · [ORCID](https://orcid.org/0000-0000-0000-0000) · [Email](mailto:markjuliusbanasihan@gmail.com) · Atlanta, Georgia, United States
+[GitHub](https://github.com/mj3b) · [LinkedIn](https://linkedin.com/in/markjuliusbanasihan) · [ORCID](https://orcid.org/0009-0001-8121-2878) · [Email](mailto:markjuliusbanasihan@gmail.com) · Atlanta, Georgia, United States
