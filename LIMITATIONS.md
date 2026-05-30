@@ -1,6 +1,6 @@
 # Limitations Register
 
-*CDFI Framework v1.0 | SAICRED v2 Reference Implementation*
+*CDFI Framework v1.3 | SAICRED v2 Reference Implementation*
 *Author: Mark Julius Banasihan | May 2026*
 
 ---
