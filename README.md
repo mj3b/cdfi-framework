@@ -133,8 +133,6 @@ cdfi-framework/
 Related repositories:
 
 - **[saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark)** — Production scoring pipeline: 400 prompts × 6 models × 9 metrics, Gemini 2.5 Flash judge, CDFI computation, and results dashboard *(private — access pending publication)*
-- **[rgds](https://github.com/mj3b/rgds)** — Regulated Gate Decision Support: human-governed decision governance infrastructure for regulated environments
-- **[rgds-independent-study](https://github.com/mj3b/rgds-independent-study)** — Decision-centric AI governance framework for biopharma/biotech development
 
 ---
 
