@@ -35,7 +35,7 @@ The CDFI Framework was built as the evaluation governance layer of **SAICRED** (
 
 | Role | Person | Contribution |
 |------|--------|-------------|
-| **Project Lead** | [Dr. Filip Ponulak](https://www.linkedin.com/in/filipponulak/) | Framework design, theological authority, dataset authorship, publication |
+| **Project Lead** | [Filip Ponulak, PhD](https://www.linkedin.com/in/filipponulak/) | Framework design, theological authority, dataset authorship, publication |
 | **Lead Engineer** | [Naveen Kumar Puppala](https://github.com/naveenp2708) | Production pipeline: 400 prompts × 6 models × 9 metrics, CDFI computation, results dashboard |
 | **Evals Expert** | [Mark Julius Banasihan](https://github.com/mj3b) | Evaluation methodology, CDFI formula, scoring architecture, reliability certification |
 
