@@ -115,4 +115,4 @@ If `publication_ready` is false, the JSON output contains the specific failures 
 
 ---
 
-*Author: Mark Julius Banasihan | Evals Specialist | May 2026*
+*Author: Mark Julius Banasihan | May 2026*
