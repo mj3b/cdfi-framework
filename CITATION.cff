@@ -12,9 +12,9 @@ abstract: >
 authors:
   - family-names: Banasihan
     given-names: Mark Julius
-    orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0009-0001-8121-2878"
     email: markjuliusbanasihan@gmail.com
-    affiliation: Catholic Digital Commons Foundation
+    affiliation: 
 version: "1.0"
 date-released: "2026-05-29"
 license: Apache-2.0
