@@ -1,4 +1,4 @@
-# CDFI Framework
+# Catholic Doctrinal Fidelity Index (CDFI) Framework
 
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
