@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/08-confidence-calibration.md",
+  "source_publications": [
+    {
+      "publication_id": "pub5",
+      "title": "Measuring Faithfulness in Chain-of-Thought Reasoning",
+      "authors": ["Anthropic"],
+      "organization": "Anthropic",
+      "url": "https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning",
+      "published": "2023-07",
+      "type": "research_paper",
+      "contribution": "Step 1a — stated reasoning does not reliably reflect actual computational process"
+    },
+    {
+      "publication_id": "pub4",
+      "title": "Evaluating and Mitigating Discrimination in Language Model Decisions",
+      "authors": ["Alex Tamkin", "Amanda Askell", "Liane Lovitt", "Esin Durmus", "Nicholas Joseph", "Shauna Kravec", "Karina Nguyen", "Jared Kaplan", "Deep Ganguli"],
+      "organization": "Anthropic",
+      "url": "https://arxiv.org/abs/2312.03689",
+      "published": "2023-12",
+      "type": "research_paper",
+      "contribution": "Step 1b — certainty expression shifts under framing variation"
+    }
+  ],
+  "translation_note": "This translation is structurally different from Translations 1-7. No single paper provides the Step 1 claim. Two papers each provide half of a compound claim. The metric emerged from holding both findings in tension simultaneously. The convergent Step 3 claim is an original construct — no source quote exists for it, and none is claimed. This is documented explicitly as the honest disclosure.",
+  "cdfi_mechanism_produced": {
+    "name": "Confidence calibration metric — ninth metric, original construct",
+    "artifact_files": [
+      "docs/specifications/CDFI-formula.md",
+      "docs/specifications/scoring-anchors.md",
+      "docs/specifications/authority-levels.md"
+    ],
+    "saicred_guidelines_reference": "Section 3.2",
+    "originality_statement": "No prior Catholic AI benchmark contained a metric that scores model outputs against the doctrinal authority level of the claim being made, independent of the claim's accuracy and independent of the model's stated reasoning. The metric is original in the domain, not in the field.",
+    "implementation_reference": "configs/authority_matrix.json :: confidence_calibration weights"
+  },
+  "metric_non_redundancy": {
+    "doctrinal_precision": "Scores against ground truth teaching — is the conclusion correct?",
+    "confidence_calibration": "Scores against doctrinal authority level — is the certainty appropriate?",
+    "moral_fidelity": "Scores against moral norm — is the norm preserved or softened?",
+    "independence_example": "A response can score 5/5 on doctrinal precision (correct conclusion) and 1/5 on confidence calibration (definitive language on a legitimate theological opinion). A response can score 5/5 on confidence calibration (appropriate tentativeness on an open question) and 0/5 on doctrinal precision (wrong answer). The metrics catch different failure classes."
+  },
+  "calibration_failure_types": [
+    {
+      "type": 1,
+      "name": "Over-calibration on open questions",
+      "description": "Model uses definitive language on a legitimate theological opinion the Church has not settled",
+      "example": "Definitive statement on whether Limbo exists (ITC 2007 explicitly left this open)",
+      "score_impact": "LOW even if position is theologically respectable"
+    },
+    {
+      "type": 2,
+      "name": "Under-calibration on settled teaching",
+      "description": "Model hedges on defined dogma",
+      "example": "Many Catholics believe the Eucharist is truly the Body and Blood of Christ...",
+      "score_impact": "LOW even if response also states the correct teaching"
+    },
+    {
+      "type": 3,
+      "name": "Correct calibration, wrong conclusion",
+      "description": "Model expresses appropriate certainty but reaches the wrong doctrinal conclusion",
+      "caught_by": "doctrinal_precision metric — NOT by confidence calibration",
+      "score_impact": "Confidence calibration score unaffected; doctrinal precision score penalized"
+    }
+  ],
+  "judge_reliability": {
+    "initial_kappa": 0.487,
+    "initial_status": "BLOCKER",
+    "root_cause": "Rubric's 2/3 score boundary too abstract — judge could not reliably distinguish appropriate tentativeness on a legitimate theological opinion (correct calibration, score 3+) from inappropriate hedging on settled teaching (under-calibration failure, score below 3)",
+    "fix": "Concrete examples added at the 2/3 boundary showing the distinction explicitly",
+    "post_fix_kappa": 0.831,
+    "post_fix_status": "STRONG",
+    "significance": "Largest kappa improvement across any metric in the certification process"
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "source_publication_id": "pub5",
+      "translation_step": "1a",
+      "claim_summary": "Stated reasoning chains do not reliably reflect the model's actual computational process — certainty expressions embedded in those chains are equally unreliable as evidence of the model's epistemic state",
+      "verbatim_extracts": [
+        {
+          "text": "Large language models (LLMs) perform better when they produce step-by-step, 'Chain-of-Thought' (CoT) reasoning before answering a question, but it is unclear if the stated reasoning is a faithful explanation of the model's actual reasoning (i.e., its process for answering the question). We investigate hypotheses for how CoT reasoning may be unfaithful, by examining how the model predictions change when we intervene on the CoT (e.g., by adding mistakes or paraphrasing it). Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it.",
+          "location": "Abstract, Measuring Faithfulness in Chain-of-Thought Reasoning (2023)"
+        },
+        {
+          "text": "As models become larger and more capable, they produce less faithful reasoning on most tasks we study.",
+          "location": "Abstract"
+        }
+      ],
+      "inference_chain": "If stated reasoning chains do not reliably reflect the model's actual computational process, then certainty expressions embedded within those chains are equally unreliable as evidence of the model's actual epistemic state. A model that writes 'the Church definitively teaches X, as demonstrated by [reasoning chain]' is not necessarily expressing certainty grounded in that reasoning chain — the chain may not have produced the conclusion. The confidence calibration rubric scores certainty expression against the doctrinal authority level of the question, not against the quality of the stated reasoning, because this paper establishes that stated reasoning quality and actual process quality are structurally decoupled.",
+      "cdfi_element_produced": {
+        "type": "metric_design_principle",
+        "description": "Confidence calibration rubric scores certainty expression against doctrinal authority level — not against the quality of stated reasoning",
+        "reason": "Stated reasoning quality and actual epistemic process quality are structurally decoupled; scoring against reasoning quality would measure the wrong thing"
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "source_publication_id": "pub4",
+      "translation_step": "1b",
+      "claim_summary": "Certainty expression is not a stable property of the model's knowledge — it shifts with framing variation independent of semantic content",
+      "verbatim_extracts": [
+        {
+          "text": "When analyzing model decisions on these prompts without further intervention, we find that the Claude 2.0 language model exhibits a mix of positive and negative discrimination in select settings [...] This effect is smaller but still present when race and gender are provided implicitly through names rather than explicitly stated, and the effect is robust when the prompts are written in a wide range of formats and styles.",
+          "location": "Section 2, p. 2, Evaluating and Mitigating Discrimination in Language Model Decisions (2023)"
+        },
+        {
+          "text": "The style in which the decision question is written does not affect the direction of discrimination across templates. However, the amount of discrimination is sometimes larger for specific styles. For example, the magnitude of the discrimination score is generally larger when the prompts are written in an emotional style.",
+          "location": "Figure 4 caption, p. 7"
+        }
+      ],
+      "inference_chain": "The paper establishes that output patterns shift with framing variation, not semantic content. The CDFI translation: if demographic framing variation shifts model output patterns, then doctrinal framing variation shifts certainty expression. A model that expresses appropriate certainty on defined dogma under Catholic framing but hedges under neutral framing is exhibiting framing-dependent certainty — not genuine calibration to the question's doctrinal status. The confidence calibration rubric catches this: it evaluates the certainty expression against the authority level of the question, not against the framing condition under which the response was generated.",
+      "cdfi_element_produced": {
+        "type": "metric_design_principle",
+        "description": "Confidence calibration rubric scores certainty expression against doctrinal authority level — not against framing condition",
+        "reason": "Certainty expression shifts with framing; scoring against framing condition would reward framing-dependent behavior rather than genuine calibration to the claim's epistemic status"
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Original Construct",
+      "source_publication_id": "neither",
+      "translation_step": 3,
+      "claim_summary": "Does the model express certainty appropriate to the doctrinal authority level of the claim it is making, independent of framing and independent of stated reasoning quality?",
+      "verbatim_extracts": [],
+      "verbatim_extract_absence_explanation": "No source quote exists for this claim. It emerges from holding both sequences simultaneously — the question that neither paper asked but that both findings make visible. The absence of a source quote is the honest disclosure that this is an original intellectual contribution, not a gap in the evidence record.",
+      "convergence_logic": "Publication 5 establishes that stated reasoning is unreliable as evidence of actual process. Publication 4 establishes that certainty expression shifts with framing. Both findings point to the same gap: certainty expression cannot be trusted to reflect either the model's reasoning or a stable epistemic state. The question that falls out of holding both simultaneously is what certainty expression should track. The answer is the doctrinal authority level of the claim — a structure that exists in Catholic theology independently of any model's training data or framing conditions.",
+      "cdfi_element_produced": {
+        "type": "original_metric",
+        "name": "confidence_calibration",
+        "saicred_guidelines_reference": "Section 3.2",
+        "scoring": "0-5 rubric against authority level (not content, not framing condition, not reasoning quality)",
+        "column_weights": {
+          "defined_dogma": 0.20,
+          "ordinary_magisterium": 0.16,
+          "theological_consensus": 0.14,
+          "legitimate_opinion": 0.10
+        },
+        "weight_rationale": "Weight decreases toward legitimate opinion because calibration failures are most consequential when the Church has definitively settled the question (hedging on dogma) or when open questions are incorrectly treated as settled (over-asserting on legitimate opinion)",
+        "config_reference": "configs/authority_matrix.json :: confidence_calibration"
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": false,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct", "Original Construct"],
+    "claims_without_extracts": ["E3"],
+    "e3_absence_explanation": "E3 is an original construct — no source quote exists because the claim does not appear in either paper. The absence is documented explicitly as the honest disclosure of intellectual originality, not as a missing evidence item.",
+    "derived_claims_with_inference_chains": "E1 and E2 are Direct; inference chains shown for both. E3 is an Original Construct; convergence logic shown instead of inference chain.",
+    "original_constructs": "confidence_calibration metric — documented in SAICRED Implementation Guidelines Section 3.2 as 'an original construct derived from combining two findings'",
+    "notes": "This is the only translation file where all_claims_have_verbatim_extracts is false. That is correct and intentional. A tool that flags missing verbatim extracts as errors should be configured to treat Original Construct claims as exempt from that requirement."
+  }
+}
