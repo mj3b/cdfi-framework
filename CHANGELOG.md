@@ -230,6 +230,60 @@ Three governance gaps identified through analysis of the [AI Alliance Trust & Sa
 
 ---
 
+## Framework v1.5 — May 2026
+
+**Machine-readable evidence traceability layer added.**
+
+### What triggered this version
+
+All eight translation documents existed in v1.4 with the seven-step pipeline format but carried no verbatim evidence anchoring each claim to its source paper. A researcher who wanted to verify that Publication 6 (Sabotage Evaluations) actually produced the cap gate architecture had to read the paper and draw the inference themselves. That gap is not acceptable for a benchmark that positions itself as defensible rather than merely documented.
+
+The addition was structured using the governed translation methodology from [applied-ai-research-translator](https://github.com/mj3b/applied-ai-research-translator) — a system for translating applied AI research into auditable artifacts. The CDFI context required three adaptations documented in [`claims/README.md`](claims/README.md): the `cdfi_element_produced` field replacing a production deployment field, a new `Original Construct` claim type for the ninth metric, and cross-file references to model the CDFI's inter-paper dependency structure.
+
+### What was added
+
+| File | Description |
+|------|-------------|
+| `claims/pub1-evaluation-criteria.json` | Machine-readable evidence pack for Translation 1 (four-column weighting matrix) |
+| `claims/pub1-rubric-reliability.json` | Machine-readable evidence pack for Translation 2 (four-part certification protocol) |
+| `claims/pub2-hallucination-gate.json` | Machine-readable evidence pack for Translation 3 (hallucination gate) |
+| `claims/pub3-statistical-rigor.json` | Machine-readable evidence pack for Translation 4 (statistical requirements) |
+| `claims/pub4-framing-sensitivity.json` | Machine-readable evidence pack for Translation 5 (relativism resistance gate) |
+| `claims/pub5-confidence-calibration.json` | Machine-readable evidence pack for Translation 8 (confidence calibration — original construct; two source publications) |
+| `claims/pub6-categorical-failures.json` | Machine-readable evidence pack for Translation 7 (five failure mode taxonomy; cap gate architecture) |
+| `claims/pub7-adversarial-probing.json` | Machine-readable evidence pack for Translation 6 (adversarial variant; prompt sensitivity drift) |
+| [`claims/README.md`](claims/README.md) | Schema reference, file index, numbering guide, cross-file dependency map, applied-ai-research-translator adaptation documentation |
+
+### What was extended
+
+| File | Extension |
+|------|-----------|
+| [`docs/translations/01-evaluation-criteria.md`](docs/translations/01-evaluation-criteria.md) through [`docs/translations/08-confidence-calibration.md`](docs/translations/08-confidence-calibration.md) | Source Evidence Records appended to all eight translation documents. Each record contains: verbatim extracts with section/page citations, Direct/Derived/Original Construct claim typing, explicit inference chains for all Derived steps, and an Evidence Completeness Assessment table |
+| [`docs/translations/README.md`](docs/translations/README.md) | Added AI safety researcher audience row to How to Read table; updated description of what each translation document contains |
+
+### What was updated
+
+| File | Change |
+|------|--------|
+| [`README.md`](README.md) | Status badge updated to v1.5; `claims/` folder added to directory tree; bibtex version updated to 1.5 |
+| [`CITATION.cff`](CITATION.cff) | Version updated to 1.5; DOI updated to v1.5 Zenodo record |
+| [`LIMITATIONS.md`](LIMITATIONS.md) | Version header updated to v1.5 |
+| [`TRACEABILITY.md`](TRACEABILITY.md) | `claims/` folder reference added |
+| [`TRANSLATION-METHOD.md`](TRANSLATION-METHOD.md) | `claims/` folder reference added with schema description |
+
+### Planned for v1.5 (carried from v1.4 — not yet delivered)
+
+| Item | Status |
+|------|--------|
+| ISO/IEC 42001:2023 AI Management System Standard mapping | Deferred to v1.6 |
+| Security remediations: Part 5 reliability certification (prompt injection resistance) | Deferred to v1.6 |
+| SHA-256 hash verification of results files | Deferred to v1.6 |
+| Authority level classification signing process | Deferred to v1.6 |
+
+---
+
+---
+
 ## Upcoming: SAICRED v2.1
 
 **Planned additions:**
@@ -240,13 +294,14 @@ Three governance gaps identified through analysis of the [AI Alliance Trust & Sa
 - Updated rankings with complete four-column matrix applied — see [`configs/authority_matrix.json`](configs/authority_matrix.json)
 - Non-English subgroup evaluation (Spanish priority) — see [`docs/governance/cdcf-compliance/c5-subgroup-protocol.md`](docs/governance/cdcf-compliance/c5-subgroup-protocol.md)
 
-## Upcoming: Framework v1.5
+## Upcoming: Framework v1.6
 
 **Planned additions:**
 
 - [`docs/governance/iso-42001-mapping.md`](docs/governance/) — ISO/IEC 42001:2023 AI Management System Standard alignment
 - Security remediations: Part 5 reliability certification (prompt injection resistance); SHA-256 hash verification of results files
 - Authority level classification file cryptographic sign-off process
+- `claims/` schema validator script
 
 ---
 
