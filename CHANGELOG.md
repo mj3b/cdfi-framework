@@ -205,7 +205,7 @@ Three governance gaps identified through analysis of the [AI Alliance Trust & Sa
 |------|-------------|
 | [`docs/governance/nist-rmf-mapping.md`](docs/governance/nist-rmf-mapping.md) | Alignment with [NIST AI RMF 1.0](https://www.nist.gov/itl/ai-risk-management-framework) (January 2023) and [NIST AI 600-1 GenAI Profile](https://airc.nist.gov/docs/NIST.AI.600-1.GenAI-Profile.ipd.pdf) (2024). All four functions covered: GOVERN, MAP, MEASURE, MANAGE. 24 sub-functions assessed. Maps CDCF criteria to NIST RMF functions for U.S. Catholic institutional reviewers |
 | [`docs/governance/eu-ai-act-mapping.md`](docs/governance/eu-ai-act-mapping.md) | Alignment with [Regulation (EU) 2024/1689](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689) (EU AI Act). Articles 9–15 assessed. Articles 11, 13, 14 satisfied. Articles 9, 10, 12, 15 partially satisfied. Fundamental rights impact assessment and conformity assessment documented as open institutional obligations. August 2026 high-risk compliance deadline documented |
-| [`docs/governance/security-considerations.md`](docs/governance/security-considerations.md) | Three attack surfaces mapped to [OWASP LLM Top 10 (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) and [MITRE ATLAS](https://atlas.mitre.org/): judge prompt injection (LLM01), scoring pipeline integrity (LLM04/LLM08), authority level classification manipulation (LLM09). Current mitigations documented. Remediations planned for v1.5 |
+| [`docs/governance/security-considerations.md`](docs/governance/security-considerations.md) | Three attack surfaces mapped to [OWASP LLM Top 10 (2025)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) and [MITRE ATLAS](https://atlas.mitre.org/): judge prompt injection (LLM01), scoring pipeline integrity (LLM04/LLM08), authority level classification manipulation (LLM09). Current mitigations documented. Remediations planned for v1.6 |
 
 ### What was updated
 
@@ -244,14 +244,14 @@ The addition was structured using the governed translation methodology from [app
 
 | File | Description |
 |------|-------------|
-| `claims/pub1-evaluation-criteria.json` | Machine-readable evidence pack for Translation 1 (four-column weighting matrix) |
-| `claims/pub1-rubric-reliability.json` | Machine-readable evidence pack for Translation 2 (four-part certification protocol) |
-| `claims/pub2-hallucination-gate.json` | Machine-readable evidence pack for Translation 3 (hallucination gate) |
-| `claims/pub3-statistical-rigor.json` | Machine-readable evidence pack for Translation 4 (statistical requirements) |
-| `claims/pub4-framing-sensitivity.json` | Machine-readable evidence pack for Translation 5 (relativism resistance gate) |
-| `claims/pub5-confidence-calibration.json` | Machine-readable evidence pack for Translation 8 (confidence calibration — original construct; two source publications) |
-| `claims/pub6-categorical-failures.json` | Machine-readable evidence pack for Translation 7 (five failure mode taxonomy; cap gate architecture) |
-| `claims/pub7-adversarial-probing.json` | Machine-readable evidence pack for Translation 6 (adversarial variant; prompt sensitivity drift) |
+| [`claims/pub1-evaluation-criteria.json`](claims/pub1-evaluation-criteria.json) | Machine-readable evidence pack for Translation 1 (four-column weighting matrix) |
+| [`claims/pub1-rubric-reliability.json`](claims/pub1-rubric-reliability.json) | Machine-readable evidence pack for Translation 2 (four-part certification protocol) |
+| [`claims/pub2-hallucination-gate.json`](claims/pub2-hallucination-gate.json) | Machine-readable evidence pack for Translation 3 (hallucination gate) |
+| [`claims/pub3-statistical-rigor.json`](claims/pub3-statistical-rigor.json) | Machine-readable evidence pack for Translation 4 (statistical requirements) |
+| [`claims/pub4-framing-sensitivity.json`](claims/pub4-framing-sensitivity.json) | Machine-readable evidence pack for Translation 5 (relativism resistance gate) |
+| [`claims/pub5-confidence-calibration.json`](claims/pub5-confidence-calibration.json) | Machine-readable evidence pack for Translation 8 (confidence calibration — original construct; two source publications) |
+| [`claims/pub6-categorical-failures.json`](claims/pub6-categorical-failures.json) | Machine-readable evidence pack for Translation 7 (five failure mode taxonomy; cap gate architecture) |
+| [`claims/pub7-adversarial-probing.json`](claims/pub7-adversarial-probing.json) | Machine-readable evidence pack for Translation 6 (adversarial variant; prompt sensitivity drift) |
 | [`claims/README.md`](claims/README.md) | Schema reference, file index, numbering guide, cross-file dependency map, applied-ai-research-translator adaptation documentation |
 
 ### What was extended
@@ -279,8 +279,6 @@ The addition was structured using the governed translation methodology from [app
 | Security remediations: Part 5 reliability certification (prompt injection resistance) | Deferred to v1.6 |
 | SHA-256 hash verification of results files | Deferred to v1.6 |
 | Authority level classification signing process | Deferred to v1.6 |
-
----
 
 ---
 
