@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/02-rubric-reliability.md",
+  "source_publication": {
+    "title": "Challenges in Evaluating AI Systems",
+    "authors": ["Deep Ganguli", "Nicholas Schiefer", "Marina Favaro", "Jack Clark"],
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/research/evaluating-ai-systems",
+    "published": "2023-10-04",
+    "type": "research_blog"
+  },
+  "note_on_shared_source": "Publication 1 produced two architecturally distinct mechanisms. pub1-evaluation-criteria.json covers the domain-specificity finding (what the rubric measures). This file covers the evaluator consistency finding (whether the rubric is applied consistently). Both conditions must be satisfied independently before any CDFI score is defensible.",
+  "cdfi_mechanism_produced": {
+    "name": "Four-part judge reliability certification protocol; Cohen's kappa publication gate",
+    "artifact_files": [
+      "docs/reliability/judge-reliability-protocol.md",
+      "docs/reliability/publication-gates.md"
+    ],
+    "implementation_entry_point": "test_judge_reliability.py",
+    "saicred_guidelines_sections": ["3.1", "3.3", "3.4", "3.6", "3.7", "3.8"]
+  },
+  "certification_history": {
+    "run_1": {"date": "2026-04-29", "result": "FAIL", "blockers": ["confidence_calibration kappa=0.487", "anchor_calibration 79.9%", "Part 4: 65% (test construction error)"]},
+    "run_2": {"date": "2026-05-04", "result": "FAIL", "blockers": ["Part 4: 80% after domain fix — exact question pairing still needed"]},
+    "run_3": {"date": "2026-05-06", "result": "FAIL", "blockers": ["Part 1: rubric revision in progress"]},
+    "run_4": {"date": "2026-05-06", "result": "FAIL", "blockers": ["Part 1: rubric revision continued"]},
+    "run_5": {"date": "2026-05-07", "result": "PASS", "parts_cleared": ["Part 1 — confidence_calibration kappa=0.831"]},
+    "run_6": {"date": "2026-05-07", "result": "PASS", "parts_cleared": ["Part 2 — anchor calibration 98.3%"]},
+    "run_7": {"date": "2026-05-11", "result": "PASS", "parts_cleared": ["Part 4 — 100% after exact question pairing fix"]},
+    "publication_ready": true,
+    "cleared_date": "2026-05-11"
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Evaluator consistency is not automatic — human raters applying structured guidelines produce inconsistent results on open-ended quality judgments",
+      "verbatim_extracts": [
+        {
+          "text": "Human evaluations can vary significantly depending on the characteristics of the human evaluators. Key factors that may influence someone's assessment include their level of creativity, motivation, and ability to identify potential flaws or issues with the system being tested.",
+          "location": "Section: Challenges — A/B tests with crowdworkers"
+        },
+        {
+          "text": "There is an inherent tension between helpfulness and harmlessness. A system could avoid harm simply by providing unhelpful responses like 'sorry, I can't help you with that'. What is the right balance between helpfulness and harmlessness? What numerical value indicates a model is sufficiently helpful and harmless? What high-level norms or values should we test for above and beyond helpfulness and harmlessness?",
+          "location": "Section: Challenges — A/B tests with crowdworkers"
+        }
+      ],
+      "inference_chain": "The paper establishes that even human evaluators applying structured guidelines produce inconsistent results on open-ended quality judgments. An automated judge applying a rubric at scale requires the same consistency verification — and the verification must be demonstrated, not assumed. Part 1 of the CDFI certification protocol (intra-rater consistency via Cohen's kappa) is that demonstration.",
+      "cdfi_element_produced": {
+        "type": "certification_part",
+        "part": 1,
+        "name": "Intra-rater consistency",
+        "description": "Same 50 responses scored twice in different orders; Cohen's kappa computed per metric",
+        "threshold": "kappa >= 0.60 on all Critical metrics",
+        "implementation_reference": "test_judge_reliability.py :: Part1IntraRater",
+        "gate_constant": "KAPPA_BLOCKER = 0.60"
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 4,
+      "claim_summary": "Calibration against the authors' intended rubric interpretation must be verified empirically — a judge can be internally consistent while systematically misapplying the rubric",
+      "verbatim_extracts": [
+        {
+          "text": "After implementing BBQ, our results showed that some of our models were achieving a bias score of 0, which made us feel optimistic that we had made progress on reducing biased model outputs. When we shared our results internally, one of the main BBQ developers (who works at Anthropic) asked if we had checked a simple control to verify whether our models were answering questions at all. We found that they weren't — our results were technically unbiased, but they were also completely useless.",
+          "location": "Section: Challenges — BBQ"
+        },
+        {
+          "text": "All evaluations are subject to the failure mode where you overinterpret the quantitative score and delude yourself into thinking that you have made progress when you haven't.",
+          "location": "Section: Challenges — BBQ"
+        }
+      ],
+      "inference_chain": "The BBQ failure is a calibration failure: the measurement instrument produced numbers that looked correct while measuring the wrong thing — and nobody knew until someone asked a direct verification question. Part 2 of the CDFI certification (anchor calibration against expert-scored responses) exists specifically to catch this failure mode before scores enter publication. The first SAICRED v2 reliability run returned 79.9% anchor accuracy — the judge was diverging from the authors' intent on approximately 1 in 5 responses. The fix (restructured anchor text format) brought calibration to 98.3%.",
+      "cdfi_element_produced": {
+        "type": "certification_part",
+        "part": 2,
+        "name": "Anchor calibration",
+        "description": "Judge scored against expert-authored responses with known correct scores; accuracy measured against ground truth",
+        "threshold": ">= 90% accuracy",
+        "implementation_reference": "test_judge_reliability.py :: Part2AnchorCalibration",
+        "saicred_v2_results": {
+          "run_1_accuracy": 0.799,
+          "run_6_accuracy": 0.983,
+          "fix_applied": "Restructured anchor text format; added concrete score band examples"
+        }
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 7,
+      "claim_summary": "A robust and repeatable evaluation process — not a single clean run — is required before scores can support comparative institutional claims",
+      "verbatim_extracts": [
+        {
+          "text": "Red teaming AI systems is presently more art than science; red teamers attempt to elicit concerning behaviors by probing models, but this process is not yet standardized. A robust and repeatable process is critical to ensure that red teaming accurately reflects model capabilities and establishes a shared baseline on which different models can be meaningfully compared.",
+          "location": "Section: Challenges — Red teaming for national security"
+        },
+        {
+          "text": "We were convinced that BBQ provides a good measurement of social biases only after implementing and comparing BBQ against several similar evaluations. This effort took us months.",
+          "location": "Section: Challenges — BBQ"
+        }
+      ],
+      "inference_chain": "The paper identifies 'a robust and repeatable process' as the specific requirement for evaluations that support comparative claims across models. The CDFI certification protocol is the operationalization of this requirement: a seven-run history with documented results, named failure modes, and specific fixes for each failure. The seven-run history is not a sign of fragility — it is the evidence that the process is robust. Scores enter publication only after the process has cleared.",
+      "cdfi_element_produced": {
+        "type": "publication_gate",
+        "description": "All four certification parts must pass before publication_ready = true; gate logic enforced in test_judge_reliability.py",
+        "gate_logic": "publication_ready = ALL(part.passed for part in [Part1, Part2, Part3, Part4])",
+        "implementation_reference": "test_judge_reliability.py :: PublicationGate",
+        "saicred_v2_cleared": "2026-05-11"
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 6,
+      "claim_summary": "Credible evaluation requires separating design authority from execution — independence at the execution level, shared design documentation so execution can be done correctly",
+      "verbatim_extracts": [
+        {
+          "text": "Providing full-time assistance diverted resources from internal evaluation efforts. When doing this audit, we realized that the relationship between auditors and those being audited poses challenges that must be navigated carefully. Auditors typically limit details shared with auditees to preserve evaluation integrity. However, without adequate information the evaluated party may struggle to address underlying issues when crafting technical evaluations.",
+          "location": "Section: Preserving the objectivity of third-party audits"
+        },
+        {
+          "text": "After seeing the final audit report, we realized that we could have helped ARC be more successful in identifying concerning behavior if we had known more details about their (clever and well-designed) audit approach.",
+          "location": "Section: Preserving the objectivity of third-party audits"
+        }
+      ],
+      "inference_chain": "The paper identifies the tension between independence (needed for objectivity) and collaboration (needed to execute correctly). The CDFI certification resolves this by separating roles: the Evals Expert designed the protocol; Naveen Kumar Puppala executed it independently in a separate environment with proven quota and no interruptions. Independence is preserved at the execution level; the design documentation is fully shared so execution can be done correctly. This is the collaboration structure the paper recommends but could not implement with ARC.",
+      "cdfi_element_produced": {
+        "type": "execution_protocol",
+        "description": "Certification executed by Lead Engineer independently; Evals Expert provided full protocol documentation",
+        "roles": {
+          "protocol_designer": "Mark Julius Banasihan (Evals Expert)",
+          "independent_executor": "Naveen Kumar Puppala (Lead Engineer)",
+          "execution_environment": "Separate API environment with proven quota; no rate-limit interruptions"
+        },
+        "implementation_reference": "test_judge_reliability.py (authored by Evals Expert, executed by Lead Engineer)"
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "N/A — all claims are Direct",
+    "original_constructs": "None in this translation",
+    "notes": "The four-part certification protocol is an original CDFI design. The paper supplies the principle (consistency must be verified, calibration must be demonstrated, repeatability requires documented process, execution requires independence). The specific four-part structure, kappa threshold, and run history are CDFI originals derived from those principles."
+  }
+}
