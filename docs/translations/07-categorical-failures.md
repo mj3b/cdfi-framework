@@ -51,7 +51,7 @@ the principle through four specific sabotage evaluations and argues
 that "ruling out the above capability thresholds does not necessarily
 rule out risks from sabotage capabilities entirely." The inference that
 categorical/gradational separation is a general architectural principle
-is the CDFI translation contribution, not a direct paper quote.
+of the CDFI translation contribution, not a direct paper quote.
 
 See Source Evidence Record: E1, E2, E3.
 
