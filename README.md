@@ -97,7 +97,7 @@ cdfi-framework/
 ├── LICENSE                                ← Apache License 2.0
 ├── NOTICE                                 ← Required attribution for derivative works
 │
-├── claims/                                ← Machine-readable evidence packs (v1.5)
+├── claims/                                ← Machine-readable evidence packs 
 │   ├── README.md                          ← Schema reference, file index, translator adaptation docs
 │   ├── pub1-evaluation-criteria.json      ← Pub 1: evaluation criteria → weighting matrix
 │   ├── pub1-rubric-reliability.json       ← Pub 1: inter-rater reliability → certification protocol
