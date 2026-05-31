@@ -5,7 +5,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20467497)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
-[![Status: v1.4 — Reference Implementation](https://img.shields.io/badge/status-v1.4%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
+[![Status: v1.5 — Reference Implementation](https://img.shields.io/badge/status-v1.5%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
 [![Tradition-Agnostic](https://img.shields.io/badge/scope-tradition--agnostic-3bb273)](docs/governance/adapting-for-other-traditions.md)
 [![Seven Source Publications](https://img.shields.io/badge/grounded%20in-7%20AI%20safety%20publications-ff6b35)](TRACEABILITY.md)
 [![SAICRED v2](https://img.shields.io/badge/reference%20implementation-SAICRED%20v2-1565C0)](examples/saicred-v2/)
@@ -96,6 +96,17 @@ cdfi-framework/
 ├── CONTRIBUTING.md                        ← How to adapt, extend, or contribute
 ├── LICENSE                                ← Apache License 2.0
 ├── NOTICE                                 ← Required attribution for derivative works
+│
+├── claims/                                ← Machine-readable evidence packs (v1.5)
+│   ├── README.md                          ← Schema reference, file index, translator adaptation docs
+│   ├── pub1-evaluation-criteria.json      ← Pub 1: evaluation criteria → weighting matrix
+│   ├── pub1-rubric-reliability.json       ← Pub 1: inter-rater reliability → certification protocol
+│   ├── pub2-hallucination-gate.json       ← Pub 2: hidden objectives → hallucination gate
+│   ├── pub3-statistical-rigor.json        ← Pub 3: statistical approach → CI + tier thresholds
+│   ├── pub4-framing-sensitivity.json      ← Pub 4: discrimination → relativism resistance gate
+│   ├── pub5-confidence-calibration.json   ← Pubs 4+5: original construct → ninth metric
+│   ├── pub6-categorical-failures.json     ← Pub 6: sabotage evaluations → cap gate architecture
+│   └── pub7-adversarial-probing.json      ← Pub 7: feature steering → adversarial variant
 │
 ├── engine/                                ← Reference implementation of the CDFI formula
 │   ├── __init__.py                        ← Package entry point
@@ -296,7 +307,7 @@ Six limitations are documented with exact disclosure language:
 | L4 | Stability scores hardcoded at 3.0 — deferred to v2.1 | Non-blocking |
 | L5 | Positions 1–5 not statistically distinguishable (only Grok vs. Claude gap reaches p < 0.05) | Interpretive constraint |
 | L6 | Scores tied to specific model versions; expire on major version update | Active via versioning protocol |
-| L7 | Security: three attack surfaces documented but not technically mitigated (prompt injection, pipeline integrity, authority level signing) | Disclosure only — v1.5 remediation planned |
+| L7 | Security: three attack surfaces documented but not technically mitigated (prompt injection, pipeline integrity, authority level signing) | Disclosure only — v1.6 remediation planned |
 
 Full register with paste-ready disclosure language: [`LIMITATIONS.md`](LIMITATIONS.md)
 
@@ -340,3 +351,4 @@ Copyright © 2026 Mark Julius Banasihan. Licensed under the [Apache License 2.0]
 Evaluation governance systems for AI in high-stakes institutional and doctrinal contexts.
 
 [GitHub](https://github.com/mj3b) · [LinkedIn](https://linkedin.com/in/markjuliusbanasihan) · [ORCID](https://orcid.org/0009-0001-8121-2878) · [Email](mailto:markjuliusbanasihan@gmail.com) · Atlanta, Georgia, United States
+
