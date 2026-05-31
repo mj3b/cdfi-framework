@@ -267,6 +267,18 @@ These results do not validate the method's theological claims. They validate tha
 
 ---
 
+## Machine-Readable Evidence Layer
+
+The seven-step translation pipeline described in this document is operationalized in two artifact layers:
+
+**Markdown translation documents** ([`docs/translations/`](docs/translations/)) — human-readable. Each file shows the full pipeline with the source paper's finding at Step 1 and the specific deployment consequence at Step 7. Each document includes a Source Evidence Record with verbatim paper extracts, claim typing (Direct / Derived / Original Construct), and an Evidence Completeness Assessment table.
+
+**JSON evidence packs** ([`claims/`](claims/)) — machine-readable. Each JSON file carries the same evidence in structured form: verbatim extracts with section/page citations, `cdfi_element_produced` fields linking each claim to its specific formula artifact, and cross-file references modeling the CDFI's inter-paper dependency structure.
+
+The JSON schema was adapted from [applied-ai-research-translator](https://github.com/mj3b/applied-ai-research-translator). The adaptations — `cdfi_element_produced` field, `Original Construct` claim type, cross-file references — are documented in [`claims/README.md`](claims/README.md).
+
+---
+
 ## Citation
 
 ```bibtex
