@@ -1,6 +1,6 @@
 # `claims/` — Machine-Readable Evidence Packs
 
-**CDFI Framework v1.4** | DOI: [10.5281/zenodo.20467497](https://doi.org/10.5281/zenodo.20467497)
+**CDFI Framework v1.4** | DOI: [10.5281/zenodo.20475185](https://doi.org/10.5281/zenodo.20475185)
 
 ---
 
@@ -201,4 +201,4 @@ Tools that validate this folder should treat the following as correct behavior, 
 
 *Mark Julius Banasihan | May 2026*
 
-*DOI: [10.5281/zenodo.20467497](https://doi.org/10.5281/zenodo.20467497) | ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
+*DOI: [10.5281/zenodo.20475185](https://doi.org/10.5281/zenodo.20475185) | ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
