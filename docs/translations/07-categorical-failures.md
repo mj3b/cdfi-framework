@@ -458,7 +458,10 @@ to CDFI mechanism. No step in the translation pipeline relies on an unsupported 
 ---
 
 *Cap gate implementation: [`engine/cdfi_calculator.py`](../../engine/cdfi_calculator.py)*
+
 *Gate configuration: [`configs/threshold_gates.yaml`](../../configs/threshold_gates.yaml)*
+
 *Failure taxonomy: [`docs/specifications/failure-taxonomy.md`](../specifications/failure-taxonomy.md)*
+
 *Applied AI Research Translator schema: [`claims/pub6-sabotage-evaluations.json`](../../claims/pub6-sabotage-evaluations.json) ← planned v1.5*
 
