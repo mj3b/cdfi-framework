@@ -1,7 +1,13 @@
 # Translation 8 — Confidence Calibration: An Original Construct
 
-**Source Publications:** [Measuring Faithfulness in Chain-of-Thought Reasoning](https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning) (Anthropic, 2023) + [Discrimination in Language Model Decisions](https://arxiv.org/abs/2312.03689) (2024)
+**Source Publications (combined):**
+
+- [Measuring Faithfulness in Chain-of-Thought Reasoning](https://www.anthropic.com/research/measuring-faithfulness-in-chain-of-thought-reasoning) — Anthropic, July 2023
+
+- [Evaluating and Mitigating Discrimination in Language Model Decisions](https://arxiv.org/abs/2312.03689) — Tamkin, Askell, Lovitt, Durmus et al., Anthropic, December 2023
+
 **SAICRED Implementation Guidelines:** Section 3.2
+
 **CDFI Artifact:** Confidence calibration metric — ninth metric, original construct with no direct source paper
 
 > *This translation is structurally different from Translations 1–7. No single paper provides the Step 1 claim. Two papers each provide half of a compound claim. The metric emerged from holding both findings in tension until the question they jointly produce became clear.*
@@ -14,7 +20,7 @@
 Publication 5: CoT Faithfulness          Publication 4: Framing Discrimination
 ────────────────────────────────         ────────────────────────────────────
 STEP 1a — Falsifiable Claim              STEP 1b — Falsifiable Claim
-                                         
+
 Stated reasoning chains do not           Model outputs shift systematically
 reliably reflect the actual              under framing variations. Certainty
 computational process that produced      expression is not a stable property
@@ -94,12 +100,12 @@ not have produced it.                    the framing activated different
         ──────────────────────────────────────────────────────────
         Column weights in the authority-sensitive matrix:
 
-          Authority Level     Weight
-          ─────────────────   ──────
-          Defined Dogma       0.20
+          Authority Level      Weight
+          ──────────────────   ──────
+          Defined Dogma        0.20
           Ordinary Magisterium 0.16
           Theological Consensus 0.14
-          Legitimate Opinion  0.10
+          Legitimate Opinion   0.10
 
         Weight decreases toward legitimate opinion because
         calibration failures are most consequential when
@@ -185,5 +191,90 @@ A response can score 5/5 on doctrinal precision (correct conclusion) and 1/5 on 
 
 ---
 
-*SAICRED Implementation Guidelines, Section 3.2 (original rubric)*
-*Authority levels: [docs/specifications/authority-levels.md](../specifications/authority-levels.md)*
+## Source Evidence Record
+
+This section provides the verbatim paper text that grounds each half of the two-paper derivation. Claims are typed **Direct** (paper states explicitly) or **Derived** (paper implies; inference chain shown). The convergent Step 3 claim is typed **Original Construct** because no paper states it — it emerges from holding both sequences simultaneously.
+
+---
+
+### E1 — Stated Reasoning Does Not Reliably Reflect Actual Process (Publication 5)
+
+**Claim type:** Direct
+
+**CDFI mechanism:** Step 1a and 2a; confidence calibration rubric scores certainty expression against authority level, not against the quality of stated reasoning
+
+**Verbatim extract:**
+
+> "Large language models (LLMs) perform better when they produce step-by-step, 'Chain-of-Thought' (CoT) reasoning before answering a question, but it is unclear if the stated reasoning is a faithful explanation of the model's actual reasoning (i.e., its process for answering the question). We investigate hypotheses for how CoT reasoning may be unfaithful, by examining how the model predictions change when we intervene on the CoT (e.g., by adding mistakes or paraphrasing it). Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it."
+
+*— Abstract, Measuring Faithfulness in Chain-of-Thought Reasoning (2023)*
+
+> "As models become larger and more capable, they produce less faithful reasoning on most tasks we study."
+
+*— Abstract*
+
+**Inference chain to CDFI:**
+
+If stated reasoning chains do not reliably reflect the model's actual computational process, then certainty expressions embedded within those chains are equally unreliable as evidence of the model's actual epistemic state. A model that writes "the Church definitively teaches X, as demonstrated by [reasoning chain]" is not necessarily expressing certainty grounded in that reasoning chain — the chain may not have produced the conclusion. The confidence calibration rubric scores certainty expression against the doctrinal authority level of the question, not against the quality of the stated reasoning, because this paper establishes that stated reasoning quality and actual process quality are structurally decoupled.
+
+---
+
+### E2 — Certainty Expression Shifts Under Framing Variation (Publication 4)
+
+**Claim type:** Direct
+
+**CDFI mechanism:** Step 1b and 2b; four-variant framing structure reveals certainty shifts independent of semantic content
+
+**Verbatim extract:**
+
+> "When analyzing model decisions on these prompts without further intervention, we find that the Claude 2.0 language model exhibits a mix of positive and negative discrimination in select settings [...] This effect is smaller but still present when race and gender are provided implicitly through names rather than explicitly stated, and the effect is robust when the prompts are written in a wide range of formats and styles."
+
+*— Section 2, p. 2, Evaluating and Mitigating Discrimination in Language Model Decisions (2023)*
+
+> "The style in which the decision question is written does not affect the direction of discrimination across templates. However, the amount of discrimination is sometimes larger for specific styles. For example, the magnitude of the discrimination score is generally larger when the prompts are written in an emotional style."
+
+*— Figure 4 caption, p. 7*
+
+**Inference chain to CDFI:**
+
+The paper establishes that output patterns shift with framing variation, not semantic content. The CDFI translation: if demographic framing variation shifts model output patterns, then doctrinal framing variation shifts certainty expression. A model that expresses appropriate certainty on defined dogma under Catholic framing but hedges under neutral framing is exhibiting framing-dependent certainty — not genuine calibration to the question's doctrinal status. The confidence calibration rubric catches this: it evaluates the certainty expression against the authority level of the question, not against the framing condition under which the response was generated.
+
+---
+
+### E3 — The Convergent Question: Neither Paper's Direct Output
+
+**Claim type:** Original Construct
+
+**CDFI mechanism:** The entire confidence calibration metric
+
+**What neither paper asked:**
+
+Does the model express certainty appropriate to the **doctrinal authority level** of the claim it is making, independent of framing and independent of the quality of its stated reasoning?
+
+Publication 5 establishes that stated reasoning is unreliable as evidence of actual process. Publication 4 establishes that certainty expression shifts with framing. Both findings point to the same gap: certainty expression cannot be trusted to reflect either the model's reasoning or a stable epistemic state. The question that falls out of holding both simultaneously is what certainty expression *should* track.
+
+The answer is the doctrinal authority level of the claim — a structure that exists in Catholic theology independently of any model's training data or framing conditions. Defined dogma warrants definitive certainty. Legitimate theological opinion warrants tentativeness. The calibration standard is external to the model, not derived from it.
+
+This convergence is documented as an original construct in SAICRED Implementation Guidelines Section 3.2. No source quote is possible for E3 because the claim emerges from the combination of both papers, not from either one directly. That is the honest disclosure.
+
+---
+
+## Evidence Completeness Assessment
+
+| Evidence Item | Source | Claim Type | Verbatim Extract Present | Location |
+|---------------|--------|:-----------:|:------------------------:|----------|
+| E1 — Stated reasoning unreliable | Publication 5 (CoT) | Direct | Yes | Abstract |
+| E2 — Certainty shifts under framing | Publication 4 (Discrimination) | Direct | Yes | Section 2 p.2; Figure 4 p.7 |
+| E3 — Convergent original construct | Neither paper directly | Original | N/A | SAICRED Impl. Guidelines §3.2 |
+
+The absence of a source quote for E3 is not an evidence gap. It is an honest disclosure that the confidence calibration metric is an original intellectual contribution. The claim documented in E3 is that neither paper asked the question — and that the combination of both papers makes the gap visible.
+
+---
+
+*CDFI formula: [`docs/specifications/CDFI-formula.md`](../specifications/CDFI-formula.md)*
+
+*Scoring anchors: [`docs/specifications/scoring-anchors.md`](../specifications/scoring-anchors.md)*
+
+*Authority levels: [`docs/specifications/authority-levels.md`](../specifications/authority-levels.md)*
+
+*Claims pack (planned v1.5): [`claims/pub5-confidence-calibration.json`](../../claims/pub5-confidence-calibration.json)*
