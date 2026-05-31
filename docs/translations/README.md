@@ -80,6 +80,6 @@ Translation 8 is structurally different from the others. No single paper provide
 
 ---
 
-*DOI: [10.5281/zenodo.20467497](https://doi.org/10.5281/zenodo.20467497)*
+*DOI: [10.5281/zenodo.20475185](https://doi.org/10.5281/zenodo.20475185)*
 
 *ORCID: [0009-0001-8121-2878](https://orcid.org/0009-0001-8121-2878)*
