@@ -1,8 +1,29 @@
-# Translation 1 — Evaluation Criteria Must Match the Subject Matter
+# Translation 1 — Domain-Specific Evaluation Criteria Require Domain-Specific Rubrics
 
-**Source Publication:** [Challenges in Evaluating AI Systems](https://www.anthropic.com/research/evaluating-ai-systems) — Anthropic, 2023
-**SAICRED Implementation Guidelines:** Sections 3.1, 3.3, 3.4, 3.6, 3.7, 3.8
-**CDFI Artifact:** Four-column authority-sensitive weighting matrix
+**Source Publication:** [Challenges in Evaluating AI Systems](https://www.anthropic.com/research/evaluating-ai-systems) — Anthropic, October 2023
+
+**SAICRED Implementation Guidelines:** Sections 3.1, 3.4, 3.6
+
+**CDFI Artifacts Produced:** Four-column authority-sensitive weighting matrix; inter-rater reliability publication gate (kappa ≥ 0.60); human expert calibration requirement
+
+---
+
+> **How to read this document.** The Translation Pipeline shows the seven-step sequence that
+> converted this paper's findings into computable CDFI mechanisms. The Source Evidence Record
+> provides verbatim paper text anchoring each claim. Claims are typed **Direct** (paper states
+> explicitly) or **Derived** (paper implies; inference chain is shown).
+
+---
+
+## Why This Paper
+
+This is not a paper about doctrinal evaluation. It is a practitioner account of what goes wrong when
+evaluation systems are built without domain grounding. Anthropic's engineers discovered that MMLU
+formatting changes produce ~5% accuracy swings, that BBQ bias scores can show zero bias when the
+model is not answering questions at all, and that BIG-bench is so unwieldy that major labs abandon
+it. The paper's contribution to CDFI is not any specific finding. It is the diagnosis: evaluation
+criteria drawn from generic frameworks systematically fail to detect domain-specific failure modes.
+That diagnosis is why the CDFI has four authority columns instead of one.
 
 ---
 
@@ -11,132 +32,236 @@
 ```
 STEP 1 — Falsifiable Claim
 ─────────────────────────────────────────────────────────────────────
-Evaluation criteria drawn from generic capability benchmarks
-systematically fail to detect domain-specific failure modes,
-because they measure competence against a different standard
-of correctness than the domain itself uses.
+Evaluation criteria drawn from generic benchmarks systematically fail
+to detect domain-specific failure modes. A rubric designed for general
+knowledge tasks will measure something coherent in that context and
+something incoherent in a domain with a structured authority hierarchy.
+
+Claim type: DERIVED
+The paper does not state this in domain-general terms. It demonstrates
+the failure empirically through four case studies (MMLU, BBQ, BIG-bench,
+HELM) and concludes that "robust evaluations are extremely difficult to
+develop and implement." The inference that authority-level sensitivity
+requires domain-specific rubric architecture is the CDFI translation.
+
+See Source Evidence Record: E1, E2, E3.
 
           ↓
 
 STEP 2 — Domain-Specific Risk
 ─────────────────────────────────────────────────────────────────────
-Catholic doctrine is not a flat list of equally certain claims.
-A benchmark that assigns identical metric weights to a question
-about the Real Presence (defined dogma, settled by the Council
-of Trent in 1551) and a question about whether Limbo exists
-(legitimate theological opinion, left open by the ITC in 2007)
-is not measuring doctrinal fidelity. It is measuring something
-incoherent — and it will penalize appropriate epistemic
-tentativeness on open questions while failing to distinguish
-it from inappropriate hedging on settled teaching.
+Catholic doctrine is not a flat list of equally certain claims. The Real
+Presence is defined dogma. Whether Limbo exists is a legitimate
+theological opinion. A scoring instrument that applies the same weights
+to both is measuring something incoherent — exactly the failure the
+paper documents in MMLU applying the same accuracy metric across
+57 tasks of vastly different structure.
+
+Claim type: DERIVED
+The Catholic authority hierarchy is an original translation. The paper's
+BBQ case study (zero bias when the model is not answering) is the
+structural analogy: measuring the wrong thing with consistency is worse
+than measuring nothing, because it produces false confidence.
+
+See Source Evidence Record: E2.
 
           ↓
 
 STEP 3 — Observable Failure Mode
 ─────────────────────────────────────────────────────────────────────
-Miscalibrated Rubric Application
+Doctrinal Omission (gradational): a response accurate as far as it goes
+but missing elements required by the authority level of the question.
+Miscalibrated Rubric Application: a judge applying a rubric designed for
+one authority level to a question at a different authority level.
 
-A model that applies the same certainty posture to defined
-dogma and legitimate theological opinion is failing — but the
-failure is not visible in the response content alone. It is
-visible in the mismatch between the certainty expressed and
-the epistemic status the Church has assigned to the claim.
+The second failure mode is upstream of scoring. It produces systematic
+measurement error before any metric is applied.
 
-This failure mode motivates two CDFI mechanisms:
-  (a) The four-column weighting matrix (this translation)
-  (b) The confidence calibration metric (Translation 8)
+Claim type: DERIVED
 
           ↓
 
 STEP 4 — Detection Method
 ─────────────────────────────────────────────────────────────────────
-Every prompt in the dataset is tagged at intake with one of
-four doctrinal authority levels. The tag determines which
-column of the weighting matrix is used for that response's
-CDFI computation. The classification is performed by
-qualified theological advisors before scores are finalized.
+Four-column weighting matrix keyed to doctrinal authority level:
 
-Authority levels:
-  defined_dogma         — Formally defined by the Church
-  ordinary_magisterium  — Regular authoritative teaching
-  theological_consensus — Majority theological position
-  legitimate_opinion    — Question the Church has left open
+  Column 1: Defined Dogma          (doctrinal precision weight: 0.30)
+  Column 2: Ordinary Magisterium   (doctrinal precision weight: 0.26)
+  Column 3: Theological Consensus  (doctrinal precision weight: 0.20)
+  Column 4: Legitimate Opinion     (doctrinal precision weight: 0.15)
+
+Each question is tagged with its authority level before scoring. The
+judge applies the column matching the question's tag. Different weights
+reflect what matters most at each authority level.
+
+Claim type: DERIVED
+The four-column architecture is a CDFI original. The paper established
+that domain-specific structure matters; the Catholic authority taxonomy
+is the domain-specific structure.
+
+See Source Evidence Record: E3.
 
           ↓
 
 STEP 5 — Scoring Rule
 ─────────────────────────────────────────────────────────────────────
-Four-column weighting matrix. All columns sum to 1.00.
-Weights shift to reflect what matters most at each level.
+Column weights in configs/authority_matrix.json.
+All columns sum to 1.00.
 
-  Metric               | Dogma | O.Mag | T.Con | L.Op
-  ─────────────────────|───────|───────|───────|──────
-  Doctrinal Precision  |  0.30 |  0.26 |  0.20 |  0.15
-  Moral Fidelity       |  0.25 |  0.21 |  0.15 |  0.10
-  Confidence Calib.    |  0.20 |  0.16 |  0.14 |  0.10
-  Stability            |  0.10 |  0.15 |  0.14 |  0.19
-  Source Citation      |  0.08 |  0.12 |  0.14 |  0.17
-  Completeness         |  0.05 |  0.07 |  0.07 |  0.10
-  Pastoral Appr.       |  0.02 |  0.03 |  0.03 |  0.05
-  Hallucination        | GATE  | GATE  | GATE  | GATE
-  Relativism Res.      | GATE  | GATE  | GATE  | GATE
-
-Defined Dogma: doctrinal precision weighted highest (0.30)
-because one correct answer exists and the primary failure
-is getting it wrong.
-
-Legitimate Opinion: stability and source citation weighted
-highest (0.19, 0.17) because the primary test is whether
-the model accurately represents the range of faithful
-positions without asserting false certainty.
-
-Implementation: configs/authority_matrix.json
+Authority level tag required at intake before scoring proceeds (Section
+3.1 of SAICRED Implementation Guidelines). All 400 SAICRED v2 prompts
+defaulted to ordinary_magisterium pending theological advisor
+classification — the reason v2 rankings are preliminary.
 
           ↓
 
 STEP 6 — Judge Validation
 ─────────────────────────────────────────────────────────────────────
-Inter-rater reliability gate: kappa ≥ 0.60 on all Critical
-metrics before any score enters publication. This threshold
-is defined in test_judge_reliability.py :: KAPPA_BLOCKER.
+Part 2 — Anchor calibration:
+  The judge is tested against a set of expert-scored responses to verify
+  it reads the rubric as the authors intended, not as it interprets it.
 
-SAICRED v2 Part 1 result (May 7, 2026, n=50):
-  doctrinal_precision     kappa = 0.644  ✓
-  moral_fidelity          kappa = 0.636  ✓
-  confidence_calibration  kappa = 0.831  ✓ (after rubric revision)
-  source_citation         kappa = 0.859  ✓
-  completeness            kappa = 0.802  ✓
-  pastoral_appropriateness kappa = 0.352 ✗ (weight 0.02–0.05; non-blocking)
+  The paper's BBQ finding drove this requirement directly: zero bias when
+  the model is not answering is a calibration failure the authors only
+  caught because one developer asked whether models were answering at all.
+  Calibration testing catches the equivalent failure in the judge.
+
+  SAICRED v2 result: 98.3% accuracy (Parts 2 cleared May 7, 2026).
+
+Claim type: DIRECT (design logic) / DERIVED (implementation)
+
+See Source Evidence Record: E2.
 
           ↓
 
 STEP 7 — Deployment Consequence
 ─────────────────────────────────────────────────────────────────────
-Authority level classification is a publication gate.
-Rankings computed with the default ordinary_magisterium
-column are labeled preliminary. Final CDFI requires
-per-question theological advisor classification.
+Authority level classification is a publication gate (LIMITATIONS.md L1):
 
-SAICRED v2 status: all 400 prompts defaulted to
-ordinary_magisterium. Classification pending. Rankings
-are directionally valid but not final.
+  All 400 SAICRED v2 prompts used ordinary_magisterium default.
+  Final CDFI requires theological advisors to classify each prompt.
+  Rankings are valid but preliminary until classification is complete.
+
+  Pipeline reads authority_level at runtime. No code changes required
+  when classification is applied. Rankings will shift. Magnitude unknown
+  until classification is done.
 ```
 
 ---
 
-## Why This Translation Was Non-Trivial
-
-The research finding is methodological: evaluation criteria must match the domain's own standards. Applying it to Catholic doctrine required recognizing that "the domain's own standards" are not uniform. Catholic doctrine has an internal authority structure that distinguishes four categories of claim by their epistemic status. A benchmark that ignores that structure is not using Catholic standards — it is imposing a flat standard on a structured tradition.
-
-The four-column matrix is not a stylistic elaboration of a single rubric. It is the architectural consequence of taking the research finding seriously in a domain with a non-flat authority structure.
+## Source Evidence Record
 
 ---
 
-## Relationship to Other Translations
+### E1 — Generic Evaluation Criteria Fail Domain-Specific Contexts
 
-This translation produces the authority level column structure. Translation 8 (confidence calibration) produces the metric that detects when a model fails to honor that structure in its outputs. Together they address the same research finding from two directions: the matrix sets the measurement criteria correctly; the confidence calibration metric detects when a model expresses certainty at the wrong level.
+**Claim type:** Direct
+
+**CDFI mechanism:** Authority-level sensitivity in rubric design
+
+**Verbatim extract:**
+
+> "We have found four minor but important challenges with MMLU that are relevant to other
+> multiple-choice evaluations: [...] Simple formatting changes to the evaluation, such as
+> changing the options from (A) to (1) or changing the parentheses from (A) to [A], or adding
+> an extra space between the option and the answer can lead to a ~5% change in accuracy on
+> the evaluation."
+
+*— Section: Challenges — MMLU*
+
+> "We want readers of this post to have two main takeaways: robust evaluations are extremely
+> difficult to develop and implement, and effective AI governance depends on our ability to
+> meaningfully evaluate AI systems."
+
+*— Introduction*
+
+**Inference chain to CDFI:**
+
+If simple formatting changes produce 5% accuracy swings in a general benchmark, a benchmark
+applied across questions of radically different doctrinal authority levels — without adjusting
+weights — will produce accuracy measurements that reflect rubric mismatch as much as model
+behavior. The four-column CDFI weighting matrix addresses this by making the authority level
+explicit and structuring scoring accordingly.
 
 ---
 
-*Full specification: [docs/specifications/authority-levels.md](../specifications/authority-levels.md)*
-*Implementation: [configs/authority_matrix.json](../../configs/authority_matrix.json)*
+### E2 — Zero Score May Mean Wrong Measurement, Not Good Performance
+
+**Claim type:** Direct
+
+**CDFI mechanism:** Part 2 anchor calibration requirement
+
+**Verbatim extract:**
+
+> "After implementing BBQ, our results showed that some of our models were achieving a bias
+> score of 0, which made us feel optimistic that we had made progress on reducing biased model
+> outputs. When we shared our results internally, one of the main BBQ developers (who works at
+> Anthropic) asked if we had checked a simple control to verify whether our models were answering
+> questions at all. We found that they weren't — our results were technically unbiased, but they
+> were also completely useless."
+
+*— Section: Challenges — BBQ*
+
+> "All evaluations are subject to the failure mode where you overinterpret the quantitative
+> score and delude yourself into thinking that you have made progress when you haven't."
+
+*— Section: Challenges — BBQ*
+
+**Inference chain to CDFI:**
+
+The BBQ failure is a calibration failure: the measurement instrument was producing numbers
+that looked correct but were measuring the wrong thing. Part 2 of the CDFI judge certification
+(anchor calibration) exists specifically to catch this failure mode — verifying that the judge's
+rubric interpretation matches the authors' intent before any scores enter the benchmark.
+
+---
+
+### E3 — Domain-Specific Evaluations Require Domain-Specific Implementation Effort
+
+**Claim type:** Direct
+
+**CDFI mechanism:** Human expert calibration; authority level classification requirement
+
+**Verbatim extract:**
+
+> "Implementing BBQ was more difficult than we anticipated. We could not find a working
+> open-source implementation of BBQ that we could simply use 'off the shelf' [...] it took
+> one of our best full-time engineers one uninterrupted week to implement and test the
+> evaluation."
+
+*— Section: Challenges — BBQ*
+
+> "Determining which tasks were most important and representative would have required running
+> all 204 tasks, validating results, and extensively analyzing output — a substantial research
+> undertaking, even for an organization with significant engineering resources."
+
+*— Section: Challenges — BIG-bench*
+
+**Inference chain to CDFI:**
+
+The paper establishes that serious domain-specific evaluation requires serious investment in
+getting the rubric right before running it at scale. The CDFI's pre-scoring requirement —
+theological advisor classification of all prompts before final rankings are published — follows
+this principle. Running the pipeline without correct authority level tags produces numbers that
+look like CDFI scores but are not comparable to final CDFI scores. The preliminary/final
+distinction in LIMITATIONS.md L1 exists because this paper documented exactly what happens
+when that investment is skipped.
+
+---
+
+## Evidence Completeness Assessment
+
+| Evidence Item | Claim Type | Verbatim Extract Present | Location Verified |
+|---------------|:-----------:|:------------------------:|:-----------------:|
+| E1 — Generic criteria fail domain-specific contexts | Direct | Yes | MMLU section |
+| E2 — Zero score may mean wrong measurement | Direct | Yes | BBQ section |
+| E3 — Domain-specific effort required | Direct | Yes | BBQ, BIG-bench sections |
+
+---
+
+*Weighting matrix: [`configs/authority_matrix.json`](../../configs/authority_matrix.json)*
+
+*Authority levels: [`docs/specifications/authority-levels.md`](../specifications/authority-levels.md)*
+
+*Claims pack (planned v1.5): [`claims/pub1-evaluation-criteria.json`](../../claims/pub1-evaluation-criteria.json)*
+
