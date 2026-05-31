@@ -3,7 +3,7 @@
 **Evaluation Governance Infrastructure for Domain-Specific AI Doctrinal Benchmarking**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20467497)
+[![DOI](https://zenodo.org/badge/1253813359.svg)](https://doi.org/10.5281/zenodo.20475185)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0001--8121--2878-brightgreen)](https://orcid.org/0009-0001-8121-2878)
 [![Status: v1.5 — Reference Implementation](https://img.shields.io/badge/status-v1.5%20reference%20implementation-5b6cff)](https://github.com/mj3b/cdfi-framework/releases)
 [![Tradition-Agnostic](https://img.shields.io/badge/scope-tradition--agnostic-3bb273)](docs/governance/adapting-for-other-traditions.md)
