@@ -14,12 +14,12 @@ authors:
     given-names: Mark Julius
     orcid: "https://orcid.org/0009-0001-8121-2878"
     email: markjuliusbanasihan@gmail.com
-version: "1.4"
-date-released: "2026-05-30"
+version: "1.5"
+date-released: "2026-05-31"
 license: Apache-2.0
 repository-code: "https://github.com/mj3b/cdfi-framework"
 url: "https://github.com/mj3b/cdfi-framework"
-doi: "10.5281/zenodo.20467148"
+doi: "ZENODO_DOI_PLACEHOLDER"
 keywords:
   - AI evaluation
   - doctrinal fidelity
