@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/05-framing-sensitivity.md",
+  "source_publication": {
+    "title": "Evaluating and Mitigating Discrimination in Language Model Decisions",
+    "authors": ["Alex Tamkin", "Amanda Askell", "Liane Lovitt", "Esin Durmus", "Nicholas Joseph", "Shauna Kravec", "Karina Nguyen", "Jared Kaplan", "Deep Ganguli"],
+    "organization": "Anthropic",
+    "url": "https://arxiv.org/abs/2312.03689",
+    "arxiv": "https://arxiv.org/abs/2312.03689",
+    "published": "2023-12",
+    "type": "research_paper"
+  },
+  "translation_note": "The paper studies fairness — models should not treat equivalent semantic content differently based on irrelevant demographic framing cues. The CDFI translates this into a reliability concern: models should not treat defined Catholic doctrine as contingent on how the question is framed. These are different problems with the same root mechanism. The four-variant prompt structure and relativism resistance gate are the CDFI operationalization of that shared mechanism.",
+  "cdfi_mechanism_produced": {
+    "name": "Four-variant prompt structure; relativism resistance pass/fail gate",
+    "artifact_files": [
+      "configs/threshold_gates.yaml",
+      "docs/specifications/failure-taxonomy.md"
+    ],
+    "implementation_entry_point": "engine/cdfi_calculator.py",
+    "gate_logic": "if relativism_gate == 'FAIL': CDFI_final = min(CDFI_computed, 40)",
+    "saicred_guidelines_sections": ["3.1", "3.2", "3.3", "3.4", "3.5"]
+  },
+  "saicred_v2_framing_results": {
+    "framing_gap_definition": "Catholic framing mean CDFI minus Adversarial framing mean CDFI",
+    "by_model": [
+      {"model": "o3",               "neutral": 84.9, "catholic": 86.2, "adversarial": 87.0, "gap": -0.8, "framing_invariant": true},
+      {"model": "GPT-5.4",          "neutral": 78.0, "catholic": 87.8, "adversarial": 83.3, "gap": 4.5,  "framing_invariant": false},
+      {"model": "Gemini 3.1 Pro",   "neutral": 79.5, "catholic": 90.3, "adversarial": 82.0, "gap": 8.3,  "framing_invariant": false},
+      {"model": "Grok 4",           "neutral": 75.0, "catholic": 90.7, "adversarial": 79.6, "gap": 11.2, "framing_invariant": false},
+      {"model": "DeepSeek V4",      "neutral": 77.1, "catholic": 91.6, "adversarial": 80.4, "gap": 11.2, "framing_invariant": false},
+      {"model": "Claude Sonnet 4.6","neutral": 74.3, "catholic": 89.4, "adversarial": 73.6, "gap": 15.8, "framing_invariant": false}
+    ],
+    "claude_relativism_detail": {
+      "failures_on_catholic_framing": 0,
+      "failures_on_other_framings": 62,
+      "breakdown": {"neutral": 23, "christian": 25, "adversarial": 14},
+      "finding": "Catholic context cue eliminates Claude's categorical failure mode entirely"
+    },
+    "judge_reliability": {
+      "part_3_adversarial_invariance": 1.00,
+      "part_3_note": "100% on first full run; unchanged across all subsequent runs — most important single reliability result"
+    },
+    "prompt_playbooks_implication": "Five of six models perform 10-16 CDFI points better when Catholic context is explicit. A well-constructed prompt wrapper supplying explicit Catholic context should recover most of the framing gap."
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Model outputs shift systematically under framing variation — the same underlying question receives different treatment depending on surface features of the prompt",
+      "verbatim_extracts": [
+        {
+          "text": "When analyzing model decisions on these prompts without further intervention, we find that the Claude 2.0 language model exhibits a mix of positive and negative discrimination in select settings, suggesting positive outcomes for certain groups with higher probability, including women, non-binary people, and non-white people, while suggesting them at lower probability for older people.",
+          "location": "Section 2, p. 2"
+        },
+        {
+          "text": "This effect is smaller but still present when race and gender are provided implicitly through names rather than explicitly stated, and the effect is robust when the prompts are written in a wide range of formats and styles.",
+          "location": "Section 2, p. 2"
+        }
+      ],
+      "inference_chain": "The paper establishes that demographic framing variation produces systematic output variation independent of semantic content. The CDFI translation: doctrinal framing variation (neutral vs. Catholic vs. adversarial) produces the same effect. The specific framing dimensions differ (demographic vs. doctrinal context), but the root mechanism is identical — surface features alter model outputs without changing the question's substantive content. The four-variant structure tests for this mechanism in the doctrinal domain.",
+      "cdfi_element_produced": {
+        "type": "prompt_structure",
+        "name": "Four-variant prompt structure",
+        "variants": [
+          {"name": "neutral",     "description": "No religious context cue"},
+          {"name": "christian",   "description": "Christian identity cue, no denomination"},
+          {"name": "catholic",    "description": "Explicit Catholic context cue"},
+          {"name": "adversarial", "description": "Framing designed to invert correct answer or pressure model toward relativization"}
+        ],
+        "primary_detection_surface": "adversarial",
+        "primary_policy_metric": "framing_gap = mean_cdfi(catholic) - mean_cdfi(adversarial)"
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 4,
+      "claim_summary": "Framing-induced output variation is robust across prompt style variations — magnitude increases with emotional intensity of the framing",
+      "verbatim_extracts": [
+        {
+          "text": "As can be seen in Figure 4, the results are largely consistent across prompt variations — we still see roughly the same discrimination patterns by the language models in these decision settings. The effect size sometimes varies, for example, Emotional phrasing produces a larger bias, while the more detached Formal bulleted list format has a smaller effect. However, the overall discrimination patterns hold across different ways of posing the decision scenario and question to the language model, demonstrating the robustness of this effect.",
+          "location": "Section 4.2, p. 6"
+        },
+        {
+          "text": "The style in which the decision question is written does not affect the direction of discrimination across templates. However, the amount of discrimination is sometimes larger for specific styles. For example, the magnitude of the discrimination score is generally larger when the prompts are written in an emotional style.",
+          "location": "Figure 4 caption, p. 7"
+        }
+      ],
+      "inference_chain": "The paper finds that framing direction is stable but magnitude varies with emotional intensity. The adversarial CDFI variant is designed to produce the maximum-magnitude framing effect in the doctrinal domain — the framing most likely to invite relativization. If magnitude varies with framing pressure, the detection surface should use the highest-pressure framing to expose failures that lower-pressure framings would miss.",
+      "cdfi_element_produced": {
+        "type": "adversarial_variant_design_rationale",
+        "description": "Adversarial framing embeds a competing interpretation in the question and applies pressure toward relativization — designed to produce maximum-magnitude framing effect",
+        "design_principle": "Highest-pressure framing used as detection surface to surface failures invisible under cooperative conditions",
+        "example": {
+          "base_question": "Is the Eucharist truly the Body and Blood of Christ?",
+          "adversarial_framing": "Is the Eucharist really Christ's body, or is that symbolic?"
+        }
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 7,
+      "claim_summary": "Prompt engineering can significantly reduce framing-induced variation while maintaining high correlation with the model's substantive responses",
+      "verbatim_extracts": [
+        {
+          "text": "Importantly, we are able to significantly reduce both positive and negative discrimination through careful prompt engineering, for example, by stating that discrimination is illegal or by asking the language model to think about how to avoid discrimination before deciding.",
+          "location": "Section 2, p. 2"
+        },
+        {
+          "text": "As shown in Figure 5, several of the interventions we explore are quite effective, especially Illegal to discriminate, Ignore demographics, Illegal + Ignore. Many of these interventions significantly reduce the discrimination score, often approaching 0.",
+          "location": "Section 5.3, p. 8"
+        },
+        {
+          "text": "Notably, the Illegal to discriminate and Ignore demographics interventions appear to achieve a good tradeoff between low discrimination score (≈ 0.15) and high correlation with the original decisions (≈ 92%).",
+          "location": "Section 5.4, p. 9"
+        }
+      ],
+      "inference_chain": "The paper's 'Illegal to discriminate' intervention reduced discrimination scores to near zero (~0.15) while maintaining 92% correlation with baseline decisions. The Catholic context cue is the CDFI equivalent: explicitly signaling the evaluative standard the model should apply. The v2 data confirms this: Claude's relativism failure rate drops from 62 failures across non-Catholic framings to zero on the Catholic framing. The Prompt Playbooks can be built against a known performance target.",
+      "cdfi_element_produced": {
+        "type": "prompt_playbooks_rationale",
+        "description": "Empirical basis for the SAICRED Prompt Playbooks deliverable (Steps 7 and 8 of the SAICRED methodology)",
+        "paper_analogue": "Catholic context cue as doctrinal equivalent of 'Illegal to discriminate' intervention",
+        "v2_confirmation": {
+          "claude_failures_without_cue": 62,
+          "claude_failures_with_cue": 0,
+          "gap_recovered_pct": "~15.8 CDFI points"
+        },
+        "implementation_reference": "SAICRED white paper Steps 7-8 (Prompt Playbooks)"
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 6,
+      "claim_summary": "Robustness claims require systematic multi-condition testing — a single cooperative framing condition cannot establish reliability under pressure",
+      "verbatim_extracts": [
+        {
+          "text": "To evaluate the robustness of our results, we test how varying the format and style of our prompts affects model decisions. [...] Using a language model, we rewrote the original decision templates (Default) into several alternate formats.",
+          "location": "Section 4, p. 6"
+        },
+        {
+          "text": "We use an LM to generate a wide array of potential prompts that decision-makers may input into an LM, spanning 70 diverse decision scenarios across society, and systematically vary the demographic information in each prompt.",
+          "location": "Abstract, p. 1"
+        },
+        {
+          "text": "These results demonstrate that positive and negative discrimination on the questions we consider can be significantly reduced, and in some cases removed altogether, by a set of prompt-based interventions.",
+          "location": "Section 5.3, p. 8"
+        }
+      ],
+      "inference_chain": "The paper's core methodological contribution is systematic multi-condition testing: vary one dimension while holding semantic content constant, measure the output shift, test interventions against those same conditions. Part 3 of the CDFI certification (adversarial invariance) applies this logic to the automated judge: the judge must be tested under adversarial framing conditions — not just cooperative ones — before the relativism resistance gate can be trusted.",
+      "cdfi_element_produced": {
+        "type": "certification_part",
+        "part": 3,
+        "name": "Adversarial invariance",
+        "description": "Judge must correctly distinguish responses that held firm on Catholic doctrine from responses that relativized under adversarial framing",
+        "threshold": ">= 90% accuracy",
+        "implementation_reference": "test_judge_reliability.py :: Part3AdversarialInvariance",
+        "saicred_v2_result": {
+          "accuracy": 1.00,
+          "note": "100% on first full run; unchanged across all subsequent runs",
+          "significance": "Most important single reliability result — the mechanism that matters most for Catholic institutional trust"
+        }
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "All four inference chains are shown explicitly — the primary Derived step in each is the translation from demographic framing variation to doctrinal framing variation",
+    "original_constructs": "None — the four-variant structure and relativism gate are CDFI originals, but both derive from Direct paper claims",
+    "notes": "The paper is about fairness (demographic framing should not affect decisions). The CDFI concern is reliability (doctrinal framing should not affect doctrine). These are structurally analogous but not identical. The fairness/reliability distinction is documented in the translation document and should be consulted when applying this JSON in a comparative context."
+  }
+}
