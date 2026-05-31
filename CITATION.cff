@@ -19,7 +19,7 @@ date-released: "2026-05-31"
 license: Apache-2.0
 repository-code: "https://github.com/mj3b/cdfi-framework"
 url: "https://github.com/mj3b/cdfi-framework"
-doi: "ZENODO_DOI_PLACEHOLDER"
+doi: "10.5281/zenodo.20475185"
 keywords:
   - AI evaluation
   - doctrinal fidelity
