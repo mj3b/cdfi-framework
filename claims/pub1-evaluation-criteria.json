@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/01-evaluation-criteria.md",
+  "source_publication": {
+    "title": "Challenges in Evaluating AI Systems",
+    "authors": ["Deep Ganguli", "Nicholas Schiefer", "Marina Favaro", "Jack Clark"],
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/research/evaluating-ai-systems",
+    "published": "2023-10-04",
+    "type": "research_blog"
+  },
+  "cdfi_mechanism_produced": {
+    "name": "Four-column authority-sensitive weighting matrix",
+    "artifact_files": [
+      "configs/authority_matrix.json",
+      "docs/specifications/authority-levels.md"
+    ],
+    "implementation_entry_point": "engine/cdfi_calculator.py",
+    "saicred_guidelines_sections": ["3.1", "3.3", "3.4", "3.6", "3.7", "3.8"]
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Evaluation criteria must measure what the domain actually requires, not what generic benchmarks measure by default",
+      "verbatim_extracts": [
+        {
+          "text": "All evaluations are subject to the failure mode where you overinterpret the quantitative score and delude yourself into thinking that you have made progress when you haven't.",
+          "location": "Section: Challenges — BBQ"
+        },
+        {
+          "text": "After implementing BBQ, our results showed that some of our models were achieving a bias score of 0, which made us feel optimistic that we had made progress on reducing biased model outputs. When we shared our results internally, one of the main BBQ developers (who works at Anthropic) asked if we had checked a simple control to verify whether our models were answering questions at all. We found that they weren't — our results were technically unbiased, but they were also completely useless.",
+          "location": "Section: Challenges — BBQ"
+        }
+      ],
+      "inference_chain": "The BBQ case study is the canonical example of a metric producing numbers that look correct while measuring the wrong thing. A CDFI benchmark that assigns equal weights to questions of radically different doctrinal authority levels makes the same error: a model that appropriately hedges on legitimate theological opinion and a model that inappropriately hedges on defined dogma score identically under a flat-weight rubric. The four-column authority-sensitive matrix addresses this directly.",
+      "cdfi_element_produced": {
+        "type": "weighting_matrix_architecture",
+        "description": "Authority level classification required before scoring; four columns selected by authority_level tag per question",
+        "config_key": "configs/authority_matrix.json",
+        "formula_reference": "CDFI_raw = SUM(score_i * weight_i) where weight_i from authority_matrix[authority_level]"
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 4,
+      "claim_summary": "Domain-specific evaluation requires domain-specific investment before running at scale; skipping that investment produces preliminary results, not final scores",
+      "verbatim_extracts": [
+        {
+          "text": "Implementing BBQ was more difficult than we anticipated. We could not find a working open-source implementation of BBQ that we could simply use 'off the shelf', as in the case of MMLU. Instead, it took one of our best full-time engineers one uninterrupted week to implement and test the evaluation.",
+          "location": "Section: Challenges — BBQ"
+        },
+        {
+          "text": "We were convinced that BBQ provides a good measurement of social biases only after implementing and comparing BBQ against several similar evaluations. This effort took us months.",
+          "location": "Section: Challenges — BBQ"
+        }
+      ],
+      "inference_chain": "The paper establishes that domain-specific evaluation requires domain-specific investment before running at scale. The CDFI pre-scoring requirement — theological advisor classification of all 400 prompts before final rankings are published — follows this principle directly. Running the pipeline without correct authority level tags produces preliminary rankings not comparable to final CDFI scores. LIMITATIONS.md L1 documents this constraint explicitly.",
+      "cdfi_element_produced": {
+        "type": "publication_prerequisite",
+        "description": "Human theological advisor classification of authority_level per prompt required before final CDFI computed",
+        "saicred_v2_status": "All 400 prompts defaulted to ordinary_magisterium pending classification — rankings labeled preliminary",
+        "limitations_reference": "LIMITATIONS.md L1"
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Generic benchmarks produce misleading results when applied to domains with structural requirements the benchmark was not designed for",
+      "verbatim_extracts": [
+        {
+          "text": "We want readers of this post to have two main takeaways: robust evaluations are extremely difficult to develop and implement, and effective AI governance depends on our ability to meaningfully evaluate AI systems.",
+          "location": "Introduction"
+        },
+        {
+          "text": "Simple formatting changes to the evaluation, such as changing the options from (A) to (1) or changing the parentheses from (A) to [A], or adding an extra space between the option and the answer can lead to a ~5% change in accuracy on the evaluation.",
+          "location": "Section: Challenges — MMLU"
+        },
+        {
+          "text": "Methods that work well for evaluating other providers' models do not necessarily work well for our models, and vice versa. For example, Anthropic's Claude series of models are trained to adhere to a specific text format [...] Because HELM needs to maintain consistency with how it prompts other models, it does not use the Human/Assistant format when evaluating our models. This means that HELM gives a misleading impression of Claude's performance.",
+          "location": "Section: Challenges — HELM"
+        }
+      ],
+      "inference_chain": "The paper documents three separate cases where generic evaluation infrastructure produces misleading results when applied to a model or domain with specific structural requirements: MMLU format sensitivity (~5% accuracy swings from formatting alone), HELM format mismatch producing misleading Claude performance data, and BBQ calibration failure. The common cause in each case is that the evaluation was designed for a different context than the one it is being applied to. The CDFI four-column matrix is the specific architectural response in the Catholic doctrinal domain: evaluation criteria designed for the domain's own authority structure, not imported from a generic benchmark and applied uniformly.",
+      "cdfi_element_produced": {
+        "type": "weighting_matrix_architecture",
+        "description": "Four authority columns (defined_dogma, ordinary_magisterium, theological_consensus, legitimate_opinion) replace the single-column flat-weight approach of generic benchmarks",
+        "config_key": "configs/authority_matrix.json",
+        "column_values": {
+          "defined_dogma": {
+            "doctrinal_precision": 0.30,
+            "moral_fidelity": 0.25,
+            "confidence_calibration": 0.20,
+            "stability": 0.10,
+            "source_citation": 0.08,
+            "completeness": 0.05,
+            "pastoral_appropriateness": 0.02
+          },
+          "legitimate_opinion": {
+            "doctrinal_precision": 0.15,
+            "moral_fidelity": 0.10,
+            "confidence_calibration": 0.10,
+            "stability": 0.19,
+            "source_citation": 0.17,
+            "completeness": 0.10,
+            "pastoral_appropriateness": 0.05
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 6,
+      "claim_summary": "A robust and repeatable evaluation process is required before scores can support comparative claims across models",
+      "verbatim_extracts": [
+        {
+          "text": "Human evaluations can vary significantly depending on the characteristics of the human evaluators. Key factors that may influence someone's assessment include their level of creativity, motivation, and ability to identify potential flaws or issues with the system being tested.",
+          "location": "Section: Challenges — A/B tests with crowdworkers"
+        },
+        {
+          "text": "Red teaming AI systems is presently more art than science; red teamers attempt to elicit concerning behaviors by probing models, but this process is not yet standardized. A robust and repeatable process is critical to ensure that red teaming accurately reflects model capabilities and establishes a shared baseline on which different models can be meaningfully compared.",
+          "location": "Section: Challenges — Red teaming for national security"
+        }
+      ],
+      "inference_chain": "The paper identifies 'a robust and repeatable process' as the specific requirement for evaluations that can support comparative claims across models. The CDFI kappa threshold operationalizes this requirement for the automated judge: a score produced by a judge that cannot pass the consistency test is not part of a robust and repeatable process. It is part of the same problem the paper documents in crowdworkers and red teamers.",
+      "cdfi_element_produced": {
+        "type": "publication_gate",
+        "description": "Cohen's kappa >= 0.60 on all Critical metrics required before any CDFI score enters publication",
+        "implementation_reference": "test_judge_reliability.py :: KAPPA_BLOCKER",
+        "saicred_v2_results": {
+          "doctrinal_precision": {"kappa": 0.644, "status": "PASS"},
+          "moral_fidelity": {"kappa": 0.636, "status": "PASS"},
+          "confidence_calibration": {"kappa": 0.831, "status": "PASS", "note": "after rubric revision"},
+          "source_citation": {"kappa": 0.859, "status": "PASS"},
+          "completeness": {"kappa": 0.802, "status": "PASS"},
+          "pastoral_appropriateness": {"kappa": 0.352, "status": "NON_BLOCKING", "note": "weight 0.02-0.05; below threshold but not a publication blocker"}
+        },
+        "gate_cleared": "2026-05-07"
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "N/A — all claims are Direct",
+    "original_constructs": "None in this translation",
+    "notes": "This is the most straightforwardly applicable of the seven source papers. All inference chains from general evaluation principle to specific Catholic authority-level architecture are Derived steps, but all derive from Direct claims."
+  }
+}
