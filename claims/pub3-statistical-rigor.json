@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/04-statistical-rigor.md",
+  "source_publication": {
+    "title": "A Statistical Approach to Model Evaluations",
+    "authors": ["Anthropic"],
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/research/statistical-approach-to-model-evals",
+    "arxiv": "https://arxiv.org/abs/2411.00640",
+    "published": "2024-11",
+    "type": "research_paper"
+  },
+  "translation_note": "This is the most directly applicable of the seven translations. The paper's five recommendations map almost 1:1 onto CDFI statistical requirements. Inference chains are correspondingly short.",
+  "cdfi_mechanism_produced": {
+    "name": "95% confidence intervals; clustered standard errors; deployment tier thresholds; temporal versioning protocol",
+    "artifact_files": [
+      "docs/specifications/deployment-tiers.md",
+      "docs/governance/temporal-versioning.md"
+    ],
+    "implementation_entry_point": "scoring_service.py",
+    "saicred_guidelines_sections": ["3.4", "3.5", "3.8"]
+  },
+  "saicred_v2_statistical_results": {
+    "n_prompts_per_model": 400,
+    "clustering_variable": "topic_domain",
+    "n_clusters": 7,
+    "confidence_level": 0.95,
+    "significance_test": "Pairwise Welch t-test with clustered standard errors",
+    "pairwise_results": [
+      {"comparison": "o3 vs. DeepSeek V4",              "diff": 1.6,   "p_value": 0.201, "significant_at_95pct": false},
+      {"comparison": "DeepSeek V4 vs. Gemini 3.1 Pro",  "diff": 0.9,   "p_value": 0.533, "significant_at_95pct": false},
+      {"comparison": "Gemini 3.1 Pro vs. GPT-5.4",      "diff": 0.4,   "p_value": 0.747, "significant_at_95pct": false},
+      {"comparison": "GPT-5.4 vs. Grok 4",              "diff": 0.004, "p_value": 0.998, "significant_at_95pct": false},
+      {"comparison": "Grok 4 vs. Claude Sonnet 4.6",    "diff": 4.1,   "p_value": 0.008, "significant_at_95pct": true}
+    ],
+    "publication_implication": "o3 is the only model whose formation-tier clearance is defensible as a distinct finding. Positions 2-5 are directionally informative but not reliably separated at this benchmark scale.",
+    "gpt54_rounding_artifact": {
+      "description": "Exactly 149 of GPT-5.4's 400 responses score 84.4 — placing them 0.6 points below the 85.0 formation threshold",
+      "pattern": "Appears across all four prompt framings and five of seven topic domains",
+      "diagnosis": "Formula artifact at a specific combination of metric scores, not a behavioral finding",
+      "disclosure_required": "Formation tier percentage for GPT-5.4 must not be presented without this context"
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Any eval score is an estimate of an underlying theoretical performance — treating it as a fixed truth is not defensible for institutional reliance",
+      "verbatim_extracts": [
+        {
+          "text": "Suppose an AI model outperforms another model on a benchmark of interest — testing its general knowledge, for example, or its ability to solve computer-coding questions. Is the difference in capabilities real, or could one model simply have gotten lucky in the choice of questions on the benchmark? With the amount of public interest in AI model evaluations — informally called 'evals' — this question remains surprisingly understudied among the AI research community.",
+          "location": "Introduction"
+        },
+        {
+          "text": "We argue that the real object of interest should not be the observed average, but rather the theoretical average across all possible questions. So if we imagine that eval questions were drawn from an unseen 'question universe,' we can learn about the average score in that universe — that is, we can measure the underlying skill, independent of the 'luck of the draw' — using statistical theory.",
+          "location": "Recommendation 1: Use the Central Limit Theorem"
+        }
+      ],
+      "inference_chain": "A bishop's conference acting on a point estimate of 82.5 is treating a sample statistic as a population parameter. The CDFI requires 95% confidence intervals on all rankings so that institutional actors see the range of plausible underlying performance, not just the observed sample mean.",
+      "cdfi_element_produced": {
+        "type": "statistical_requirement",
+        "name": "95% confidence intervals on all CDFI rankings",
+        "implementation_reference": "scoring_service.py :: compute_confidence_intervals()",
+        "parameters": {
+          "confidence_level": 0.95,
+          "standard_error_type": "clustered",
+          "clustering_variable": "topic_domain"
+        }
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 4,
+      "claim_summary": "Non-independent questions require clustered standard errors — naive standard errors can underestimate uncertainty by over 3x",
+      "verbatim_extracts": [
+        {
+          "text": "Many evals violate the above assumption of independently selected questions, and instead consist of groups of closely related questions. For these evals, each question's selection from the 'question universe' is no longer independent. Because including several questions about the same passage of text will yield less information than selecting the same number of questions about different passages of text, a naive application of the Central Limit Theorem to the case of non-independent questions will lead us to underestimate the standard error — and potentially mislead analysts into drawing incorrect conclusions from the data.",
+          "location": "Recommendation 2: Cluster standard errors"
+        },
+        {
+          "text": "In practice, we have found that clustered standard errors on popular evals can be over three times as large as naive standard errors.",
+          "location": "Recommendation 2: Cluster standard errors"
+        }
+      ],
+      "inference_chain": "The SAICRED v2 dataset contains four variants of each of 100 base questions. Questions within the same topic domain are non-independent: a model's performance on papal infallibility questions predicts its performance on other ecclesiology questions. Naive standard errors would underestimate uncertainty by the factor the paper documents. SAICRED v2 clusters on topic_domain (G=7) directly implementing this recommendation.",
+      "cdfi_element_produced": {
+        "type": "statistical_requirement",
+        "name": "Clustered standard errors at topic_domain level",
+        "implementation_reference": "scoring_service.py :: compute_clustered_se()",
+        "parameters": {
+          "clustering_variable": "topic_domain",
+          "n_clusters": 7,
+          "cluster_labels": [
+            "Sacramental Theology",
+            "Moral Theology and Sin",
+            "Church Authority and Ecclesiology",
+            "Apologetics and Objection Handling",
+            "Eschatology",
+            "Catholic Social Teaching",
+            "Mariology and Saints"
+          ]
+        }
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 4,
+      "claim_summary": "Frontier models share question-level performance patterns — pairwise paired-difference analysis extracts the strongest comparative signal",
+      "verbatim_extracts": [
+        {
+          "text": "In practice, we find the correlation of question scores on popular evals between frontier models to be substantial — between 0.3 and 0.7 on a scale of −1 to +1. Put another way, frontier models have an overall tendency to get the same questions right and wrong. Paired-difference analysis thus represents a 'free' variance reduction technique that is very well suited for AI model evals. Therefore, in the interest of extracting the clearest signal from the data, our paper recommends reporting pairwise information — mean differences, standard errors, confidence intervals, and correlations — whenever two or more models are being compared.",
+          "location": "Recommendation 4: Analyze paired differences"
+        }
+      ],
+      "inference_chain": "Frontier models share question-level performance patterns. Paired-difference analysis exploits this correlation to reduce apparent variance without collecting more data. The SAICRED v2 pairwise Welch t-tests implement this recommendation. The finding that only the Grok 4 vs. Claude gap reaches significance (p=0.008) while the o3 vs. Claude gap does not (p=0.142) directly follows from applying this analytical framework.",
+      "cdfi_element_produced": {
+        "type": "statistical_requirement",
+        "name": "Pairwise Welch t-tests between all model pairs",
+        "implementation_reference": "scoring_service.py :: compute_pairwise_significance()",
+        "parameters": {
+          "test": "Welch t-test",
+          "rationale_for_welch": "Does not assume equal variances — appropriate for bimodal score distributions observed in v2",
+          "significance_threshold": 0.05,
+          "reporting_standard": "Positions 2-5 disclosed as directionally informative only unless p < 0.05"
+        }
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 5,
+      "claim_summary": "Readiness for deployment is context-dependent — a model adequate for low-stakes retrieval may be inadequate for high-stakes formation; scores expire when underlying models change",
+      "verbatim_extracts": [
+        {
+          "text": "If an eval doesn't have very many questions, confidence intervals associated with any statistical tests will tend to be wide. This means that models will need to have a large underlying difference in capabilities in order to register a statistically significant result — and that small differences will likely go undetected.",
+          "location": "Recommendation 5: Use power analysis"
+        },
+        {
+          "text": "Statistics is the science of measuring uncertainty. The scientific goal of an eval is to measure a model's underlying skill — the average score it would achieve across all possible questions.",
+          "location": "Conclusion"
+        }
+      ],
+      "inference_chain": "The paper establishes that eval scores measure underlying skill, and that the usefulness of that measurement depends on whether it is being applied to the right purpose. A model adequate for general knowledge retrieval is not necessarily adequate for high-stakes formation. The CDFI deployment tiers operationalize this principle with three distinct cutoffs reflecting three distinct institutional risk profiles. Temporal versioning follows from the same logic: an estimate of underlying skill expires when the underlying model changes.",
+      "cdfi_element_produced": {
+        "type": "deployment_tiers_and_versioning",
+        "tiers": [
+          {
+            "name": "Formation and Catechesis",
+            "threshold": "CDFI >= 85",
+            "rationale": "Formation contexts assume users act on content; model must be reliable across all four framings"
+          },
+          {
+            "name": "General Information",
+            "threshold": "CDFI 70-84",
+            "rationale": "Information use tolerates occasional failures; prompt wrapper can mitigate framing gaps"
+          },
+          {
+            "name": "R&D Only",
+            "threshold": "CDFI 50-69",
+            "rationale": "Systematic reliability problems; not suitable for any Catholic public-facing deployment"
+          },
+          {
+            "name": "Not Recommended",
+            "threshold": "CDFI < 50 or any gate failure",
+            "rationale": "Gate failure triggers regardless of mean CDFI"
+          }
+        ],
+        "temporal_versioning": {
+          "description": "Each score record includes the model version string from the API response",
+          "expiry_condition": "Major model version update triggers re-evaluation",
+          "implementation_reference": "docs/governance/temporal-versioning.md"
+        }
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "N/A — all claims are Direct; inference chains are short due to small translation distance",
+    "original_constructs": "None — all four CDFI statistical requirements map directly to named paper recommendations",
+    "notes": "The specific threshold values (85/70/50) and the seven topic domain cluster labels are CDFI design decisions. The principle that readiness thresholds should be context-differentiated is Direct from the paper. The specific values were proposed by the Evals Expert, reviewed against the SAICRED white paper theological criteria, and accepted into the Implementation Guidelines."
+  }
+}
