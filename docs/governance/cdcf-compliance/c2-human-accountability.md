@@ -44,7 +44,7 @@ Owns:         Scoring methodology, weighting matrix, gate logic,
 
 Does NOT own: Any deployment decision for any specific AI tool
 
-Accountability: Project Lead (Dr. Filip Ponulak); theological
+Accountability: Project Lead (Filip Ponulak, PhD); theological
                advisors; peer reviewers; any institution that
                cites the published methodology in a deployment
                decision
@@ -53,14 +53,14 @@ Override mechanism: CHANGELOG.md records all methodology
                changes with versioning; users may challenge
                any change via GitHub issue or pull request
 
-Decision record: DOI 10.5281/zenodo.20464408 + CHANGELOG.md
+Decision record: DOI 10.5281/zenodo.20467497 + CHANGELOG.md
                + LIMITATIONS.md (six disclosed constraints)
 
 ──────────────────────────────────────────────────────────────────
 LEVEL 2 — Benchmark Validation Authority
 ──────────────────────────────────────────────────────────────────
-Role:         Project Lead (theological and publication authority)
-Named person: Dr. Filip Ponulak
+Role:          Project Lead (theological and publication authority)
+Named person:  Filip Ponulak, PhD
 Institutional: Catholic Digital Commons Foundation
 
 Owns:         Authority level classification of all prompts;
