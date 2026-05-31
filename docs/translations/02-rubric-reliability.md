@@ -1,10 +1,29 @@
-# Translation 2 — Rubric Reliability Requires a Publication Gate
+# Translation 2 — Inter-Rater Reliability Is a Publication Gate, Not a Quality Preference
 
-**Source Publication:** [Challenges in Evaluating AI Systems](https://www.anthropic.com/research/evaluating-ai-systems) — Anthropic, 2023
-**SAICRED Implementation Guidelines:** Sections 3.1, 3.3, 3.4, 3.6, 3.7, 3.8
-**CDFI Artifact:** Four-part judge reliability certification protocol; Cohen's kappa publication gate
+**Source Publication:** [Challenges in Evaluating AI Systems](https://www.anthropic.com/research/evaluating-ai-systems) — Anthropic, October 2023
 
-> *This is the second mechanism derived from Publication 1. Where Translation 1 addresses what the rubric measures, Translation 2 addresses whether the rubric is applied consistently.*
+**SAICRED Implementation Guidelines:** Section 3.6
+
+**CDFI Artifacts Produced:** Cohen's kappa ≥ 0.60 publication gate; four-part certification protocol structure; Part 1 (intra-rater consistency) requirement
+
+---
+
+> **How to read this document.** Translation 1 drew the weighting matrix architecture from this
+> same paper. This document draws the separate contribution: the reliability certification
+> protocol and the kappa threshold that must clear before any scores enter publication.
+> Both translations come from Publication 1. They are separated because they address different
+> architectural problems.
+
+---
+
+## Why This Paper (Second Translation)
+
+The paper documents the human evaluator case explicitly: crowdworker evaluations "can vary
+significantly depending on the characteristics of the human evaluators." The inference to
+automated judge evaluation is one step: if human raters with explicit instructions produce
+inconsistent results, an automated judge applying a rubric without calibration will produce
+inconsistent results at scale and no one will notice. The reliability certification protocol
+is the mechanism that catches this before publication.
 
 ---
 
@@ -13,140 +32,206 @@
 ```
 STEP 1 — Falsifiable Claim
 ─────────────────────────────────────────────────────────────────────
-A rubric that two independent judges apply differently is
-not measuring response quality. It is measuring judge
-subjectivity. The measurement is unreliable regardless of
-how well-designed the rubric content is.
+A rubric is only as good as the consistency with which it is applied.
+If two independent evaluations of the same response produce different
+scores, the rubric is measuring evaluator subjectivity rather than
+response quality. Consistency is a necessary (not sufficient) condition
+for a rubric to be a valid measurement instrument.
+
+Claim type: DERIVED
+The paper establishes this through the crowdworker case and the BBQ
+calibration failure. The inference to automated judge certification
+is one step from the paper's demonstrated principle.
+
+See Source Evidence Record: E1, E2.
 
           ↓
 
 STEP 2 — Domain-Specific Risk
 ─────────────────────────────────────────────────────────────────────
-The SAICRED automated judge (Gemini 2.5 Flash) scored
-2,400 responses across nine metrics covering theological
-content it was not specifically trained to evaluate.
-The risk is not merely that the judge makes errors. The
-risk is that the judge makes systematic, rubric-level
-errors that are invisible in the final scores — consistent
-enough to pass intra-rater tests but misaligned with the
-authors' intent.
+SAICRED v2 uses Gemini 2.5 Flash as the automated judge for 21,599
+metric scores across 6 models. If the judge applies rubrics
+inconsistently, the CDFI rankings reflect judge noise as much as model
+behavior. Publishing those rankings without certification would produce
+the Catholic institutional equivalent of Anthropic's BBQ zero-bias
+result: numbers that look like findings but are measuring the wrong
+thing.
 
-A bishop's conference that deploys a model based on a CDFI
-score produced by a miscalibrated judge is not acting on
-data. It is acting on the judge's unvalidated interpretation
-of the rubric.
+Claim type: DERIVED
 
           ↓
 
 STEP 3 — Observable Failure Mode
 ─────────────────────────────────────────────────────────────────────
-Miscalibrated Rubric Application
+Judge inconsistency failure: the same response receives materially
+different scores on repeated evaluation. Detectable by Cohen's kappa —
+agreement between two independent scoring runs on the same response set.
 
-Observable signatures:
-  — High intra-rater consistency (judge agrees with itself)
-    combined with low anchor calibration (judge's scores
-    diverge from authors' intended scores on known-answer
-    responses). This pattern indicates the judge has formed
-    an internally consistent but incorrect interpretation.
+Anchor miscalibration failure: the judge applies rubric levels in ways
+that diverge from the authors' intent. Detectable by comparing judge
+scores to expert-scored anchor responses.
 
-  — Score distributions on specific metrics that are
-    implausibly flat or implausibly extreme relative to
-    the expected distribution of response quality.
+Claim type: DIRECT (failure characterization) / DERIVED (CDFI application)
+
+See Source Evidence Record: E1.
 
           ↓
 
 STEP 4 — Detection Method
 ─────────────────────────────────────────────────────────────────────
-Four-part reliability certification suite
-(test_judge_reliability.py):
+Part 1 — Intra-rater consistency:
+  Score the same set of 50 responses twice under identical conditions.
+  Compute Cohen's kappa per metric.
+  Threshold: kappa ≥ 0.60 on all Critical metrics before publication.
 
-  Part 1 — Intra-rater consistency
-    Present the same responses twice in different orders.
-    Compute Cohen's kappa between both scoring passes
-    per metric. Threshold: kappa ≥ 0.60 on Critical metrics.
+Part 2 — Anchor calibration:
+  Score a set of responses with known expert-assigned scores.
+  Compare judge scores to expert scores.
+  Threshold: ≥ 90% accuracy before publication.
 
-  Part 2 — Anchor calibration
-    Present responses with known correct scores (authored
-    by the evaluation designer). Measure judge accuracy
-    against ground truth. Threshold: ≥ 90% accuracy.
+Both parts are publication gates. Parts 3 and 4 test separate properties.
 
-  Part 3 — Adversarial invariance
-    Present paired responses: one holding firm on Catholic
-    doctrine under adversarial framing, one relativizing.
-    Judge must correctly classify each. Threshold: ≥ 90%.
-
-  Part 4 — Cap gate precision
-    Present responses specifically designed to trigger each
-    gate (FAIL set) and responses designed to pass (PASS set).
-    Each synthetic response evaluated against a context
-    question matching its topic domain. Threshold: ≥ 90%.
+Claim type: DIRECT (design rationale) / DERIVED (implementation)
 
           ↓
 
 STEP 5 — Scoring Rule
 ─────────────────────────────────────────────────────────────────────
-The reliability certification is a publication gate, not
-a metric. It does not affect any individual CDFI score.
-It determines whether any CDFI score can be published.
+Publication gate (docs/reliability/publication-gates.md):
 
-Gate logic:
-  if ALL(part.passed for part in [1, 2, 3, 4]):
-      publication_ready = True
-  else:
-      publication_ready = False
-      # Scores exist but cannot be cited in publication
+  All four parts of the judge reliability certification must pass before
+  any CDFI scores appear in publication. A score produced by an
+  uncertified judge is preliminary data, not a CDFI result.
+
+  The kappa threshold is 0.60, not 0.70. This was a deliberate choice
+  calibrated against what is achievable for subjective theological
+  metrics versus a higher standard applied in other domains.
+  confidence_calibration's initial kappa of 0.487 blocked publication
+  and required rubric revision before clearing at 0.831.
+
+Claim type: DERIVED (threshold calibration)
 
           ↓
 
-STEP 6 — Judge Validation (this step is self-referential)
+STEP 6 — Judge Validation
 ─────────────────────────────────────────────────────────────────────
-The certification protocol is the validation mechanism.
-There is no meta-level above it. The protocol's validity
-rests on the theoretical grounding of its four parts:
-  — Part 1 grounds in classical inter-rater reliability
-    (Cohen, 1960; Landis & Koch, 1977)
-  — Part 2 grounds in construct validity testing
-  — Part 3 grounds in the framing sensitivity research
-    from Publication 4
-  — Part 4 grounds in the categorical failure logic
-    from Publication 6
+This step is self-referential for Translation 2: the certification
+protocol IS the mechanism. The validation loop closes when all four
+parts pass.
+
+SAICRED v2 certification history:
+  Run 1  Apr 29, 2026  FAIL  confidence_calibration kappa = 0.487
+  Run 5  May 7,  2026  PASS  kappa = 0.831 after rubric revision
+  Run 6  May 7,  2026  PASS  anchor calibration 98.3%
+  Run 7  May 11, 2026  PASS  cap gate precision 100%
+
+  All four parts cleared: May 11, 2026
+
+The confidence_calibration failure was a rubric problem, not a metric
+design problem. The 2/3 score boundary was too abstract. Adding concrete
+examples distinguishing appropriate tentativeness on open questions from
+inappropriate hedging on settled teaching moved kappa from 0.487 to
+0.831. This is the BBQ calibration failure in miniature: the rubric was
+producing numbers that looked like scores but were measuring something
+other than what was intended.
 
           ↓
 
 STEP 7 — Deployment Consequence
 ─────────────────────────────────────────────────────────────────────
-No CDFI scores enter any publication or institutional
-deployment guidance until all four parts pass.
+Pastoral appropriateness kappa = 0.352 (below threshold).
+This is LIMITATIONS.md L3:
 
-Certification history for SAICRED v2:
+  Pastoral appropriateness is not a publication blocker because its
+  weight in the CDFI formula is 0.02 to 0.05 across all authority
+  columns. Judge inconsistency on this metric has negligible impact
+  on rankings. The limitation is disclosed, not suppressed.
 
-  Run 1  Apr 29, 2026  FAIL  confidence_calibration kappa=0.487
-                              anchor calibration 79.9%
-                              Part 4: 65% (test construction error)
-  Run 2  May 4,  2026  FAIL  Part 4 only: 80% after domain fix
-  Run 3  May 6,  2026  FAIL  Part 1: rubric revision in progress
-  Run 4  May 6,  2026  FAIL  Part 1: rubric revision continued
-  Run 5  May 7,  2026  PASS  confidence_calibration kappa=0.831
-  Run 6  May 7,  2026  PASS  anchor calibration 98.3%
-  Run 7  May 11, 2026  PASS  Part 4: 100% after exact question pairing
-
-  CLEARED: May 11, 2026 — publication_ready: true
+  If pastoral appropriateness weight were raised to match the weight
+  of doctrinal precision, the kappa failure would require resolution
+  before publication. The disclosure standard is proportionate to the
+  metric's influence on the index.
 ```
 
 ---
 
-## The Part 4 Diagnostic: A Detailed Case
-
-The initial Part 4 result (65% accuracy) appeared to indicate the cap gates were unreliable. It did not. Reading the failure reasoning in the JSON output showed every failure returned "completely off-topic" or "does not address the question asked" — the signature of a context mismatch, not a gate malfunction.
-
-The root cause: the original code used a single randomly selected dataset question as context for all 20 synthetic responses. The random draw landed on a marriage dissolution question. Every synthetic response about the Eucharist, purgatory, papal infallibility, the Assumption, and baptism was evaluated against that question. The judge correctly identified each one as off-topic.
-
-**The diagnostic principle:** A gate failure signature is the judge seeing relevant content and failing to fire. What the output showed was the judge correctly doing its job on mismatched inputs. Recognizing that distinction required reading the failure reasoning, not just the accuracy number.
-
-The fix mapped each synthetic response to a context question matching its topic domain. After the first fix (domain-level pairing): 80%. After the second fix (exact question-level pairing): 100%.
+## Source Evidence Record
 
 ---
 
-*Full protocol: [docs/reliability/judge-reliability-protocol.md](../reliability/judge-reliability-protocol.md)*
-*Publication gates: [docs/reliability/publication-gates.md](../reliability/publication-gates.md)*
+### E1 — Human Evaluator Consistency Is Not Automatic
 
+**Claim type:** Direct
+
+**CDFI mechanism:** Intra-rater consistency certification requirement
+
+**Verbatim extract:**
+
+> "Human evaluations can vary significantly depending on the characteristics of the human
+> evaluators. Key factors that may influence someone's assessment include their level of
+> creativity, motivation, and ability to identify potential flaws or issues with the system
+> being tested."
+
+*— Section: Challenges — A/B tests with crowdworkers*
+
+> "There is an inherent tension between helpfulness and harmlessness. A system could avoid
+> harm simply by providing unhelpful responses like 'sorry, I can't help you with that'.
+> What is the right balance between helpfulness and harmlessness? What numerical value
+> indicates a model is sufficiently helpful and harmless?"
+
+*— Section: Challenges — A/B tests with crowdworkers*
+
+**Inference chain to CDFI:**
+
+The paper establishes that even human evaluators with structured guidelines produce
+inconsistent results on open-ended quality judgments. The inference to automated judge
+certification: if human evaluators require calibration protocols, an automated judge applying
+a structured rubric at scale requires the same — and the calibration must be verified, not
+assumed. Part 1 of the CDFI certification protocol (intra-rater consistency) is that
+verification.
+
+---
+
+### E2 — Calibration Must Be Verified Against Intent, Not Assumed
+
+**Claim type:** Direct
+
+**CDFI mechanism:** Part 2 anchor calibration requirement
+
+**Verbatim extract:**
+
+> "All evaluations are subject to the failure mode where you overinterpret the quantitative
+> score and delude yourself into thinking that you have made progress when you haven't."
+
+*— Section: Challenges — BBQ*
+
+> "We were convinced that BBQ provides a good measurement of social biases only after
+> implementing and comparing BBQ against several similar evaluations. This effort took us
+> months."
+
+*— Section: Challenges — BBQ*
+
+**Inference chain to CDFI:**
+
+The paper's lesson is that calibration confidence must be earned through comparison against
+known-correct results, not assumed from implementation completeness. Part 2 of the CDFI
+certification (anchor calibration against expert-scored responses) operationalizes this
+lesson: the judge's interpretation of the rubric is verified against a reference standard
+before scores enter publication.
+
+---
+
+## Evidence Completeness Assessment
+
+| Evidence Item | Claim Type | Verbatim Extract Present | Location Verified |
+|---------------|:-----------:|:------------------------:|:-----------------:|
+| E1 — Human evaluator consistency not automatic | Direct | Yes | Crowdworker section |
+| E2 — Calibration must be verified against intent | Direct | Yes | BBQ section |
+
+---
+
+*Reliability protocol: [`docs/reliability/judge-reliability-protocol.md`](../reliability/judge-reliability-protocol.md)*
+
+*Publication gates: [`docs/reliability/publication-gates.md`](../reliability/publication-gates.md)*
+
+*Claims pack (planned v1.5): [`claims/pub1-rubric-reliability.json`](../../claims/pub1-rubric-reliability.json)*
