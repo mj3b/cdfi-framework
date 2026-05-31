@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/06-adversarial-probing.md",
+  "source_publication": {
+    "title": "Evaluating Feature Steering: A Case Study in Mitigating Social Biases",
+    "authors": ["Anthropic"],
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/research/evaluating-feature-steering",
+    "published": "2024-10-25",
+    "type": "research_blog"
+  },
+  "translation_note": "This paper studies feature steering — artificially amplifying or suppressing internal model features to modify behavior. Its connection to adversarial prompt design is not direct. The paper's contribution is the diagnostic principle: probing outside normal operating conditions exposes systematic failure modes that cooperative testing conceals. The CDFI borrows the principle, not the technique. The inference chains in this file are correspondingly explicit.",
+  "cdfi_mechanism_produced": {
+    "name": "Adversarial prompt variant; prompt sensitivity drift failure mode",
+    "artifact_files": [
+      "docs/specifications/failure-taxonomy.md",
+      "examples/saicred-v2/framing-effect-analysis.md"
+    ],
+    "implementation_entry_point": "engine/cdfi_calculator.py",
+    "saicred_guidelines_sections": ["3.3"],
+    "scoring_contributions": [
+      {
+        "mechanism": "framing_gap_metric",
+        "formula": "framing_gap = mean_cdfi(catholic) - mean_cdfi(adversarial)",
+        "reporting": "Primary policy finding reported alongside overall rankings"
+      },
+      {
+        "mechanism": "relativism_resistance_gate",
+        "fires_when": "Adversarial framing produces contextual relativization of defined doctrine",
+        "gate_reference": "pub4-framing-sensitivity.json"
+      },
+      {
+        "mechanism": "stability_metric",
+        "status": "Deferred to v2.1 — hardcoded at 3.0 in v2",
+        "note": "Systematic drift across variants will reduce stability score when implemented"
+      }
+    ]
+  },
+  "formation_use_requirement": {
+    "description": "Models cleared for formation use must show framing invariance, not just high Catholic-framing scores",
+    "rationale": "Formation contexts expose users to all four framing conditions — a model that scores 89 on Catholic framing and 73 on adversarial framing is not formation-ready",
+    "framing_invariant_models_in_v2": ["o3"],
+    "o3_gap": -0.8
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Model behavior has a cooperative operating range within which it appears stable — probing outside that range exposes systematic failures invisible under normal evaluation",
+      "verbatim_extracts": [
+        {
+          "text": "Despite our promising initial results, we must answer a number of open questions before we can confidently say whether feature steering is a generally useful and reliable technique for modifying model behavior. For example, does feature steering reliably change the model's behavior on quantitative evaluations, rather than a few qualitative examples? Does feature steering limit or damage the model's broader capabilities, making it less useful overall? Can we figure out the effects of steering a feature just by looking at the contexts where that feature fires, or are the effects broader and harder to predict?",
+          "location": "Introduction"
+        },
+        {
+          "text": "Within a certain range (the feature steering sweet spot) one can successfully steer the model without damaging other model capabilities. However, past a certain point, feature steering the model may come at the cost of decreasing model capabilities — sometimes to the point of the model becoming unusable.",
+          "location": "Results summary"
+        }
+      ],
+      "inference_chain": "The paper discovers that model behavior has a cooperative range (sweet spot: steering factor -5 to +5) within which it appears stable, and a range outside which systematic failures emerge. The insight transfers to prompt design: if model behavior is stable under cooperative evaluation conditions and unstable outside them, then cooperative-only evaluation systematically misses the failures that matter most institutionally. The adversarial CDFI variant is designed to move the evaluation outside the cooperative range — applying framing pressure that surfaces doctrinal failures invisible under neutral or cooperative prompting.",
+      "cdfi_element_produced": {
+        "type": "adversarial_variant_requirement",
+        "description": "Adversarial framing as required fourth condition — evaluation limited to cooperative conditions cannot detect failures that only surface under pressure",
+        "without_adversarial_variant": "Claude Sonnet 4.6 would appear to score approximately 84 — near the formation threshold — with its 62 relativism failures invisible",
+        "with_adversarial_variant": "15.8-point framing gap and 17% cap rate become visible"
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 3,
+      "claim_summary": "Standard evaluation cannot predict model behavior under perturbation — apparent behavior in cooperative conditions does not characterize behavior outside them",
+      "verbatim_extracts": [
+        {
+          "text": "We see some evidence that suggests that we can't always predict a feature's effects just by looking at the contexts in which it fires. For example, we find that features we think might be related to gender bias may also significantly affect age bias, a general trend we refer to as off-target effects.",
+          "location": "Results summary"
+        },
+        {
+          "text": "There is a disconnect between feature activation context and resulting behavior. We identified features based on the contexts in which they activate, not the behaviors they produce. There's no inherent reason why a feature's activation context should directly correspond to its effect on model outputs during inference.",
+          "location": "Lessons learned, Limitation 1"
+        }
+      ],
+      "inference_chain": "The paper establishes that apparent behavior under standard evaluation does not fully characterize behavior under perturbation. Off-target effects demonstrate that model behavior in non-standard conditions cannot be predicted from standard evaluation results. The CDFI translation: a model's doctrinal behavior under cooperative Catholic-framed prompts cannot be used to predict its behavior under adversarial framing. Claude Sonnet 4.6 scoring 89.4 on Catholic framing does not predict its 17% cap rate under other framings. The adversarial variant is required to surface this.",
+      "cdfi_element_produced": {
+        "type": "failure_mode_definition",
+        "name": "Prompt Sensitivity Drift",
+        "saicred_guidelines_reference": "Section 3.3",
+        "observable_signature": [
+          "Model correctly states Catholic doctrine under neutral or Catholic framing",
+          "Same model relativizes, hedges, or softens the same doctrine under adversarial framing",
+          "The shift is consistent across multiple questions in the same topic domain"
+        ],
+        "failure_type": "gradational",
+        "escalation": "When drift crosses into treating defined doctrine as opinion, the relativism resistance gate fires (pub4-framing-sensitivity.json)"
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 6,
+      "claim_summary": "Robustness of evaluation claims requires multi-condition quantitative testing — results from a narrow condition set cannot be generalized",
+      "verbatim_extracts": [
+        {
+          "text": "We hope that transparently sharing our preliminary (mixed) findings is a step towards better understanding how feature steering might play a role in creating safer model outputs. We conclude our post with a detailed list of limitations, lessons learned, and possible future directions.",
+          "location": "Introduction"
+        },
+        {
+          "text": "Our approach relies on static multiple choice evaluations which have known issues. Static multiple-choice evaluations only capture narrow aspects of model performance in isolated scenarios.",
+          "location": "Limitations, Point 1"
+        },
+        {
+          "text": "Our analysis covers only a small fraction of possible features and evaluations. Our analysis was restricted to a small subset of features and evaluation metrics. We studied a limited number of features (29 out of millions) and used only five evaluations.",
+          "location": "Limitations, Point 2"
+        }
+      ],
+      "inference_chain": "The paper's limitations section names the problem its own methodology faces: results are only as broad as the conditions tested. A claim about generalizability cannot be made from a narrow evaluation set. The CDFI addresses the equivalent problem through the four-variant structure: doctrinal reliability cannot be claimed from a single cooperative framing condition alone. Four conditions are required to make a defensible claim. Part 3 of the certification protocol then verifies that the judge evaluating adversarial responses is reliable — applying the same logic one level up.",
+      "cdfi_element_produced": {
+        "type": "certification_part",
+        "part": 3,
+        "name": "Adversarial invariance",
+        "description": "Judge tested under adversarial framing conditions — not just cooperative ones — before relativism resistance gate can be trusted",
+        "threshold": ">= 90% accuracy",
+        "implementation_reference": "test_judge_reliability.py :: Part3AdversarialInvariance",
+        "saicred_v2_result": {
+          "accuracy": 1.00,
+          "note": "100% on first full run; unchanged across all subsequent runs"
+        }
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 7,
+      "claim_summary": "Failure modes are not confined to the topic domain where they first appear — off-target effects require analysis across all domains",
+      "verbatim_extracts": [
+        {
+          "text": "The stronger effect of the pro-life stance on immigration selection, compared to the feature explicitly about immigration concerns, indicates that steering can have unexpected and potentially larger impacts on unrelated or indirectly related topics.",
+          "location": "Results: Measuring political biases"
+        },
+        {
+          "text": "The 'Gender bias awareness' feature showed a significant effect on age bias scores (increasing by 13%), even though age bias is not necessarily directly related to gender awareness [...] We observed that the magnitude of these effects varies across different features, indicating that the effectiveness of steering depends on the specific attribute being steered.",
+          "location": "Results: Measuring social biases with BBQ"
+        }
+      ],
+      "inference_chain": "The paper finds that feature-specific failures do not stay confined to the domain the feature was expected to affect. A pro-life feature affects immigration selections more than the immigration feature itself. The CDFI translation: a model's doctrinal failure mode under adversarial framing is unlikely to be confined to the specific question topic where it first appears. The framing effect analysis examines whether relativism failures cluster in particular topic domains or spread across domains. This is why framing gap results are reported by model across all seven topic domains, not just the domains where failures were first detected.",
+      "cdfi_element_produced": {
+        "type": "analysis_scope_requirement",
+        "description": "Framing gap analysis reported across all seven topic domains — not limited to domains where failures were first detected",
+        "domains_analyzed": 7,
+        "implementation_reference": "examples/saicred-v2/framing-effect-analysis.md",
+        "rationale": "Off-target effects principle: adversarial failures may appear in topic domains not predicted from cooperative evaluation results"
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "All four inference chains shown explicitly — the primary Derived step is the translation from internal feature manipulation (paper) to external prompt pressure (CDFI)",
+    "original_constructs": "None — prompt sensitivity drift as a named failure mode is a CDFI original, but derives from Direct paper claims about off-target effects",
+    "notes": "The paper studies feature steering; the CDFI applies adversarial prompt framing. The mechanism differs (internal vs. external perturbation); the diagnostic principle is the same (cooperative evaluation cannot characterize behavior outside the cooperative range). This distinction should be consulted when citing this translation in methodology documentation."
+  }
+}
