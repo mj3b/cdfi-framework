@@ -6,6 +6,8 @@
 ---
 
 > This matrix documents the complete causal chain from each of the seven source publications to the specific CDFI mechanism it produced. Every weight, gate, and threshold in the formula traces to a row in this table. No architectural decision was made by convention or intuition.
+>
+> **Machine-readable version:** Each row in this matrix has a corresponding JSON evidence pack in [`claims/`](claims/). The JSON files carry verbatim paper extracts, Direct/Derived/Original Construct claim typing, and the `cdfi_element_produced` field linking each claim to its specific formula artifact. See [`claims/README.md`](claims/README.md) for the file index and schema reference.
 
 ---
 
