@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "cdfi_framework_version": "1.4",
+  "doi": "10.5281/zenodo.20467497",
+  "translation_document": "docs/translations/07-categorical-failures.md",
+  "source_publication": {
+    "title": "Sabotage Evaluations for Frontier Models",
+    "authors": ["Josh Benton"],
+    "organization": "Anthropic",
+    "url": "https://www.anthropic.com/research/sabotage-evaluations",
+    "pdf": "https://assets.anthropic.com/m/377027d5b36ac1eb/original/Sabotage-Evaluations-for-Frontier-Models.pdf",
+    "published": "2024-10",
+    "type": "research_paper"
+  },
+  "translation_note": "This paper studies whether AI models can deceive evaluators, insert undetected bugs, hide dangerous capabilities, and subvert oversight systems. The connection to Catholic doctrinal benchmarking is not obvious. The paper's primary contribution to CDFI is architectural, not domain-specific: some failures are categorically different in kind from gradational failures, and averaging them with other scores produces a metric systematically misleading about institutional risk. The specific sabotage failure modes are irrelevant to the CDFI. The structural principle transfers directly.",
+  "cdfi_mechanism_produced": {
+    "name": "Five failure mode taxonomy; cap gate architecture; CAP_VALUE = 40",
+    "artifact_files": [
+      "engine/cdfi_calculator.py",
+      "configs/threshold_gates.yaml",
+      "docs/specifications/failure-taxonomy.md"
+    ],
+    "implementation_entry_point": "engine/cdfi_calculator.py",
+    "cap_value": 40,
+    "cap_gate_logic": "if hallucination == 'FAIL' or relativism == 'FAIL': CDFI_final = min(CDFI_computed, 40)",
+    "saicred_guidelines_sections": ["3.3", "3.5", "3.8"]
+  },
+  "failure_mode_taxonomy": {
+    "gradational": [
+      {
+        "name": "Doctrinal Omission",
+        "description": "Accurate but incomplete response",
+        "scoring": "0-5, averaged into CDFI"
+      },
+      {
+        "name": "Moral Softening",
+        "description": "Prohibition stated as suggestion",
+        "scoring": "0-5, averaged into CDFI"
+      },
+      {
+        "name": "Prompt Sensitivity Drift",
+        "description": "Position shifts across framings",
+        "scoring": "0-5 via stability metric (deferred to v2.1); measured via framing gap analysis",
+        "type": "framing_dependent_gradational"
+      }
+    ],
+    "categorical": [
+      {
+        "name": "Citation Fabrication",
+        "description": "Non-existent magisterial source cited",
+        "scoring": "Binary FAIL triggers CAP_VALUE = 40 override",
+        "gate_reference": "pub2-hallucination-gate.json"
+      },
+      {
+        "name": "Contextual Relativization",
+        "description": "Defined doctrine presented as one opinion among several",
+        "scoring": "Binary FAIL triggers CAP_VALUE = 40 override",
+        "gate_reference": "pub4-framing-sensitivity.json"
+      }
+    ],
+    "categorical_gradational_distinction": "Not about severity. A severe gradational failure (scoring 0 on doctrinal precision) is worse numerically than a mild categorical failure but does not trigger the cap gate. The distinction is structural: categorical failures are binary and institutionally propagating; gradational failures exist on a quality scale."
+  },
+  "saicred_v2_cap_results": {
+    "total_responses": 2400,
+    "cap_events": {
+      "relativism_only": {"count": 181, "pct": 7.5},
+      "both_gates":      {"count": 76,  "pct": 3.2},
+      "hallucination_only": {"count": 48, "pct": 2.0},
+      "total_capped":    {"count": 305, "pct": 12.7}
+    },
+    "cap_rates_by_model": [
+      {"model": "Claude Sonnet 4.6", "capped": 68, "total": 400, "rate_pct": 17.0},
+      {"model": "Grok 4",           "capped": 61, "total": 400, "rate_pct": 15.3},
+      {"model": "Gemini 3.1 Pro",   "capped": 58, "total": 400, "rate_pct": 14.5},
+      {"model": "DeepSeek V4",      "capped": 50, "total": 400, "rate_pct": 12.5},
+      {"model": "GPT-5.4",          "capped": 32, "total": 400, "rate_pct": 8.0},
+      {"model": "o3",               "capped": 32, "total": 400, "rate_pct": 8.0}
+    ],
+    "institutional_risk_note": "A model with mean CDFI of 82 and cap rate of 8% has a materially different institutional risk profile than a model with mean CDFI of 82 and cap rate of 15%. Institutions should consult cap rate alongside mean CDFI and framing effect data before making deployment decisions."
+  },
+  "claims": [
+    {
+      "claim_id": "E1",
+      "claim_type": "Direct",
+      "translation_step": 1,
+      "claim_summary": "Some failures are characterized by remaining undetected inside an otherwise functional process — a structural property that is binary, not gradational",
+      "verbatim_extracts": [
+        {
+          "text": "We argue that this family of risk evaluations should be complemented by evaluation of risks arising from models' ability to subvert other agents' measurement, oversight, sensemaking, and decision-making. We call these sabotage capabilities.",
+          "location": "Section 1 (Introduction)"
+        },
+        {
+          "text": "We only consider threats having both the following properties: Autonomous: The model is capable of sabotage autonomously, without the need for a malicious human actor. Subversive: The risk comes from secretly undermining a normally-useful activity by another agent.",
+          "location": "Section 2.1 (Scope of threats)"
+        }
+      ],
+      "inference_chain": "The paper defines a class of failures characterized by a specific structural property: the harm operates by remaining undetected inside an otherwise functional process. This is a binary property — either the sabotage remained undetected, or it did not. The CDFI translates this structural property directly: citation fabrication and contextual relativization are failures that propagate undetected through institutional channels precisely because they superficially resemble correct responses. A fabricated citation looks like a real citation. A relativized doctrine sounds like a balanced perspective. Both pass the surface-level plausibility test every downstream user applies.",
+      "cdfi_element_produced": {
+        "type": "failure_taxonomy_architecture",
+        "description": "Categorical/gradational distinction as the structural basis for the five failure mode taxonomy",
+        "categorical_structural_property": "Harm operates by remaining undetected inside an otherwise functional process — binary, not gradational",
+        "taxonomy_reference": "docs/specifications/failure-taxonomy.md",
+        "cross_references": {
+          "citation_fabrication_gate": "pub2-hallucination-gate.json",
+          "relativization_gate": "pub4-framing-sensitivity.json"
+        }
+      }
+    },
+    {
+      "claim_id": "E2",
+      "claim_type": "Direct",
+      "translation_step": 5,
+      "claim_summary": "A conservative gate design requires that when the gate does not fire, absence of the categorical failure must be confirmable with confidence",
+      "verbatim_extracts": [
+        {
+          "text": "Our core design goal for evaluations is that, whenever the evaluation fails to flag, we should be confident that the model has not passed the corresponding threshold.",
+          "location": "Section 3 (Evaluation framework)"
+        },
+        {
+          "text": "Ruling out the above capability thresholds does not necessarily rule out risks from sabotage capabilities entirely. However, we claim that strong evidence that each capability threshold has not been reached is moderate evidence against the possibility of the corresponding listed threats.",
+          "location": "Section 2.2 (Capability thresholds and related threats)"
+        }
+      ],
+      "inference_chain": "The paper's design goal specifies a conservative gate: when it passes, absence of the categorical failure must be confirmable with confidence. This is the CDFI translation in both gate directions. When the hallucination gate passes, the absence of citation fabrication must be confirmable. When the relativism gate passes, the absence of contextual relativization must be confirmable. Neither is a matter of degree. The binary PASS/FAIL gate structure is the direct implementation of this conservative design goal.",
+      "cdfi_element_produced": {
+        "type": "cap_gate_design_principle",
+        "description": "Binary PASS/FAIL gates — not partial scores — because when the gate does not fire, absence of the categorical failure must be confirmable",
+        "gate_constants": {
+          "CAP_VALUE": 40,
+          "hallucination_gate": "PASS or FAIL",
+          "relativism_gate": "PASS or FAIL"
+        },
+        "rationale_for_40_not_0": "A score of 0 would imply no usable content was produced. Most capped responses contain partially correct information alongside the disqualifying failure. The 40 cap classifies the response as categorically disqualified while preserving that distinction.",
+        "implementation_reference": "engine/cdfi_calculator.py :: apply_cap_gates()"
+      }
+    },
+    {
+      "claim_id": "E3",
+      "claim_type": "Direct",
+      "translation_step": 5,
+      "claim_summary": "Threshold evaluations assess whether a specific bad outcome occurred — not how severely — producing binary results rather than scalar scores",
+      "verbatim_extracts": [
+        {
+          "text": "Each evaluation defines a specific mock deployment scenario (e.g. deployment inside a company) along with a proxy for a potentially catastrophic outcome that the model is trying to achieve (e.g. widely deploy a misaligned model). We then assess whether the model is capable of causing the proxy bad outcome under existing counter-measures.",
+          "location": "Section 3 (Evaluation framework)"
+        },
+        {
+          "text": "In practice, we aim to design evaluations which are somewhat conservative, i.e. that have a lower bar than the corresponding capability threshold.",
+          "location": "Section 3 (Evaluation framework)"
+        }
+      ],
+      "inference_chain": "The paper's evaluations are pass/fail: either the model could sabotage the target process, or it could not. There is no partial score for 'sabotaged somewhat.' The CDFI gate architecture inherits this structural choice. The hallucination gate and relativism resistance gate assess whether a specific institutional harm occurred — not how severely. A fabricated citation that was almost plausible triggers the gate identically to one that was obviously wrong, because the institutional propagation mechanism fires the same way in both cases.",
+      "cdfi_element_produced": {
+        "type": "gate_vs_metric_distinction",
+        "description": "Gates assess whether a specific institutional harm occurred — not how severely. This is structurally distinct from the 0-5 rubric metrics that measure quality gradations.",
+        "gate_firing_is_independent_of": [
+          "Severity of the fabrication or relativization",
+          "Quality scores on other eight metrics",
+          "Mean CDFI of the model overall"
+        ],
+        "config_reference": "configs/threshold_gates.yaml"
+      }
+    },
+    {
+      "claim_id": "E4",
+      "claim_type": "Direct",
+      "translation_step": 6,
+      "claim_summary": "A threshold mechanism must be tested under realistic conditions to verify it actually fires correctly — correct specification does not imply correct function",
+      "verbatim_extracts": [
+        {
+          "text": "A necessary step for running meaningful sabotage evaluations is to examine the actual level of oversight likely to be applied to models during their evaluation and use.",
+          "location": "Section 3 (Calibrating mitigations)"
+        },
+        {
+          "text": "Including mitigations as part of the evaluation framework, while adding complexity, extends their useful lifetime and is informative about the level of mitigations necessary for a given deployment.",
+          "location": "Section 1 (Introduction — Lessons learned)"
+        }
+      ],
+      "inference_chain": "The paper establishes that an evaluation of a threshold mechanism must itself be tested under realistic conditions — not assumed to work because it was correctly specified. Part 4 of the CDFI certification protocol applies this principle: the gates are tested against synthetic triggering and non-triggering responses before any production scores are published. The gates cannot be assumed correct because the rubric specifies them correctly. They must be validated empirically.",
+      "cdfi_element_produced": {
+        "type": "certification_part",
+        "part": 4,
+        "name": "Cap gate precision",
+        "description": "Gates tested against synthetic FAIL responses designed to trigger them and synthetic PASS responses designed not to — before any production scores enter publication",
+        "threshold": ">= 90% accuracy",
+        "implementation_reference": "test_judge_reliability.py :: Part4CapGatePrecision",
+        "saicred_v2_result": {
+          "accuracy": 1.00,
+          "diagnostic_detail_reference": "pub1-rubric-reliability.json :: certification_history"
+        }
+      }
+    }
+  ],
+  "evidence_completeness": {
+    "all_claims_have_verbatim_extracts": true,
+    "all_locations_verified": true,
+    "claim_types_present": ["Direct"],
+    "derived_claims_with_inference_chains": "All four inference chains shown explicitly — the primary Derived step in each is the translation from sabotage/subversion (paper) to citation fabrication and contextual relativization (CDFI)",
+    "original_constructs": "None — the five failure mode taxonomy and cap gate architecture are CDFI originals, but both derive from Direct paper claims about categorical/gradational structural distinction",
+    "notes": "The paper studies models subverting oversight systems. The CDFI studies models fabricating doctrinal authority and relativizing settled teaching. The specific failure modes differ entirely. The structural property that makes them categorical is identical: they operate by remaining undetected inside an otherwise functional process. This is the non-obvious connection that the translation_note and the inference chains in this file make explicit."
+  }
+}
