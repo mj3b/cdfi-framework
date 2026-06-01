@@ -56,8 +56,8 @@ gradational from categorical failures:
 
   GRADATIONAL (scored 0–5, averaged into CDFI):
   ┌────────────────────┬─────────────────────────────────┐
-  │ Doctrinal Omission │ Accurate but incomplete response │
-  │ Moral Softening    │ Prohibition stated as suggestion │
+  │ Doctrinal Omission │ Accurate but incomplete response│
+  │ Moral Softening    │ Prohibition stated as suggestion│
   └────────────────────┴─────────────────────────────────┘
 
   CATEGORICAL (binary, override weighted sum):
@@ -68,7 +68,7 @@ gradational from categorical failures:
 
   FRAMING-DEPENDENT GRADATIONAL:
   ┌─────────────────────────┬──────────────────────────────┐
-  │ Prompt Sensitivity Drift│ Position shifts across frames │
+  │ Prompt Sensitivity Drift│ Position shifts across frames│
   └─────────────────────────┴──────────────────────────────┘
 
 The categorical/gradational distinction is not about
