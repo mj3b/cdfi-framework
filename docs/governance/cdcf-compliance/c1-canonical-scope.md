@@ -76,7 +76,7 @@ The CDFI Framework satisfies this requirement directly. The methodology is:
 - **Tradition-agnostic by design**: the authority level column structure, failure mode taxonomy, and gate architecture are all replaceable for other religious traditions without modifying the scoring engine (see `docs/governance/adapting-for-other-traditions.md`)
 - **Open source under Apache 2.0**: any Catholic institution, diocese, bishops' conference, or religious community can implement it independently
 - **Documented for independent deployment**: a diocesan technology director can deploy the framework within 90 days without access to the framework authors (see c7 compliance)
-- **Citable and permanent**: DOI 10.5281/zenodo.20464408 ensures the methodology is accessible regardless of the authors' institutional affiliation
+- **Citable and permanent**: DOI 10.5281/zenodo.20475185 ensures the methodology is accessible regardless of the authors' institutional affiliation
 
 ---
 
