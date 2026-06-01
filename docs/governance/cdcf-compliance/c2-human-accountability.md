@@ -36,7 +36,7 @@ LEVEL 1 — Benchmark Authority
 ──────────────────────────────────────────────────────────────────
 Role:         Evals Expert | CDFI Framework Author
 Named person: Mark Julius Banasihan
-Institutional: Catholic Digital Commons Foundation
+Institutional: Independent Researcher
 
 Owns:         Scoring methodology, weighting matrix, gate logic,
               reliability certification protocol, limitation
@@ -61,7 +61,7 @@ LEVEL 2 — Benchmark Validation Authority
 ──────────────────────────────────────────────────────────────────
 Role:          Project Lead (theological and publication authority)
 Named person:  Filip Ponulak, PhD
-Institutional: Catholic Digital Commons Foundation
+Institutional: TBD
 
 Owns:         Authority level classification of all prompts;
               human theological review of automated scores
