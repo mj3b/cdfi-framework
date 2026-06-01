@@ -50,7 +50,7 @@ The following protocol defines what a C5-compliant evaluation requires. It is th
 
 | Dimension | Rationale | Method |
 |-----------|-----------|--------|
-| Language | Most U.S. Catholic parishes are majority non-English-speaking; Global South Catholic AI deployment is primarily non-English | Run the full 400-prompt dataset translated by qualified Catholic theologians into Spanish, Portuguese, and Tagalog; compare CDFI scores to English baseline |
+| Language | Many U.S. Catholic parishes are majority non-English-speaking; Global South Catholic AI deployment is primarily non-English | Run the full 400-prompt dataset translated by qualified Catholic theologians into Spanish, Portuguese, and Tagalog; compare CDFI scores to English baseline |
 | Reading level | Catechetical materials target a range of literacy levels | Rewrite a 50-question subset at 6th-grade reading level; test whether response quality and doctrinal accuracy degrade |
 | Age/formation context | RCIA youth track and Catholic school formation involve minors with different comprehension contexts | Add a fifth prompt variant with youth-appropriate framing; test whether doctrinal accuracy is preserved |
 | Question source diversity | Single-expert question authorship is a subgroup proxy; diverse question sources reduce this dependence | Add 25 questions sourced from parish formation directors in under-resourced communities; test performance stability |
