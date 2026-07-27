@@ -39,7 +39,7 @@ The CDFI Framework is the evaluation governance layer of this project.
 
 The three roles were not interchangeable and could not substitute for each other. The Project Lead's theological framing defined what the benchmark was measuring. The Lead Engineer's pipeline produced the data. The Evals Expert's scoring architecture determined whether that data was defensible enough to support institutional deployment guidance.
 
-Production pipeline: [saicred-benchmark](https://github.com/naveenp2728/saicred-benchmark) *(private — access pending publication)*
+Production pipeline: [saicred-benchmark](https://github.com/naveenp2708/saicred-benchmark) *(private — access pending publication)*
 
 ---
 
