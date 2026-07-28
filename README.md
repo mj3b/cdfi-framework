@@ -328,7 +328,7 @@ This project used Claude (Anthropic) for methodology development, document draft
              for Domain-Specific {AI} Doctrinal Benchmarking},
   year    = {2026},
   month   = {5},
-  version = {1.4},
+  version = {1.5},
   doi     = {10.5281/zenodo.20475185},
   url     = {https://doi.org/10.5281/zenodo.20475185},
   license = {Apache-2.0}
